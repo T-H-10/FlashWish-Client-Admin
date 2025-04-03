@@ -3,19 +3,19 @@
     <div class="stats-container">
       <div class="stat-card">
         <h2>משתמשים רשומים</h2>
-        <p>{{ usersCount }}</p>
+        <p>{{ statistics.usersCount }}</p>
       </div>
       <div class="stat-card">
         <h2>ברכות שנוצרו</h2>
-        <p>{{ greetingsCount }}</p>
+        <p>{{ statistics.greetingsCount }}</p>
       </div>
       <div class="stat-card">
         <h2>רקעים זמינים</h2>
-        <p>{{ backgroundsCount }}</p>
+        <p>{{ statistics.templatesCount }}</p>
       </div>
     </div>
   
-    <div class="recent-activities">
+    <!-- <div class="recent-activities">
       <h2>פעולות אחרונות</h2>
       <ul>
         @for (activity of recentActivities; track $index) {
@@ -24,6 +24,6 @@
         </li>
     }
       </ul>
-    </div>
+    </div> -->
   </div>
   

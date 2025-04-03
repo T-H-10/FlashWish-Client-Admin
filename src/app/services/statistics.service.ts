@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-interface Statistics {
+export interface Statistics {
   usersCount: number;
   greetingsCount: number;
   templatesCount: number;
@@ -14,9 +14,8 @@ interface Statistics {
 export class StatisticsService {
   private apiUrl = 'http://localhost:5279/api/Statistics';
 
-  constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
   getStatistics():Observable<Statistics> {
-    return this.http.get<Statistics>(this.apiUrl);
+    return this._http.get<Statistics>(this.apiUrl);
   }
 }
-git 
