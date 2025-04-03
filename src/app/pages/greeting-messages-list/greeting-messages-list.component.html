@@ -1,0 +1,32 @@
+@if (loading) {
+<div>Loading messages...</div>
+}
+@if (error) {
+<div>{{ error }}</div>
+}
+@if (messages.length>0) {
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Content</th>
+            <th>Signature</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (message of messages; track $index) {
+        <tr>
+            <td>{{ message.title }}</td>
+            <td>{{ message.categoryID }}</td>
+            <td>{{ message.content }}</td>
+            <td>{{ message.signature }}</td>
+            <td>
+                <button (click)="deleteMessage(message.textID)">Delete</button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+}
