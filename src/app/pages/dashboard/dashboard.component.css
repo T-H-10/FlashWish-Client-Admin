@@ -1,0 +1,46 @@
+.dashboard-container {
+    padding: 20px;
+  }
+  
+  .stats-container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .stat-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1;
+  }
+  
+  .stat-card h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .stat-card p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .recent-activities {
+    margin-top: 30px;
+  }
+  
+  .recent-activities ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .recent-activities li {
+    background: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+  
