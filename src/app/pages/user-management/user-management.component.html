@@ -1,1 +1,39 @@
-<p>user-management works!</p>
+<h1>ניהול משתמשים</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>מזהה</th>
+      <th>שם</th>
+      <th>אימייל</th>
+      <th>תפקיד</th>
+      <th>פעולות</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (user of users; track user.id) {
+    <tr>
+      <td>{{ user.id }}</td>
+
+      <td><input [value]="user.userName"
+        />
+      <!-- {{user.name}} -->
+      </td>
+        <!-- [(ngModel)]="user.name"  -->
+      <td>{{ user.email }}</td>
+      <td>
+        <select 
+        >
+        <!-- [(ngModel)]="user.role" -->
+          <option value="User">משתמש</option>
+          <option value="Admin">מנהל</option>
+        </select>
+      </td>
+      <td>
+        <button (click)="updateUser(user)">💾 שמור</button>
+        <button (click)="deleteUser(user.id)">🗑️ מחק</button>
+      </td>
+    </tr>
+}
+  </tbody>
+</table>
