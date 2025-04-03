@@ -1,1 +1,36 @@
-<p>template-management works!</p>
+<h1>ניהול רקעים</h1>
+
+<h3>הוספת רקע חדש</h3>
+<input type="text" placeholder="שם הרקע" >
+<!-- [(ngModel)]="newTemplateName" -->
+<input type="file" (change)="onFileSelected($event)">
+<select >
+<!-- [(ngModel)]="newCategoryID" -->
+    <option value="1">קטגוריה 1</option>
+    <option value="2">קטגוריה 2</option>
+</select>
+<button (click)="addTemplate()">➕ הוסף רקע</button>
+
+<h3>רשימת רקעים קיימים</h3>
+<table>
+    <thead>
+        <tr>
+            <th>תמונה</th>
+            <th>שם</th>
+            <th>קטגוריה</th>
+            <th>פעולות</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (template of templates; track $index) {
+        <tr>
+            <td><img [src]="template.imageURL" alt="Template" width="100"></td>
+            <td>{{ template.templateName }}</td>
+            <td>{{ template.categoryID }}</td>
+            <td>
+                <button (click)="deleteTemplate(template.templateID)">🗑️ מחק</button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
