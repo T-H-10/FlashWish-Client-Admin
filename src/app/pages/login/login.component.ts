@@ -10,18 +10,21 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  username: string = '';
+  email: string = '';
   password: string = '';
   errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  onSubmit(): void {
-    this.authService.login(this.username, this.password).subscribe(
+  onSubmit(e: Event): void {
+    e.preventDefault();
+    console.log('Attempting to log in with:', this.email, this.password);
+    
+    this.authService.login(this.email, this.password).subscribe(
       (response: any) => {
         // Handle successful login
         console.log('Login successful:', response);
-        this.router.navigate(['/dashboard']); // Redirect to the dashboard or home page
+        // this.router.navigate(['/dashboard']); // Redirect to the dashboard or home page
       },
       (error: any) => {
         // Handle login error

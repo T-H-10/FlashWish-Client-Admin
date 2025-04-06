@@ -17,7 +17,9 @@ export class DashboardComponent implements OnInit {
   statistics: Statistics = {
     usersCount: 0,
     greetingsCount: 0,
-    templatesCount: 0
+    templatesCount: 0,
+    greetingMessagesCount: 0,
+    categoriesCount: 0
   };
   constructor(private statisticsService: StatisticsService) {}
 

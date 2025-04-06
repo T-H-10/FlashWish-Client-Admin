@@ -6,6 +6,8 @@ export interface Statistics {
   usersCount: number;
   greetingsCount: number;
   templatesCount: number;
+  greetingMessagesCount: number;
+  categoriesCount: number;
 }
 
 @Injectable({
@@ -18,4 +20,5 @@ export class StatisticsService {
   getStatistics():Observable<Statistics> {
     return this._http.get<Statistics>(this.apiUrl);
   }
+
 }

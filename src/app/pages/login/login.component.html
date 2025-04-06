@@ -1,10 +1,16 @@
 <div class="login-container">
     <h2>התחברות למערכת</h2>
-    <form (ngSubmit)="onSubmit()">
+<!-- 
+    <form (submit)="onSubmit($event)">
+        <input type="email" [(ngModel)]="email" placeholder="Email" />
+        <input type="password" [(ngModel)]="password" placeholder="Password" />
+        <button type="submit">Login</button>
+      </form> -->
+    <form (submit)="onSubmit($event)">
       <div class="form-group">
-        <label for="username">שם משתמש</label>
-        <input type="text" id="username"
-        name="username" required />
+        <label for="email">מייל</label>
+        <input type="text" id="email"
+        name="email" required />
         <!-- [(ngModel)]="username"  -->
       </div>
   
