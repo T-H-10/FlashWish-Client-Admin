@@ -5,11 +5,12 @@
 <!-- [(ngModel)]="newTemplateName" -->
 <input type="file" (change)="onFileSelected($event)">
 <select >
+    @for (category of categories; track category.categoryID) {
 <!-- [(ngModel)]="newCategoryID" -->
-    <option value="1">קטגוריה 1</option>
-    <option value="2">קטגוריה 2</option>
+    <option [value]="category.categoryID">{{category.categoryName}}</option>
+    }
 </select>
-<button (click)="addTemplate()">➕ הוסף רקע</button>
+<button (click)="addTemplate()">הוסף רקע</button>
 
 <h3>רשימת רקעים קיימים</h3>
 <table>
@@ -26,8 +27,9 @@
         <tr>
             <td><img [src]="template.imageURL" alt="Template" width="100"></td>
             <td>{{ template.templateName }}</td>
-            <td>{{ template.categoryID }}</td>
+            <td>{{ getCategoryName(template.categoryID) }}</td>
             <td>
+                <button (click)="changeCategory(template)">🖋️ עדכון קטגוריה</button>
                 <button (click)="deleteTemplate(template.templateID)">🗑️ מחק</button>
             </td>
         </tr>

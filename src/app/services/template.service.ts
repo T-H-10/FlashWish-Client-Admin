@@ -25,7 +25,9 @@ export class TemplateService {
 
   // הוספת רקע חדש
   addTemplate(formData: FormData): Observable<Template> {
-    return this._http.post<Template>(this.apiUrl, formData);
+    return this._http.post<Template>(this.apiUrl, formData,{
+      headers:{'Content-Type': 'multipart/form-data'}
+    });
   }
 
   // עדכון פרטי רקע

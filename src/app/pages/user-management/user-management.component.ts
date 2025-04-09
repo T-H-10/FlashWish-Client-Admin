@@ -15,6 +15,7 @@ export class UserManagementComponent implements OnInit {
   ngOnInit(): void {
     this.loadUsers();
   }
+
   loadUsers(): void {
     this.userService.getUsers().subscribe({
       next: (data) => {
@@ -25,7 +26,9 @@ export class UserManagementComponent implements OnInit {
       }
     });
   }
+
   updateUser(user: User): void {
+    if (confirm('האם אתה בטוח שברצונך לשנות את המשתמש הזה?')) {
     this.userService.updateUser(user).subscribe({
       next: (updatedUser) => {
         console.log('User updated:', updatedUser);
@@ -36,6 +39,13 @@ export class UserManagementComponent implements OnInit {
       }
     });
   }
+  //  else {
+  //   console.log(this.users);
+    
+  //   this.users=this.users;
+  // }
+  }
+
   deleteUser(userId: number): void {
     if (confirm('האם אתה בטוח שברצונך למחוק את המשתמש הזה?')) {
       this.userService.deleteUser(userId).subscribe({
