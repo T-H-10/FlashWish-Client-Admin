@@ -100,6 +100,7 @@ export class TemplateManagementComponent implements OnInit {
       cancelButtonText: 'ביטול',
       preConfirm: (categoryID: number) => {
         if (categoryID) {
+          console.log('here in updating...');
           this.updateTemplateCategory(template.templateID, categoryID);
         }
       }

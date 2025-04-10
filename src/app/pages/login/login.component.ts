@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -24,6 +25,8 @@ export class LoginComponent {
       (response: any) => {
         // Handle successful login
         console.log('Login successful:', response);
+        console.log('The token is: ', response.token);
+        localStorage.setItem('token',response.token);
         // this.router.navigate(['/dashboard']); // Redirect to the dashboard or home page
       },
       (error: any) => {
