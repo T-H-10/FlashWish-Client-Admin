@@ -1,4 +1,74 @@
 <div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">לוח בקרה</h1>
+  </div>
+  
+  <div class="stats-container">
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="material-icons">people</i>
+      </div>
+      <div class="stat-content">
+        <h2>משתמשים רשומים</h2>
+        <p class="stat-value">{{ statistics.usersCount }}</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="material-icons">card_giftcard</i>
+      </div>
+      <div class="stat-content">
+        <h2>ברכות שנוצרו</h2>
+        <p class="stat-value">{{ statistics.greetingsCount }}</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="material-icons">wallpaper</i>
+      </div>
+      <div class="stat-content">
+        <h2>רקעים זמינים</h2>
+        <p class="stat-value">{{ statistics.templatesCount }}</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="material-icons">description</i>
+      </div>
+      <div class="stat-content">
+        <h2>תכנים זמינים</h2>
+        <p class="stat-value">{{ statistics.greetingMessagesCount }}</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="material-icons">category</i>
+      </div>
+      <div class="stat-content">
+        <h2>קטגוריות</h2>
+        <p class="stat-value">{{ statistics.categoriesCount }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="recent-activities">
+    <h2>פעולות אחרונות</h2>
+    <ul>
+      @for (activity of recentActivities; track $index) {
+      <li>
+        {{ activity }}
+      </li>
+      }
+    </ul>
+  </div> -->
+</div>
+
+
+<!-- <div class="dashboard-container">
     <h1>לוח בקרה</h1>
     <div class="stats-container">
       <div class="stat-card">
@@ -23,7 +93,7 @@
       </div>
     </div>
   
-    <!-- <div class="recent-activities">
+  <div class="recent-activities">
       <h2>פעולות אחרונות</h2>
       <ul>
         @for (activity of recentActivities; track $index) {
@@ -33,5 +103,5 @@
     }
       </ul>
     </div> -->
-  </div>
-  
+  <!-- </div>
+   -->
