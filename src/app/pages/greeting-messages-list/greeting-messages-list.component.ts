@@ -1,10 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { GreetingMessage, GreetingMessageService } from '../../services/greeting-message.service';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-greeting-messages-list',
   standalone: true,
-  imports: [],
+  imports: [    
+    MatTableModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatProgressSpinnerModule],
   templateUrl: './greeting-messages-list.component.html',
   styleUrl: './greeting-messages-list.component.scss'
 })

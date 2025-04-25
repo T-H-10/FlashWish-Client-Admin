@@ -3,10 +3,10 @@
     <button mat-icon-button class="menu-button" (click)="toggleMenu()">
         <mat-icon>{{isMenuOpen? 'close': 'menu'}}</mat-icon>
     </button>
+    <button mat-icon-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+    </button>
 
-    <!-- <span class="title">מערכת ניהול</span> -->
-
-    <!-- @if(isMenuOpen){ -->
     <nav class="nav-links" [ngClass]="{'open': isMenuOpen}">
         <a mat-button routerLink="/dashboard" (click)="closeMenu()">דף הבית</a>
         <a mat-button routerLink="/users" (click)="closeMenu()">ניהול משתמשים</a>
@@ -16,5 +16,5 @@
     @if (isMenuOpen) {
     <div class="backdrop" (click)="closeMenu()"></div>
     }
-    <!-- } -->
+
 </mat-toolbar>

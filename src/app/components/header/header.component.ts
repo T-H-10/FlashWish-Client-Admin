@@ -26,13 +26,18 @@ export class HeaderComponent {
   toggleMenu() {
     this.isMenuOpen=!this.isMenuOpen;
   }
-  
+
   closeMenu() {
     this.isMenuOpen=false;
   }
 
-  showMenu() {
-    return this.isMenuOpen;
+  // showMenu() {
+  //   return this.isMenuOpen;
+  // }
+  logout() {
+    sessionStorage.removeItem('token');
+    // sessionStorage.removeItem('user');
+    // window.location.reload();
   }
 
 }
