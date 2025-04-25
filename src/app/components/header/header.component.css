@@ -1,0 +1,28 @@
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .menu-button {
+    display: none;
+  }
+
+  .nav-links a {
+    margin-left: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+    .menu-button {
+      display: inline-flex;
+    }
+  }
+
+  .title {
+    flex: 1;
+    text-align: right;
+    margin-right: 16px;
+  }
