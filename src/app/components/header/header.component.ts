@@ -1,8 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, NgModule, signal } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -11,15 +13,26 @@ import { MatMenuModule } from '@angular/material/menu';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    RouterLink,
+    CommonModule,
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  showMenu = signal(false);
+  isMenuOpen:boolean = true;
+  
   toggleMenu() {
-    this.showMenu.set(!this.showMenu());
+    this.isMenuOpen=!this.isMenuOpen;
+  }
+  
+  closeMenu() {
+    this.isMenuOpen=false;
+  }
+
+  showMenu() {
+    return this.isMenuOpen;
   }
 
 }

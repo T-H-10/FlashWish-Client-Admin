@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+@use './styles/custom-theme.scss';
 html,
 body {
     height: 100%;
@@ -10,3 +10,10 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     direction: rtl;
 }
+:root {
+    --primary-color: #25173b;
+    --accent-color: #eeb451;
+    --warn-color: #f44336;
+    --primary-text: #ffffff;
+    --accent-text: #000000;
+  }

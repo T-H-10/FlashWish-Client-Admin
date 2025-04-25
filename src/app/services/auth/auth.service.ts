@@ -60,8 +60,6 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    const res=sessionStorage.getItem('token')? true : false;
-    console.log('isAuthenticated:', res);
-    return res;
+    return sessionStorage.getItem('token')? true : false;
   }
 }

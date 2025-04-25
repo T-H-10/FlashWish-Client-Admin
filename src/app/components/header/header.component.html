@@ -1,22 +1,20 @@
 <mat-toolbar color="primary" class="toolbar">
-<button mat-icon-button class="menu-button" (click)="toggleMenu()">
-  <mat-icon>menu</mat-icon>
-</button>
+    <img src="assets/logo.jpg" alt="לוגו" class="logo" />
+    <button mat-icon-button class="menu-button" (click)="toggleMenu()">
+        <mat-icon>{{isMenuOpen? 'close': 'menu'}}</mat-icon>
+    </button>
 
-<span class="title">מערכת ניהול</span>
+    <!-- <span class="title">מערכת ניהול</span> -->
 
-@if(!showMenu()){
-<nav class="nav-links">
-    <a mat-button routerLink="/dashboard">דף הבית</a>
-    <a mat-button routerLink="/users">ניהול משתמשים</a>
-    <a mat-button routerLink="/templates">ניהול תבניות</a>
-    <a mat-button routerLink="/messages">ניהול תכנים</a>
-  </nav>
-}
-<mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/dashboard">דף הבית</button>
-    <button mat-menu-item routerLink="/users">ניהול משתמשים</button>
-    <button mat-menu-item routerLink="/templates">ניהול תבניות</button>
-    <button mat-menu-item routerLink="/messages">ניהול תכנים</button>
-  </mat-menu>
+    <!-- @if(isMenuOpen){ -->
+    <nav class="nav-links" [ngClass]="{'open': isMenuOpen}">
+        <a mat-button routerLink="/dashboard" (click)="closeMenu()">דף הבית</a>
+        <a mat-button routerLink="/users" (click)="closeMenu()">ניהול משתמשים</a>
+        <a mat-button routerLink="/templates" (click)="closeMenu()">ניהול תבניות</a>
+        <a mat-button routerLink="/messages" (click)="closeMenu()">ניהול תכנים</a>
+    </nav>
+    @if (isMenuOpen) {
+    <div class="backdrop" (click)="closeMenu()"></div>
+    }
+    <!-- } -->
 </mat-toolbar>

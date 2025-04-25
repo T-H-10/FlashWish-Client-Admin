@@ -1,0 +1,54 @@
+@use '@angular/material' as mat;
+
+// הגדרת primary מותאם אישית
+$my-primary: mat.define-palette((
+  50: #edeaf1,
+  100: #cfc6dd,
+  200: #b1a1c8,
+  300: #937cb4,
+  400: #7d63a4,
+  500: #25173b, // צבע ראשי
+  600: #1f1432,
+  700: #190f29,
+  800: #130b20,
+  900: #0d0717,
+  contrast: (
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+));
+
+// הגדרת accent בצבע #eeb451
+$my-accent: mat.define-palette((
+  50: #fff4de,
+  100: #ffe4b0,
+  200: #ffd180,
+  300: #ffc051,
+  400: #ffb533,
+  500: #eeb451, // צבע עיקרי
+  600: #d4a346,
+  700: #ba933c,
+  800: #a18332,
+  900: #877228,
+  contrast: (
+    500: black
+  )
+));
+
+$my-warn: mat.define-palette(mat.$red-palette);
+
+// Theme מלא
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+@include mat.all-component-themes($my-theme);

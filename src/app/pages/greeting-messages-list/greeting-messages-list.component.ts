@@ -6,7 +6,7 @@ import { GreetingMessage, GreetingMessageService } from '../../services/greeting
   standalone: true,
   imports: [],
   templateUrl: './greeting-messages-list.component.html',
-  styleUrl: './greeting-messages-list.component.css'
+  styleUrl: './greeting-messages-list.component.scss'
 })
 export class GreetingMessagesListComponent implements OnInit{
   messages: GreetingMessage[]=[];

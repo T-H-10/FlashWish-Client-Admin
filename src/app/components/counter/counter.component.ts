@@ -6,7 +6,7 @@ import { Component, Input, OnChanges, signal, SimpleChanges } from '@angular/cor
   standalone: true,
   imports: [CommonModule],
   templateUrl: './counter.component.html',
-  styleUrl: './counter.component.css'
+  styleUrl: './counter.component.scss'
 })
 export class CounterComponent implements OnChanges {
   @Input() target=0;

@@ -7,7 +7,7 @@ import { CounterComponent } from "../../components/counter/counter.component";
   standalone: true,
   imports: [CounterComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
   // usersCount: number = 0;

@@ -6,7 +6,7 @@ import { User, UserService } from '../../services/user.service';
   standalone: true,
   imports: [],
   templateUrl: './user-management.component.html',
-  styleUrl: './user-management.component.css'
+  styleUrl: './user-management.component.scss'
 })
 export class UserManagementComponent implements OnInit {
   users: User[] = [];
