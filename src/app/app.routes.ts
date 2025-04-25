@@ -5,20 +5,29 @@ import { TemplateManagementComponent } from './pages/template-management/templat
 import { GreetingMessagesListComponent } from './pages/greeting-messages-list/greeting-messages-list.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
+import { LayoutComponent } from './components/layout/layout.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    // { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
-    { path: 'dashboard', component: DashboardComponent,
-         canActivate: [AuthGuard] 
-        },
-    { path: 'users', component: UserManagementComponent,
-        //  canActivate: [AuthGuard] 
-        },
-    { path: 'templates', component: TemplateManagementComponent,
-        //  canActivate: [AuthGuard] 
-        },
-    { path: 'messages', component: GreetingMessagesListComponent,
-        //  canActivate: [AuthGuard] 
-        },
+    {
+        path: '', component: LayoutComponent, 
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: 'dashboard', component: DashboardComponent,
+            },
+            {
+                path: 'users', component: UserManagementComponent,
+                //  canActivate: [AuthGuard] 
+            },
+            {
+                path: 'templates', component: TemplateManagementComponent,
+                //  canActivate: [AuthGuard] 
+            },
+            {
+                path: 'messages', component: GreetingMessagesListComponent,
+                //  canActivate: [AuthGuard] 
+            }]
+    }
 ];

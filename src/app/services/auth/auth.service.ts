@@ -42,7 +42,7 @@ export class AuthService {
     //   response => {
     //     console.log('Login successful:', response);
     //     // Store the token in local storage
-    //     localStorage.setItem('token', response.token);
+    //     sessionStorage.setItem('token', response.token);
     //   },
     //   error => {
     //     console.error('Login failed:', error);
@@ -56,10 +56,12 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    const res=sessionStorage.getItem('token')? true : false;
+    console.log('isAuthenticated:', res);
+    return res;
   }
 }

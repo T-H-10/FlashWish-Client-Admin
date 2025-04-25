@@ -26,8 +26,8 @@ export class LoginComponent {
         // Handle successful login
         console.log('Login successful:', response);
         console.log('The token is: ', response.token);
-        localStorage.setItem('token',response.token);
-        // this.router.navigate(['/dashboard']); // Redirect to the dashboard or home page
+        sessionStorage.setItem('token',response.token);
+        this.router.navigate(['/dashboard']); // Redirect to the dashboard or home page
       },
       (error: any) => {
         // Handle login error
