@@ -10,7 +10,10 @@
       </div>
       <div class="stat-content">
         <h2>משתמשים רשומים</h2>
-        <p class="stat-value">{{ statistics.usersCount }}</p>
+        <p class="stat-value">
+          <!-- {{ statistics.usersCount }} -->
+            <app-counter [target]="statistics.usersCount"></app-counter>
+        </p>
       </div>
     </div>
     
@@ -20,7 +23,9 @@
       </div>
       <div class="stat-content">
         <h2>ברכות שנוצרו</h2>
-        <p class="stat-value">{{ statistics.greetingsCount }}</p>
+        <p class="stat-value">
+          <app-counter [target]="statistics.greetingsCount"></app-counter>
+        </p>
       </div>
     </div>
     
@@ -30,7 +35,9 @@
       </div>
       <div class="stat-content">
         <h2>רקעים זמינים</h2>
-        <p class="stat-value">{{ statistics.templatesCount }}</p>
+        <p class="stat-value">
+          <app-counter [target]="statistics.templatesCount"></app-counter>
+        </p>
       </div>
     </div>
     
@@ -40,7 +47,9 @@
       </div>
       <div class="stat-content">
         <h2>תכנים זמינים</h2>
-        <p class="stat-value">{{ statistics.greetingMessagesCount }}</p>
+        <p class="stat-value">
+          <app-counter [target]="statistics.greetingMessagesCount"></app-counter>
+        </p>
       </div>
     </div>
     
@@ -50,7 +59,9 @@
       </div>
       <div class="stat-content">
         <h2>קטגוריות</h2>
-        <p class="stat-value">{{ statistics.categoriesCount }}</p>
+        <p class="stat-value">
+          <app-counter [target]="statistics.categoriesCount"></app-counter>
+        </p>
       </div>
     </div>
   </div>

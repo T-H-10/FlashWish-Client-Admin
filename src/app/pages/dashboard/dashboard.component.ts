@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Statistics, StatisticsService } from '../../services/statistics.service';
+import { CounterComponent } from "../../components/counter/counter.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [CounterComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
