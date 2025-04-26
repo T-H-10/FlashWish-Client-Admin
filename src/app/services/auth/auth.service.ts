@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
@@ -16,7 +16,11 @@ export class AuthService {
 
   login(email: string, password: string): Observable<{ user:User, token:string}> {
     const loginData = { email, password };
-    return this.http.post<{ user:User, token:string}>(this.apiUrl, loginData);
+    return this.http.post<{ user:User, token:string}>(this.apiUrl, loginData).pipe(
+      catchError((error) => {
+        return of(error);
+      })
+    );
   }
   // login(email: string, password: string): Observable<any> 
   // {
