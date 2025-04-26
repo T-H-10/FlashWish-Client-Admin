@@ -9,26 +9,26 @@ import { User } from '../../models/user.model';
 })
 export class UserService {
   private apiUrl: string;
-  constructor(private _http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.apiUrl=environment.apiUrl+'/api/users';
    }
   getAllUsers(): Observable<User[]> {
-    return this._http.get<User[]>(this.apiUrl);
+    return this.http.get<User[]>(this.apiUrl);
   }
 
   getUserById(id: number): Observable<User> {
-    return this._http.get<User>(`${this.apiUrl}/${id}`);
+    return this.http.get<User>(`${this.apiUrl}/${id}`);
   }
 
   addUser(user: User): Observable<User> {// use by userPostModel
-    return this._http.post<User>(this.apiUrl, user);
+    return this.http.post<User>(this.apiUrl, user);
   }
 
   updateUser(user: User): Observable<User> {
-    return this._http.put<User>(`${this.apiUrl}/${user.id}`, user);
+    return this.http.put<User>(`${this.apiUrl}/${user.id}`, user);
   }
 
   deleteUser(id: number): Observable<void> {
-    return this._http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
