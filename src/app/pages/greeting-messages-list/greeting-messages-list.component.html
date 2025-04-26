@@ -1,4 +1,4 @@
-@if (loading) {
+<!-- @if (loading) {
 <ng-container>
     <mat-progress-spinner mode="indeterminate" color="primary" diameter="40"></mat-progress-spinner>
     <div>Loading messages...</div>
@@ -7,18 +7,18 @@
 
 @if (error) {
     <ng-container>
-        <mat-card class=" error-card">
+        <mat-card class=" error-card"> -->
             <!-- <mat-card-header>
                 <mat-card-title>Error</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <p>{{ error }}</p>
             </mat-card-content> -->
-        <mat-icon color="warn">error</mat-icon>
+        <!-- <mat-icon color="warn">error</mat-icon> -->
         <!-- <div> -->
-            {{ error }}
+            <!-- {{ error }} -->
         <!-- </div> -->
-         </mat-card>
+         <!-- </mat-card>
     </ng-container>
 }
 
@@ -27,34 +27,34 @@
             <mat-card>
               <mat-card-title>רשימת הודעות</mat-card-title>
               <div class="table-container">
-                <table mat-table [dataSource]="messages" class="mat-elevation-z2">
+                <table mat-table [dataSource]="messages" class="mat-elevation-z2"> -->
           
                   <!-- Title Column -->
-                  <ng-container matColumnDef="title">
+                  <!-- <ng-container matColumnDef="title">
                     <th mat-header-cell *matHeaderCellDef> כותרת </th>
                     <td mat-cell *matCellDef="let message"> {{message.title}} </td>
                   </ng-container>
-          
+           -->
                   <!-- Category Column -->
-                  <ng-container matColumnDef="categoryID">
+                  <!-- <ng-container matColumnDef="categoryID">
                     <th mat-header-cell *matHeaderCellDef> קטגוריה </th>
                     <td mat-cell *matCellDef="let message"> {{message.categoryID}} </td>
                   </ng-container>
-          
+           -->
                   <!-- Content Column -->
-                  <ng-container matColumnDef="content">
+                  <!-- <ng-container matColumnDef="content">
                     <th mat-header-cell *matHeaderCellDef> תוכן </th>
                     <td mat-cell *matCellDef="let message"> {{message.content}} </td>
                   </ng-container>
-          
+           -->
                   <!-- Signature Column -->
-                  <ng-container matColumnDef="signature">
+                  <!-- <ng-container matColumnDef="signature">
                     <th mat-header-cell *matHeaderCellDef> חתימה </th>
                     <td mat-cell *matCellDef="let message"> {{message.signature}} </td>
                   </ng-container>
-          
+           -->
                   <!-- Actions Column -->
-                  <ng-container matColumnDef="actions">
+                  <!-- <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef> פעולות </th>
                     <td mat-cell *matCellDef="let message">
                       <button mat-icon-button color="warn" (click)="deleteMessage(message.textID)">
@@ -70,7 +70,7 @@
             </mat-card>
           </ng-container>
 
-}
+} -->
 <!-- @if (loading) {
 <div>Loading messages...</div>
 }
