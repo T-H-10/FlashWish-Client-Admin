@@ -8,3 +8,12 @@ export class User {
     public updatedAt: Date
     ) { }
 }
+
+export class JwtPayload{
+    constructor(
+        public id: string,
+        public email: string,
+        public role: string,
+        public exp: number
+    ){}
+}
