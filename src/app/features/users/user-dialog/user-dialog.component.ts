@@ -33,14 +33,16 @@ export class UserDialogComponent {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<UserDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { mode: 'add' | 'edit', user?: User }
+    @Inject(MAT_DIALOG_DATA) public data: { mode: 'add' | 'edit', user?: Partial<User> }
   ) {
     this.mode = data.mode;
     this.form = this.fb.group({
       userName: [data.user?.userName || '', Validators.required],
       email: [data.user?.email || '', [Validators.required, Validators.email]],
-      password: [data.user?.password || '', [Validators.required, Validators.minLength(6)]],
     });
+    if(this.mode==='add'){
+      this.form.addControl('password', this.fb.control('', [Validators.required, Validators.minLength(6)]));
+    }
   }
 
   save(): void {

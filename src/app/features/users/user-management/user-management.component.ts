@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'; // אם תוסיף אייקונים
 import { MatFormFieldModule } from '@angular/material/form-field'; // אם יש שדות טופס
 import { MatInputModule } from '@angular/material/input'; // אם תחזיר שדה חיפוש
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-management',
@@ -30,9 +31,9 @@ export class UserManagementComponent implements OnInit {
   filteredUsers: User[] = [];
   searchControl = new FormControl('');
 
-  constructor(private userService: UserService, private dialog: MatDialog) {}
+  constructor(private userService: UserService, private dialog: MatDialog) { }
 
-  
+
   ngOnInit(): void {
     this.getAllUsers();
     this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe(value => {
@@ -51,7 +52,7 @@ export class UserManagementComponent implements OnInit {
     const dialogRef = this.dialog.open(UserDialogComponent, {
       width: '400px',
       data: { mode: 'add' }
-    }); 
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -60,29 +61,46 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-    editUser(user: User): void {
-      const dialogRef = this.dialog.open(UserDialogComponent, {
-        width: '400px',
-        data: { mode: 'edit', user }
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.userService.updateUser(result).subscribe(() => this.getAllUsers());
-        }
-      });
-    }
+  editUser(user: User): void {
+    const dialogRef = this.dialog.open(UserDialogComponent, {
+      width: '400px',
+      data: { mode: 'edit', user }
+    });
 
-    deleteUser(userId: number): void {
-      if (confirm('האם אתה בטוח שברצונך למחוק את המשתמש?')) {
-        this.userService.deleteUser(userId).subscribe(() => this.getAllUsers());
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result);
+
+        this.userService.updateUser(user.id, result).subscribe({
+          next: () => {
+            this.getAllUsers();
+            Swal.fire({
+              icon: 'success',
+              title: 'המשתמש עודכן בהצלחה',
+            });
+          },
+          error: () => {
+            Swal.fire({
+              icon: 'error',
+              title: 'שגיאה',
+              text: 'אירעה שגיאה בעת עדכון המשתמש.'
+            });
+          }
+        });
       }
+    });
+  }
+
+  deleteUser(userId: number): void {
+    if (confirm('האם אתה בטוח שברצונך למחוק את המשתמש?')) {
+      this.userService.deleteUser(userId).subscribe(() => this.getAllUsers());
     }
-  
-    private filterUsers(searchTerm: string): void {
-      const lower = searchTerm.toLowerCase();
-      this.filteredUsers = this.users.filter(user =>
-        user.userName.toLowerCase().includes(lower) || user.email.toLowerCase().includes(lower)
-      );
-    }
+  }
+
+  private filterUsers(searchTerm: string): void {
+    const lower = searchTerm.toLowerCase();
+    this.filteredUsers = this.users.filter(user =>
+      user.userName.toLowerCase().includes(lower) || user.email.toLowerCase().includes(lower)
+    );
+  }
 }
