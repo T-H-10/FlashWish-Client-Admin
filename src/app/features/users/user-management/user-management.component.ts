@@ -92,9 +92,34 @@ export class UserManagementComponent implements OnInit {
   }
 
   deleteUser(userId: number): void {
-    if (confirm('האם אתה בטוח שברצונך למחוק את המשתמש?')) {
-      this.userService.deleteUser(userId).subscribe(() => this.getAllUsers());
-    }
+    Swal.fire({
+      title: 'האם אתה בטוח?',
+      text: 'לא תוכל לשחזר את המשתמש לאחר המחיקה!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'כן, מחק!',
+      cancelButtonText: 'בטל'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteUser(userId).subscribe({
+          next: () => {
+            this.getAllUsers();
+            Swal.fire({
+              icon: 'success',
+              title: 'נמחק!',
+              text: 'המשתמש נמחק בהצלחה.'
+            });
+          },
+          error: () => {
+            Swal.fire({
+              icon: 'error',
+              title: 'שגיאה',
+              text: 'אירעה שגיאה בעת מחיקת המשתמש.'
+            });
+          }
+        });
+      }
+    });
   }
 
   private filterUsers(searchTerm: string): void {
