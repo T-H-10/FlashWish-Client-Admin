@@ -6,6 +6,7 @@ import { ContentsComponent } from './features/contents/contents.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { UserManagementComponent } from './features/users/user-management/user-management.component';
+import { TemplatesManagementComponent } from './features/templates/templates-management/templates-management.component';
 // import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -20,7 +21,7 @@ export const routes: Routes = [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'users', component: UserManagementComponent },
             { path: 'categories', component: CategoriesComponent},
-            { path: 'templates', component: BackgroundsComponent},
+            { path: 'templates', component: TemplatesManagementComponent},
             { path: 'contents', component: ContentsComponent},
         ]
     },

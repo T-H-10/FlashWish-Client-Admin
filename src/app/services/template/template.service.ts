@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class TemplateService {
   private apiUrl: string;
   constructor(private http: HttpClient) {
-    this.apiUrl = environment.apiUrl+'/api/Template';
+    this.apiUrl = environment.apiUrl+'/api/Templates';
   }
 
   getAllTemplates(): Observable<Template[]> {
