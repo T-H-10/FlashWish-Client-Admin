@@ -20,12 +20,12 @@ export class UserService {
     return this.http.get<User>(`${this.apiUrl}/${id}`);
   }
 
-  addUser(user: User): Observable<User> {// use by userPostModel
-    return this.http.post<User>(this.apiUrl, user);
+  addUser({userName, email, password}:{userName: string, email: string, password: string}): Observable<User> {// use by userPostModel
+    return this.http.post<User>(this.apiUrl, {userName, email, password});
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${user.id}`, user);
+    return this.http.put<User>(`${this.apiUrl}/${user.id}`, {userName: user.userName, email: user.email});
   }
 
   deleteUser(id: number): Observable<void> {

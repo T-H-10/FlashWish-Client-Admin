@@ -10,11 +10,16 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private apiUrl: string;
-  constructor(private http: HttpClient, private router: Router) { 
+  constructor(
+    private http: HttpClient, 
+    private router: Router
+  ) { 
     this.apiUrl=environment.apiUrl+'/api/auth/login';
   }
 
   login(email: string, password: string): Observable<{ user:User, token:string}> {
+    console.log('Login called with:', email, password);
+    
     const loginData = { email, password };
     return this.http.post<{ user:User, token:string}>(this.apiUrl, loginData).pipe(
       catchError((error) => {

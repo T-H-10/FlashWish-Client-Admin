@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+// import jwt_decode from 'jwt-decode';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Router } from '@angular/router';
-import { JwtPayload } from '../../../models/user.model';
-// import jwt_decode from 'jwt-decode';
+// import { default as jwt_decode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit{
 
   constructor(
     private authService: AuthService,
-    // private router: Router,
+    private router: Router,
     private formBuilder: FormBuilder
   ){}
  
@@ -38,32 +38,34 @@ export class LoginComponent implements OnInit{
     
     if(!this.loginForm.valid){
       console.log('Form is invalid');
-      
       return;
     }
 
-    // this.authService.login(email.trim(), password.trim()).subscribe(
-    //   (response)=>{
-    //     if(response.token){
-    //       console.log('here');
-          
-    //       const decoded=jwt_decode<JwtPayload>(response.token);
-    //       if(decoded.role !== 'admin'){
-    //         this.errorMessage = 'אין הרשאה לגשת למערכת הניהול';
-    //         return;
-    //       }
+    this.authService.login(email.trim(), password.trim()).subscribe(
+      (response)=>{
+        console.log('in login response '+response);
+
         
-    //       localStorage.setItem('token', response.token);
-    //       localStorage.setItem('user', JSON.stringify(decoded));
-    //       // this.router.navigate(['/dashboard']);
-    //     } else {
-    //       this.errorMessage = 'ארעה שגיאה, נסה מאוחר יותר.';
-    //     }
-    //   },
-    //   (error)=>{
-    //     this.errorMessage = 'שם משתמש או סיסמה שגויים. אנא נסה שוב.';
-    //   }
-    // );
+        if(response.token){
+          console.log(response.token);
+          
+          // const decoded=jwt_decode(response.token);
+          // if(decoded.role !== 'admin'){
+          //   this.errorMessage = 'אין הרשאה לגשת למערכת הניהול';
+          //   return;
+          // }
+        
+          localStorage.setItem('token', response.token);
+          // localStorage.setItem('user', JSON.stringify(decoded));
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.errorMessage = 'ארעה שגיאה, נסה מאוחר יותר.';
+        }
+      },
+      (error)=>{
+        this.errorMessage = 'שם משתמש או סיסמה שגויים. אנא נסה שוב.';
+      }
+    );
   }
   
 }

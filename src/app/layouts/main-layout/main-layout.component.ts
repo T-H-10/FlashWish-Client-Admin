@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SidebarComponent } from "../sidebar/sidebar.component";
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 
 @Component({
@@ -9,7 +9,9 @@ import { HeaderComponent } from '../header/header.component';
   imports: [
     HeaderComponent,
      SidebarComponent,
-     RouterOutlet
+     RouterOutlet,
+     RouterLink,
+     RouterLinkActive
     ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.css'

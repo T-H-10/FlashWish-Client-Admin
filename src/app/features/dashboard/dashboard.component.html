@@ -1,1 +1,94 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">לוח בקרה</h1>
+  </div>
+  
+  <div class="stats-container">
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="material-icons">people</i>
+      </div>
+      <div class="stat-content">
+        <h2>משתמשים רשומים</h2>
+        <p class="stat-value">
+            <app-counter [target]="statistics.usersCount"></app-counter>
+        </p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="material-icons">card_giftcard</i>
+      </div>
+      <div class="stat-content">
+        <h2>ברכות שנוצרו</h2>
+        <p class="stat-value">
+          <app-counter [target]="statistics.greetingsCount"></app-counter>
+        </p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="material-icons">wallpaper</i>
+      </div>
+      <div class="stat-content">
+        <h2>רקעים זמינים</h2>
+        <p class="stat-value">
+          <app-counter [target]="statistics.templatesCount"></app-counter>
+        </p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="material-icons">description</i>
+      </div>
+      <div class="stat-content">
+        <h2>תכנים זמינים</h2>
+        <p class="stat-value">
+          <app-counter [target]="statistics.greetingMessagesCount"></app-counter>
+        </p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="material-icons">category</i>
+      </div>
+      <div class="stat-content">
+        <h2>קטגוריות</h2>
+        <p class="stat-value">
+          <app-counter [target]="statistics.categoriesCount"></app-counter>
+        </p>
+      </div>
+    </div>
+  </div>
+
+<!-- <div class="dashboard-container">
+    <h1>ברוך הבא למערכת הניהול</h1>
+  
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h2>{{ statistics.usersCount }}</h2>
+        <p>משתמשים</p>
+      </div>
+      <div class="stat-card">
+        <h2>{{ statistics.categoriesCount }}</h2>
+        <p>קטגוריות</p>
+      </div>
+      <div class="stat-card">
+        <h2>{{ statistics.templatesCount }}</h2>
+        <p>רקעים</p>
+      </div>
+      <div class="stat-card">
+        <h2>{{ statistics.contentsCount }}</h2>
+        <p>תכנים</p>
+      </div>
+      <div class="stat-card">
+        <h2>{{ statistics.greetingsCount }}</h2>
+        <p>ברכות</p>
+      </div>
+    </div>
+</div>
+   -->
