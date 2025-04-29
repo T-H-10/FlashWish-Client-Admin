@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
-import { UsersComponent } from './features/users/users/users.component';
 import { CategoriesComponent } from './features/categories/categories.component';
 import { BackgroundsComponent } from './features/backgrounds/backgrounds.component';
 import { ContentsComponent } from './features/contents/contents.component';
@@ -24,22 +23,6 @@ export const routes: Routes = [
             { path: 'templates', component: BackgroundsComponent},
             { path: 'contents', component: ContentsComponent},
         ]
-        // children: [
-        //     {
-        //         path: 'dashboard', component: DashboardComponent,
-        //     },
-        //     {
-        //         path: 'users', component: UserManagementComponent,
-        //         //  canActivate: [AuthGuard] 
-        //     },
-        //     {
-        //         path: 'templates', component: TemplateManagementComponent,
-        //         //  canActivate: [AuthGuard] 
-        //     },
-        //     {
-        //         path: 'messages', component: GreetingMessagesListComponent,
-        //         //  canActivate: [AuthGuard] 
-        //     }]
     },
     // { path: '**', redirectTo: 'dashboard' } // Redirect to dashboard for any unknown routes
 ];

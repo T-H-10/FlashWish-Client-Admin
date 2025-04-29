@@ -7,9 +7,9 @@ import { debounceTime } from 'rxjs';
 import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon'; // אם תוסיף אייקונים
-import { MatFormFieldModule } from '@angular/material/form-field'; // אם יש שדות טופס
-import { MatInputModule } from '@angular/material/input'; // אם תחזיר שדה חיפוש
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -56,10 +56,26 @@ export class UserManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.userService.addUser(result).subscribe(() => this.getAllUsers());
+        this.userService.addUser(result).subscribe({
+          next: () => {
+            this.getAllUsers();
+            Swal.fire({
+              icon: 'success',
+              title: 'המשתמש נוסף בהצלחה',
+            });
+          },
+          error: () => {
+            Swal.fire({
+              icon: 'error',
+              title: 'שגיאה',
+              text: 'אירעה שגיאה בעת הוספת המשתמש.'
+            });
+          }
+        });
       }
     });
   }
+
 
   editUser(user: User): void {
     const dialogRef = this.dialog.open(UserDialogComponent, {

@@ -21,15 +21,16 @@ export class TemplateService {
     return this.http.get<Template>(`${this.apiUrl}/${id}`);
   }
 
-  addTemplate(template: Template): Observable<Template> {
-    return this.http.post<Template>(this.apiUrl, template);
+  addTemplate({templateName, categoryID, userID, imageFile}:{templateName: string, categoryID: number, userID: number, imageFile: File}): Observable<Template> {
+    return this.http.post<Template>(this.apiUrl, {templateName, categoryID, userID, imageFile});
   }
 
-  updateTemplate(template: Template): Observable<Template> {
-    return this.http.put<Template>(`${this.apiUrl}/${template.templateID}`, template);
+  updateTemplate(id:number, template: Template): Observable<Template> {
+    return this.http.put<Template>(`${this.apiUrl}/${id}`, {templateName: template.templateName, categoryID: template.categoryID, userID: template.userID, imageFile: template.imageFile});
   }
 
   deleteTemplate(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
