@@ -13,7 +13,7 @@ export class ContentService {
     this.apiUrl = environment.apiUrl+'/api/GreetingMessages';
   }
 
-  getAllContent():Observable<Content[]> {
+  getAllContents():Observable<Content[]> {
     return this.http.get<Content[]>(this.apiUrl);
   }
 

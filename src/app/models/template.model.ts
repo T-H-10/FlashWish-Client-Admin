@@ -5,7 +5,7 @@ export class Template{
         public categoryID: number,
         public userID: number,
         public markedForDeletion: boolean,
-        public imageFile: string,
+        public ImageURL: string,
         public createdAt: Date,
         public updatedAt: Date
     ){}

@@ -1,5 +1,5 @@
 <div class="toolbar">
-    <input [formControl]="searchControl" placeholder="חיפוש לפי שם רקע או URL" class="search-input" />
+    <input [formControl]="searchControl" placeholder="חיפוש לפי שם רקע" class="search-input" />
 
     <button mat-raised-button color="primary" (click)="addTemplate()">הוסף רקע</button>
 </div>
@@ -10,13 +10,12 @@
         <mat-card class="user-card mat-elevation-z4">
             <mat-card-header>
                 <mat-card-title>{{ template.templateName }}</mat-card-title>
-                <mat-card-subtitle>{{ template.imageFile }}</mat-card-subtitle>
+                <img [src]="template.ImageURL" [alt]="template.templateName" class="template-image" />
             </mat-card-header>
 
             <mat-card-content>
                 <p>קטגוריה: </p>
                 <p>משתמש שהעלה: </p>
-                <p>קטגוריה: </p>
                 @if (template.markedForDeletion) {
                 <p style="color: red;">מיועד למחיקה </p>
                 }

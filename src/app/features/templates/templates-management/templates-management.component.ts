@@ -44,6 +44,8 @@ export class TemplatesManagementComponent implements OnInit {
       this.templates = templates;
       this.filteredTemplates = templates;
     });
+    console.log(this.filteredTemplates);
+    
   }
 
   addTemplate(): void {
