@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Category } from '../../models/category.model';
 
 @Injectable({
@@ -9,16 +9,32 @@ import { Category } from '../../models/category.model';
 })
 export class CategoryService {
   private apiUrl: string;
+  private categories:Category[]=[];
+  private categoryMap: Map<number, string> = new Map();
+
   constructor(private http: HttpClient) {
     this.apiUrl = environment.apiUrl+'/api/Categories';
    }
 
-  getAllCategories() :Observable<Category[]>{
-    return this.http.get<Category[]>(this.apiUrl);
+  getAllCategories():Observable<Category[]> {
+    return this.http.get<Category[]>(this.apiUrl).pipe(
+      tap((categories: Category[])=>{
+        this.categories=this.categories;
+        this.categoryMap=new Map(categories.map((category: Category) => [category.categoryID, category.categoryName]));
+      })
+    );
   }
 
-  getCategoryById(id: number): Observable<Category> {
-    return this.http.get<Category>(`${this.apiUrl}/${id}`);
+  getCategoryNameById(id: number): string {
+    return this.categoryMap.get(id) ?? '';
+  }
+  // getCategoryById(id: number): Observable<Category> {
+  //   return this.http.get<Category>(`${this.apiUrl}/${id}`);
+  // }
+
+  refreshMap(categories: Category[]) {
+    this.categories = categories;
+    this.categoryMap = new Map(categories.map(c => [c.categoryID, c.categoryName]));
   }
 
   addCategory(category: Category): Observable<Category> {

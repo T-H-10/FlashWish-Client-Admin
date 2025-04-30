@@ -9,6 +9,7 @@ import { Content } from '../../models/content.model';
 })
 export class ContentService {
   private apiUrl:string;
+  
   constructor(private http: HttpClient) {
     this.apiUrl = environment.apiUrl+'/api/GreetingMessages';
   }
