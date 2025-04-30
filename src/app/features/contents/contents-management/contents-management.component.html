@@ -1,1 +1,32 @@
-<p>contents-management works!</p>
+<div class="toolbar">
+    <input [formControl]="searchControl" placeholder="חיפוש לפי כותרת / תוכן / חתימה" class="search-input" />
+
+    <button mat-raised-button color="primary" (click)="addContent()">הוסף תוכן</button>
+</div>
+
+<div class="cards-container">
+    @for (content of filteredContents; track content.textID) {
+        <mat-card class="card mat-elevation-z4">
+            <mat-card-header>
+                <mat-card-title>{{ content.title }}</mat-card-title>
+                <mat-card-subtitle style="white-space: pre-line; font-size: 1em;">{{ content.content }}</mat-card-subtitle>
+                <mat-card-subtitle style="font-style: italic; font-size: 0.9em;">{{ content.signature }}</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <p>קטגוריה: </p>
+                <p>משתמש שהעלה: </p>
+                <!-- @if (contents.markedForDeletion) {
+                <p style="color: red;">מיועד למחיקה </p>
+                } -->
+                <p>תאריך יצירה: </p>
+                <p>תאריך עדכון: </p>
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+                <button mat-button color="accent" (click)="editContent(content)">עריכה</button>
+                <button mat-button color="warn" (click)="deleteContent(content.textID)">מחיקה</button>
+            </mat-card-actions>
+        </mat-card>
+    }
+</div>

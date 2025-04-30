@@ -1,7 +1,7 @@
 export class Content {
     constructor(
         public textID: number,
-        public categoryId: number,
+        public categoryID: number,
         public title: string,
         public content: string,
         public signature: string,

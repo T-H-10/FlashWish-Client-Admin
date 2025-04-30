@@ -10,16 +10,17 @@ import { ContentService } from '../../../services/content/content.service';
 import { MatDialog } from '@angular/material/dialog';
 import { debounceTime } from 'rxjs';
 import { ContentsDialogComponent } from '../contents-dialog/contents-dialog.component';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-contents-management',
   standalone: true,
   imports: [
-        ReactiveFormsModule,
-        MatCardModule,
-        MatButtonModule,
-        MatIconModule,
-        MatFormFieldModule,
-        MatInputModule
+    ReactiveFormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './contents-management.component.html',
   styleUrl: './contents-management.component.css'
@@ -28,8 +29,8 @@ export class ContentsManagementComponent implements OnInit {
   contents: Content[] = []; // Replace 'any' with your actual content type
   filteredContents: Content[] = []; // Replace 'any' with your actual content type
   searchControl = new FormControl('');
-
-  constructor(private contentService: ContentService,  private dialog: MatDialog ) { }
+  contentInLines:string[] = [];
+  constructor(private contentService: ContentService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAllContents();
@@ -45,18 +46,97 @@ export class ContentsManagementComponent implements OnInit {
     });
   }
 
-  addTemplate(): void {
+  addContent(): void {
     const dialogRef = this.dialog.open(ContentsDialogComponent, {
-      
-
-  filterContents(searchTerm: string): void {
-    if (!searchTerm) {
-      this.filteredContents = this.contents;
-      return;
-    }
-    this.filteredContents = this.contents.filter(content =>
-      content.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+      width: '400px',
+      data: { mode: 'add' }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.contentService.addContent(result).subscribe({
+          next: () => {
+            this.getAllContents();
+            Swal.fire({
+              icon: 'success',
+              title: 'התוכן נוסף בהצלחה',
+            });
+          },
+          error: (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'שגיאה',
+              text: 'אירעה שגיאה בעת הוספת התוכן.'
+            });
+          }
+        });
+      }
+    });
   }
 
+  editContent(content: Content): void {
+    const dialogRef = this.dialog.open(ContentsDialogComponent, {
+      width: '400px',
+      data: { mode: 'edit', content }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.contentService.updateContent(result).subscribe({
+          next: () => {
+            this.getAllContents();
+            Swal.fire({
+              icon: 'success',
+              title: 'התוכן עודכן בהצלחה',
+            });
+          },
+          error: (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'שגיאה',
+              text: 'אירעה שגיאה בעת עדכון התוכן.'
+            });
+          }
+        });
+      }
+    });
+  }
+
+  deleteContent(contentID: number): void {
+    Swal.fire({
+      title: 'האם אתה בטוח?',
+      text: 'לא תוכל לשחזר את התוכן הזה לאחר המחיקה!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'כן, מחק את זה!',
+      cancelButtonText: 'בטל'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.contentService.deleteContent(contentID).subscribe({
+          next: () => {
+            this.getAllContents();
+            Swal.fire(
+              'מחק',
+              'התוכן נמחק בהצלחה.',
+              'success'
+            );
+          },
+          error: (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'שגיאה',
+              text: 'אירעה שגיאה בעת מחיקת התוכן.'
+            });
+          }
+        });
+      }
+    });
+  }
+
+  private filterContents(searchTerm: string): void {
+    const lower = searchTerm.toLowerCase();
+    this.filteredContents = this.contents.filter(content => {
+      return content.title.toLowerCase().includes(lower)
+        || content.content.toLowerCase().includes(lower)
+        || content.signature.toLowerCase().includes(lower)
+    });
+  }
 }

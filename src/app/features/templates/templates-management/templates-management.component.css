@@ -1,11 +1,19 @@
-.user-cards-container {
+  .template-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  
+  .cards-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 16px;
     margin-top: 20px;
   }
   
-  .user-card {
+  .card {
     direction: rtl;
   }
   
@@ -19,13 +27,5 @@
     width: 300px;
     padding: 0.5rem;
     font-size: 1rem;
-  }
-
-  .template-image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 8px;
-    flex-shrink: 0;
   }
   

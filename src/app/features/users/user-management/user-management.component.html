@@ -4,10 +4,9 @@
     <button mat-raised-button color="primary" (click)="addUser()">הוסף משתמש</button>
 </div>
 
-<div class="user-cards-container">
+<div class="cards-container">
     @for (user of filteredUsers; track user.id) {
-    <span key="user.id">
-        <mat-card class="user-card mat-elevation-z4">
+        <mat-card class="card mat-elevation-z4">
             <mat-card-header>
                 <mat-card-title>{{ user.userName }}</mat-card-title>
                 <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
@@ -22,6 +21,5 @@
                 <button mat-button color="warn" (click)="deleteUser(user.id)">מחיקה</button>
             </mat-card-actions>
         </mat-card>
-    </span>
     }
 </div>

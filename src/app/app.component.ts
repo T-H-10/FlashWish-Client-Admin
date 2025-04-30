@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
   standalone: true,
   imports: [RouterOutlet, HttpClientModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'FlashWish-Admin';
