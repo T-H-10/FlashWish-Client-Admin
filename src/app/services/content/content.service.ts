@@ -25,8 +25,13 @@ export class ContentService {
     return this.http.post<Content>(this.apiUrl, content);
   }
 
-  updateContent(content: Content): Observable<Content> {
-    return this.http.put<Content>(`${this.apiUrl}/${content.textID}`, content);
+  updateContent(id: number, content: Content): Observable<Content> {
+    console.log(content);
+    return this.http.put<Content>(`${this.apiUrl}/${id}`, content,{
+      headers: { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' +localStorage.getItem('token') || '' 
+       },
+    });
   }
 
   deleteContent(id: number): Observable<void> {

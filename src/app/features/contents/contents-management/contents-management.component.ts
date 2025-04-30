@@ -80,7 +80,7 @@ export class ContentsManagementComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.contentService.updateContent(result).subscribe({
+        this.contentService.updateContent(content.textID, result).subscribe({
           next: () => {
             this.getAllContents();
             Swal.fire({
