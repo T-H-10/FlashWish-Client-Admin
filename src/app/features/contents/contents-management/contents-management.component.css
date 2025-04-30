@@ -7,6 +7,9 @@
   
   .card {
     direction: rtl;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
   }
   
   .toolbar {
@@ -20,3 +23,26 @@
     padding: 0.5rem;
     font-size: 1rem;
   }
+
+  .card-content{
+    white-space: pre-line;
+    font-size: 1em;
+    overflow-y: auto;
+    max-height: 200px; 
+  }
+
+  /* .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    /* height: 300px;
+} */
+
+.mat-card-actions {
+    margin-top: auto; /* זה יגרום לכפתורים להיות תמיד בתחתית הכרטיס */
+}
