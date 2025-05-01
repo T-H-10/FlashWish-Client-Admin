@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import Swal from 'sweetalert2';
+import { CardsService } from '../../services/cards/cards.service';
 
 @Component({
   selector: 'app-categories',
@@ -29,7 +30,9 @@ export class CategoriesComponent implements OnInit{
   filteredCategories: Category[]=[];
   searchControl=new FormControl('');
 
-  constructor(private categoryService: CategoryService){}
+  constructor(private categoryService: CategoryService,
+    private cardsService: CardsService
+  ){}
 
   ngOnInit(): void {
     this.getAllCategories();
@@ -43,6 +46,10 @@ export class CategoriesComponent implements OnInit{
       this.categories=categories;
       this.filteredCategories=categories;
     })
+  }
+
+  countCardsByCategoryId(categoryID: number): number {
+    return this.cardsService.getCardsByCategoryId(categoryID).length;
   }
 
   addCategory(): void{}

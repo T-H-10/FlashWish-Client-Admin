@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Card } from '../../models/card.model';
 
 @Injectable({
@@ -14,9 +14,13 @@ export class CardsService {
   constructor(private http: HttpClient) {
     this.apiUrl = environment.apiUrl + '/api/GreetingCards';
     this.getAllCards().subscribe();
+    console.log(this.cards);
+    
   }
   getAllCards(): Observable<Card[]> {
-    return this.http.get<Card[]>(this.apiUrl);
+    return this.http.get<Card[]>(this.apiUrl).pipe(
+      tap((cards:Card[])=>this.cards=cards)
+    );
   }
 
   getCardsByUserId(userID: number): Card[] {
@@ -33,22 +37,6 @@ export class CardsService {
 
   getCardsByTextId(textID: number): Card[] {
     return this.cards.filter(card => card.textID === textID);
-  }
-
-  countCardsByUserId(userID: number): number {
-    return this.getCardsByUserId(userID).length;
-  }
-
-  countCardsByCategoryId(categoryID: number): number {
-    return this.getCardsByCategoryId(categoryID).length;
-  }
-
-  countCardsByTemplateId(templateID: number): number {
-    return this.getCardsByTemplateId(templateID).length;
-  }
-
-  countCardsByTextId(textID: number): number {
-    return this.getCardsByTextId(textID).length;
   }
 
 }

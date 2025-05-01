@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import Swal from 'sweetalert2';
+import { CardsService } from '../../../services/cards/cards.service';
 
 @Component({
   selector: 'app-user-management',
@@ -31,7 +32,10 @@ export class UserManagementComponent implements OnInit {
   filteredUsers: User[] = [];
   searchControl = new FormControl('');
 
-  constructor(private userService: UserService, private dialog: MatDialog) { }
+  constructor(
+    private userService: UserService,
+    private dialog: MatDialog, 
+    private cardsServise: CardsService) { }
 
 
   ngOnInit(): void {
@@ -46,6 +50,10 @@ export class UserManagementComponent implements OnInit {
       this.users = users;
       this.filteredUsers = users;
     });
+  }
+
+  countCardsByUserId(userID: number): number {
+    return this.cardsServise.getCardsByUserId(userID).length;
   }
 
   addUser(): void {

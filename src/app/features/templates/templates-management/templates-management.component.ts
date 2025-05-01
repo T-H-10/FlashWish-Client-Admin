@@ -15,6 +15,7 @@ import { CategoryService } from '../../../services/category/category.service';
 import { environment } from '../../../../environments/environment';
 import { CategoryNamePipe } from '../../../pipes/category-name.pipe';
 import { UserNamePipe } from '../../../pipes/user-name.pipe';
+import { CardsService } from '../../../services/cards/cards.service';
 @Component({
   selector: 'app-templates-management',
   standalone: true,
@@ -36,7 +37,10 @@ export class TemplatesManagementComponent implements OnInit {
   filteredTemplates: Template[] = [];
   searchControl = new FormControl('');
 
-  constructor(private templateService: TemplateService, private dialog: MatDialog, private categoryService:CategoryService) { }
+  constructor(private templateService: TemplateService,
+     private dialog: MatDialog, 
+     private categoryService:CategoryService,
+    private cardsService: CardsService) { }
 
   ngOnInit(): void {
     this.getAllTemplates();
@@ -57,7 +61,9 @@ export class TemplatesManagementComponent implements OnInit {
     return this.categoryService.getCategoryNameById(categoryID)||"nothing";
   }
 
-
+  countCardsByTemplateId(templateID: number): number {
+    return this.cardsService.getCardsByTemplateId(templateID).length;
+  }
 
   addTemplate(): void {
     const dialogRef = this.dialog.open(TemplateDialogComponent, {

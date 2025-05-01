@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { SharedFunctionsService } from '../../../shared/shared-functions.service';
 import { CategoryNamePipe } from '../../../pipes/category-name.pipe';
 import { UserNamePipe } from '../../../pipes/user-name.pipe';
+import { CardsService } from '../../../services/cards/cards.service';
 @Component({
   selector: 'app-contents-management',
   standalone: true,
@@ -35,7 +36,9 @@ export class ContentsManagementComponent implements OnInit {
   filteredContents: Content[] = []; // Replace 'any' with your actual content type
   searchControl = new FormControl('');
   contentInLines:string[] = [];
-  constructor(private contentService: ContentService, private dialog: MatDialog, private shared: SharedFunctionsService) { }
+  constructor(private contentService: ContentService,
+     private dialog: MatDialog,
+     private cardsService: CardsService) { }
 
   ngOnInit(): void {
     this.getAllContents();
@@ -49,6 +52,10 @@ export class ContentsManagementComponent implements OnInit {
       this.contents = contents;
       this.filteredContents = contents;
     });
+  }
+
+  countCardsByTextId(textID: number): number {
+    return this.cardsService.getCardsByTextId(textID).length;
   }
 
   addContent(): void {
