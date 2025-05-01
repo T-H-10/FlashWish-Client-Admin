@@ -6,7 +6,7 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { UserManagementComponent } from './features/users/user-management/user-management.component';
 import { TemplatesManagementComponent } from './features/templates/templates-management/templates-management.component';
 import { ContentsManagementComponent } from './features/contents/contents-management/contents-management.component';
-// import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     // { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -14,7 +14,7 @@ export const routes: Routes = [
     {
         path: '',
         component: MainLayoutComponent, //LayoutComponent, 
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         children: [
             // { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent },

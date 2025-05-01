@@ -11,9 +11,11 @@ export class User {
 
 export class JwtPayload{
     constructor(
-        public id: string,
+        public key: any,  // כל מפתח יכול להיות כל ערך
+        public exp: number,
+        public iss: string,
+        public aud: string,
+        public role: string[],  // role יהיה מערך של תפקידים
         public email: string,
-        public role: string,
-        public exp: number
     ){}
 }
