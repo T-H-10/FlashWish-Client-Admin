@@ -12,6 +12,9 @@ import Swal from 'sweetalert2';
 import { CardsService } from '../../services/cards/cards.service';
 import { TemplateService } from '../../services/template/template.service';
 import { ContentService } from '../../services/content/content.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ContentsDialogComponent } from '../contents/contents-dialog/contents-dialog.component';
+import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
 
 @Component({
   selector: 'app-categories',
@@ -29,7 +32,7 @@ import { ContentService } from '../../services/content/content.service';
 })
 export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
-  categoryState: Record<number, {cards: number; templates: number; contents: number}>={};
+  categoryState: Record<number, { cards: number; templates: number; contents: number }> = {};
 
   filteredCategories: Category[] = [];
   searchControl = new FormControl('');
@@ -37,7 +40,8 @@ export class CategoriesComponent implements OnInit {
   constructor(private categoryService: CategoryService,
     private cardsService: CardsService,
     private templateService: TemplateService,
-    private contentService: ContentService
+    private contentService: ContentService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -51,9 +55,9 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.getAllCategories().subscribe(categories => {
       this.categories = categories;
       this.filteredCategories = categories;
-      for(const category of this.categories){
-        const id=category.categoryID;
-        this.categoryState[id]={
+      for (const category of this.categories) {
+        const id = category.categoryID;
+        this.categoryState[id] = {
           cards: this.countCardsByCategoryId(id),
           templates: this.countTemplatesByCategoryId(id),
           contents: this.countContentsByCategoryId(id),
@@ -74,9 +78,59 @@ export class CategoriesComponent implements OnInit {
     return this.templateService.getTemplatesByCategoryId(categoryID).length;
   }
 
-  addCategory(): void { }
+  addCategory(): void {
+    const dialogRef = this.dialog.open(CategoryDialogComponent, {
+      width: '400px',
+      data: { mode: 'add' }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.categoryService.addCategory(result).subscribe({
+          next: () => {
+            this.getAllCategories();
+            Swal.fire({
+              icon: 'success',
+              title: 'קטגוריה נוספה בהצלחה',
+            });
+          },
+          error: (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'שגיאה',
+              text: 'אירעה שגיאה בעת הוספת הקטגוריה.'
+            });
+          }
+        });
+      }
+    });
+  }
 
-  editCategory(category: Category): void { }
+  editCategory(category: Category): void {
+        const dialogRef = this.dialog.open(CategoryDialogComponent, {
+          width: '400px',
+          data: { mode: 'edit', category }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.categoryService.updateCategory(category.categoryID, result).subscribe({
+              next: () => {
+                this.getAllCategories();
+                Swal.fire({
+                  icon: 'success',
+                  title: 'קטגוריה עודכנה בהצלחה',
+                });
+              },
+              error: (error) => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'שגיאה',
+                  text: 'אירעה שגיאה בעת עדכון הקטגוריה.'
+                });
+              }
+            });
+          }
+        });
+   }
 
   deleteCategory(categoryID: number): void {
     Swal.fire({

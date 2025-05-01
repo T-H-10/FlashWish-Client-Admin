@@ -1,0 +1,16 @@
+<h1 mat-dialog-title class="dialog-title">{{ mode === 'add' ? 'הוסף קטגוריה' : 'ערוך קטגוריה' }}</h1>
+
+<div mat-dialog-content class="dialog-content">
+    <form [formGroup]="form">
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>שם קטגוריה</mat-label>
+            <input matInput type="text" formControlName="categoryName" />
+        </mat-form-field>
+    </form>
+</div>
+
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="close()">ביטול</button>
+    <button mat-button color="primary" (click)="save()" [disabled]="form.invalid">שמור</button>
+</div>

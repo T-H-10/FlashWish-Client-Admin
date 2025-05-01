@@ -6,7 +6,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-import { ContentService } from '../../../services/content/content.service';
 import { Content } from '../../../models/content.model';
 import { Category } from '../../../models/category.model';
 import { CategoryService } from '../../../services/category/category.service';
@@ -31,19 +30,21 @@ export class ContentsDialogComponent {
   form: FormGroup;
   mode: 'add' | 'edit';
   categories: Category[]=[];
+  adminUserID: string;
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<ContentsDialogComponent>,
     private categoryService: CategoryService,
     @Inject(MAT_DIALOG_DATA) public data: { mode: 'add' | 'edit', content?: Partial<Content> }
   ){
+    this.adminUserID=localStorage.getItem('userID')||'-1';
     this.mode = data.mode;
     this.form = this.fb.group({
       title: [data.content?.title || ''],
       content: [data.content?.content || ''],
       signature: [data.content?.signature || ''],
       categoryID: [data.content?.categoryID || '', Validators.required],
-      userID: [data.content?.userID || '1'], // default userID to 1- userAdminId to get from the token!
+      userID: [data.content?.userID || this.adminUserID], // default userID to 1- userAdminId to get from the token!
     });
 
     if (this.mode === 'edit') {
