@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { User } from '../../models/user.model';
 
 @Injectable({
@@ -9,16 +9,35 @@ import { User } from '../../models/user.model';
 })
 export class UserService {
   private apiUrl: string;
+  private users:User[]=[];
+  private userMap: Map<number, string>=new Map();
+
   constructor(private http: HttpClient) {
     this.apiUrl=environment.apiUrl+'/api/users';
+    this.getAllUsers().subscribe();
    }
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
+    return this.http.get<User[]>(this.apiUrl).pipe(
+      tap((users: User[])=>{
+        this.users=users;
+        this.userMap=new Map(users.map((user: User)=>[user.id, user.userName]));
+      })
+    );
   }
 
   // getUserById(id: number): Observable<User> {
   //   return this.http.get<User>(`${this.apiUrl}/${id}`);
   // }
+
+  
+    // refreshMap(categories: Category[]) {
+    //   this.categories = categories;
+    //   this.categoryMap = new Map(categories.map(c => [c.categoryID, c.categoryName]));
+    // }
+  
+  getUserNameById(id:number):string{
+    return this.userMap.get(id) || '---';
+  }
 
   addUser({userName, email, password}:{userName: string, email: string, password: string}): Observable<User> {// use by userPostModel
     return this.http.post<User>(this.apiUrl, {userName, email, password});

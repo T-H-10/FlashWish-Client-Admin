@@ -5,9 +5,9 @@ import { CategoryService } from '../services/category/category.service';
   providedIn: 'root'
 })
 export class SharedFunctionsService {
-  constructor(private categoryService: CategoryService) { }
+  // constructor(private categoryService: CategoryService) { }
 
-  getCategoryName(categoryID: number): string {
-    return this.categoryService.getCategoryNameById(categoryID) || "---";
-  }
+  // getCategoryName(categoryID: number): string {
+  //   return this.categoryService.getCategoryNameById(categoryID) || "---";
+  // }
 }

@@ -1,0 +1,17 @@
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    /* margin-top: 20px; */
+  }
+  
+  .card {
+    direction: rtl;
+  }
+  
+  
+  .search-input {
+    width: 300px;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }

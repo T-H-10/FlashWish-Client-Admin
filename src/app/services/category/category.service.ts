@@ -20,7 +20,7 @@ export class CategoryService {
   getAllCategories():Observable<Category[]> {
     return this.http.get<Category[]>(this.apiUrl).pipe(
       tap((categories: Category[])=>{
-        this.categories=this.categories;
+        this.categories=categories;
         this.categoryMap=new Map(categories.map((category: Category) => [category.categoryID, category.categoryName]));
       })
     );
