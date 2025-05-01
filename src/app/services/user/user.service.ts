@@ -16,9 +16,9 @@ export class UserService {
     return this.http.get<User[]>(this.apiUrl);
   }
 
-  getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${id}`);
-  }
+  // getUserById(id: number): Observable<User> {
+  //   return this.http.get<User>(`${this.apiUrl}/${id}`);
+  // }
 
   addUser({userName, email, password}:{userName: string, email: string, password: string}): Observable<User> {// use by userPostModel
     return this.http.post<User>(this.apiUrl, {userName, email, password});
@@ -30,5 +30,11 @@ export class UserService {
 
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  getUserByEmail(email: string): Observable<User|null> {
+    console.log(`${this.apiUrl}/email-exists?username=${email}`);
+    
+    return this.http.get<User|null>(`${this.apiUrl}/email-exists?email=${email}`);
   }
 }

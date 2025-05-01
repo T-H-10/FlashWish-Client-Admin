@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CategoryService } from '../../../services/category/category.service';
 @Component({
   selector: 'app-templates-management',
   standalone: true,
@@ -30,7 +31,7 @@ export class TemplatesManagementComponent implements OnInit {
   filteredTemplates: Template[] = [];
   searchControl = new FormControl('');
 
-  constructor(private templateService: TemplateService, private dialog: MatDialog) { }
+  constructor(private templateService: TemplateService, private dialog: MatDialog, private categoryService:CategoryService) { }
 
   ngOnInit(): void {
     this.getAllTemplates();
@@ -45,8 +46,13 @@ export class TemplatesManagementComponent implements OnInit {
       this.filteredTemplates = templates;
     });
     console.log(this.filteredTemplates);
-    
   }
+
+  getCategoryName(categoryID: number): string {
+    return this.categoryService.getCategoryNameById(categoryID)||"nothing";
+  }
+
+
 
   addTemplate(): void {
     const dialogRef = this.dialog.open(TemplateDialogComponent, {
