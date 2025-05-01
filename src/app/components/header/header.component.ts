@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
     CommonModule,
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.css'
 })
 export class HeaderComponent {
   isMenuOpen:boolean = true;
