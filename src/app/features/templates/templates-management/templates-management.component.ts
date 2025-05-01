@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CategoryService } from '../../../services/category/category.service';
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-templates-management',
   standalone: true,
@@ -141,6 +142,13 @@ export class TemplatesManagementComponent implements OnInit {
         });
       }
     });
+  }
+  
+  getTemplateFullURL(imageURL: string):string{
+    console.log(imageURL);
+    
+    console.log(environment.startImageURL+imageURL);
+    return environment.startImageURL+imageURL;
   }
 
   private filterTemplates(searchTerm: string): void {

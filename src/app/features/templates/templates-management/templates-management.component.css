@@ -28,4 +28,9 @@
     padding: 0.5rem;
     font-size: 1rem;
   }
+
+  .mat-card-header{
+    /* align-content: space-around */
+    justify-content: space-between;
+  }
   

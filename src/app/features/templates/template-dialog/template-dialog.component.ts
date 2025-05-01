@@ -42,7 +42,7 @@ export class TemplateDialogComponent {
       templateName: [data.template?.templateName || '', Validators.required],
       categoryID: [data.template?.categoryID || '', Validators.required],
       userID: [data.template?.userID || '1'],//default userID to 1- userAdminId to get from the token!
-      imageFile: [data.template?.ImageURL || ''],
+      imageFile: [data.template?.imageURL || ''],
     });
 
     if (this.mode === 'edit') {
