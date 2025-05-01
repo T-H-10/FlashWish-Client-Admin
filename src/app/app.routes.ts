@@ -22,6 +22,7 @@ export const routes: Routes = [
             { path: 'categories', component: CategoriesComponent},
             { path: 'templates', component: TemplatesManagementComponent},
             { path: 'contents', component: ContentsManagementComponent},
+            {path: 'categories', component: CategoriesComponent}
         ]
     },
     // { path: '**', redirectTo: 'dashboard' } // Redirect to dashboard for any unknown routes

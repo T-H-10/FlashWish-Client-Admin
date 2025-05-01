@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { debounceTime } from 'rxjs';
 import { ContentsDialogComponent } from '../contents-dialog/contents-dialog.component';
 import Swal from 'sweetalert2';
+import { SharedFunctionsService } from '../../../shared/shared-functions.service';
+import { CategoryNamePipe } from '../../../pipes/category-name.pipe';
 @Component({
   selector: 'app-contents-management',
   standalone: true,
@@ -20,7 +22,8 @@ import Swal from 'sweetalert2';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    CategoryNamePipe
   ],
   templateUrl: './contents-management.component.html',
   styleUrl: './contents-management.component.css'
@@ -30,7 +33,7 @@ export class ContentsManagementComponent implements OnInit {
   filteredContents: Content[] = []; // Replace 'any' with your actual content type
   searchControl = new FormControl('');
   contentInLines:string[] = [];
-  constructor(private contentService: ContentService, private dialog: MatDialog) { }
+  constructor(private contentService: ContentService, private dialog: MatDialog, private shared: SharedFunctionsService) { }
 
   ngOnInit(): void {
     this.getAllContents();

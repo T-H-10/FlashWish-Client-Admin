@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CategoryService } from '../../../services/category/category.service';
 import { environment } from '../../../../environments/environment';
+import { CategoryNamePipe } from '../../../pipes/category-name.pipe';
 @Component({
   selector: 'app-templates-management',
   standalone: true,
@@ -22,7 +23,8 @@ import { environment } from '../../../../environments/environment';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    CategoryNamePipe
   ],
   templateUrl: './templates-management.component.html',
   styleUrl: './templates-management.component.css'

@@ -15,7 +15,7 @@
             </mat-card-header>
 
             <mat-card-content>
-                <p style="color: red;">קטגוריה: {{this.getCategoryName(template.categoryID)}}</p>
+                <p>קטגוריה: {{template.categoryID | categoryName}}</p>
                 <p>משתמש שהעלה: </p>
                 @if (template.markedForDeletion) {
                 <p style="color: red;">מיועד למחיקה </p>

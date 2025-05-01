@@ -26,8 +26,8 @@ export class CategoryService {
     );
   }
 
-  getCategoryNameById(id: number): string|undefined {
-    return this.categoryMap.get(id);
+  getCategoryNameById(id: number): string {
+    return this.categoryMap.get(id)||'---';
   }
   // getCategoryById(id: number): Observable<Category> {
   //   return this.http.get<Category>(`${this.apiUrl}/${id}`);
