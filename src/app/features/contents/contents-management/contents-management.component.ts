@@ -11,7 +11,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { debounceTime } from 'rxjs';
 import { ContentsDialogComponent } from '../contents-dialog/contents-dialog.component';
 import Swal from 'sweetalert2';
-import { SharedFunctionsService } from '../../../shared/shared-functions.service';
 import { CategoryNamePipe } from '../../../pipes/category-name.pipe';
 import { UserNamePipe } from '../../../pipes/user-name.pipe';
 import { CardsService } from '../../../services/cards/cards.service';

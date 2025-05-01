@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Category } from '../../models/category.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -34,10 +35,10 @@ export class CategoryService {
   //   return this.http.get<Category>(`${this.apiUrl}/${id}`);
   // }
 
-  refreshMap(categories: Category[]) {
-    this.categories = categories;
-    this.categoryMap = new Map(categories.map(c => [c.categoryID, c.categoryName]));
-  }
+  // refreshMap(categories: Category[]) {
+  //   this.categories = categories;
+  //   this.categoryMap = new Map(categories.map(c => [c.categoryID, c.categoryName]));
+  // }
 
   addCategory(category: Category): Observable<Category> {
     return this.http.post<Category>(this.apiUrl, category);

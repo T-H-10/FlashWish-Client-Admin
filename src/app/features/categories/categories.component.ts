@@ -29,6 +29,8 @@ import { ContentService } from '../../services/content/content.service';
 })
 export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
+  categoryState: Record<number, {cards: number; templates: number; contents: number}>={};
+
   filteredCategories: Category[] = [];
   searchControl = new FormControl('');
 
@@ -49,6 +51,14 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.getAllCategories().subscribe(categories => {
       this.categories = categories;
       this.filteredCategories = categories;
+      for(const category of this.categories){
+        const id=category.categoryID;
+        this.categoryState[id]={
+          cards: this.countCardsByCategoryId(id),
+          templates: this.countTemplatesByCategoryId(id),
+          contents: this.countContentsByCategoryId(id),
+        };
+      }
     })
   }
 
@@ -56,11 +66,11 @@ export class CategoriesComponent implements OnInit {
     return this.cardsService.getCardsByCategoryId(categoryID).length;
   }
 
-  countContentsByCategoryId(categoryID: number):number{
+  countContentsByCategoryId(categoryID: number): number {
     return this.contentService.getContentByCategoryId(categoryID).length;
   }
 
-  countTemplatesByCategoryId(categoryID: number): number {  
+  countTemplatesByCategoryId(categoryID: number): number {
     return this.templateService.getTemplatesByCategoryId(categoryID).length;
   }
 
@@ -68,7 +78,36 @@ export class CategoriesComponent implements OnInit {
 
   editCategory(category: Category): void { }
 
-  deleteCategory(categoryId: number): void { }
+  deleteCategory(categoryID: number): void {
+    Swal.fire({
+      title: 'האם אתה בטוח?',
+      text: 'לא תוכל לשחזר לאחר המחיקה!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'כן, מחק את זה!',
+      cancelButtonText: 'בטל'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.categoryService.deleteCategory(categoryID).subscribe({
+          next: () => {
+            this.getAllCategories();
+            Swal.fire(
+              'מחק',
+              'קטגוריה נמחקה בהצלחה.',
+              'success'
+            );
+          },
+          error: (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'שגיאה',
+              text: 'אירעה שגיאה בעת מחיקת הקטגוריה.'
+            });
+          }
+        });
+      }
+    });
+  }
 
   private filterCategories(searchTerm: string): void {
     const lower = searchTerm.toLowerCase();
