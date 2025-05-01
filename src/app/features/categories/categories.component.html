@@ -13,8 +13,8 @@
 
             <mat-card-content>
                 <p>כמות ברכות שנוצרו: {{countCardsByCategoryId(category.categoryID)}}</p>
-                <p>כמות רקעים זמינים: </p>
-                <p>כמות תכנים זמינים: </p>
+                <p>כמות רקעים זמינים: {{countTemplatesByCategoryId(category.categoryID)}}</p>
+                <p>כמות תכנים זמינים: {{countContentsByCategoryId(category.categoryID)}} </p>
             </mat-card-content>
 
             <mat-card-actions align="end">

@@ -16,6 +16,8 @@ import { environment } from '../../../../environments/environment';
 import { CategoryNamePipe } from '../../../pipes/category-name.pipe';
 import { UserNamePipe } from '../../../pipes/user-name.pipe';
 import { CardsService } from '../../../services/cards/cards.service';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-templates-management',
   standalone: true,
@@ -27,7 +29,8 @@ import { CardsService } from '../../../services/cards/cards.service';
     MatFormFieldModule,
     MatInputModule,
     CategoryNamePipe,
-    UserNamePipe
+    UserNamePipe,
+    DatePipe,
   ],
   templateUrl: './templates-management.component.html',
   styleUrl: './templates-management.component.css'
@@ -46,7 +49,7 @@ export class TemplatesManagementComponent implements OnInit {
     this.getAllTemplates();
     this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe(value => {
       this.filterTemplates(value || '');
-    });
+    });   
   }
 
   getAllTemplates(): void {
@@ -54,7 +57,6 @@ export class TemplatesManagementComponent implements OnInit {
       this.templates = templates;
       this.filteredTemplates = templates;
     });
-    console.log(this.filteredTemplates);
   }
 
   getCategoryName(categoryID: number): string {
@@ -155,9 +157,6 @@ export class TemplatesManagementComponent implements OnInit {
   }
   
   getTemplateFullURL(imageURL: string):string{
-    console.log(imageURL);
-    
-    console.log(environment.startImageURL+imageURL);
     return environment.startImageURL+imageURL;
   }
 

@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import Swal from 'sweetalert2';
 import { CardsService } from '../../../services/cards/cards.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-management',
@@ -22,7 +23,8 @@ import { CardsService } from '../../../services/cards/cards.service';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    DatePipe
   ],
   templateUrl: './user-management.component.html',
   styleUrl: './user-management.component.css'

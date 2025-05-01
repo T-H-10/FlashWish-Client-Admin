@@ -31,7 +31,6 @@ export class DashboardComponent implements OnInit {
       this.statisticsService.getStatistics().subscribe(
         (response) => {
           this.statistics = response;
-          console.log('Statistics loaded:', this.statistics);
         },
         (error) => {
           console.error('Error loading statistics:', error);

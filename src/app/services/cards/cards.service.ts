@@ -13,10 +13,9 @@ export class CardsService {
 
   constructor(private http: HttpClient) {
     this.apiUrl = environment.apiUrl + '/api/GreetingCards';
-    this.getAllCards().subscribe();
-    console.log(this.cards);
-    
+    this.getAllCards().subscribe();    
   }
+  
   getAllCards(): Observable<Card[]> {
     return this.http.get<Card[]>(this.apiUrl).pipe(
       tap((cards:Card[])=>this.cards=cards)

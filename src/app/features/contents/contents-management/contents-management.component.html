@@ -20,8 +20,8 @@
                 <p style="color: red;">מיועד למחיקה </p>
                 } -->
                 <p> כמות ברכות: {{countCardsByTextId(content.textID)}}</p>
-                <p>תאריך יצירה: </p>
-                <p>תאריך עדכון: </p>
+                <p>תאריך יצירה: {{content.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>
+                <p>תאריך עדכון: {{content.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>
             </mat-card-content>
 
             <mat-card-actions align="end">

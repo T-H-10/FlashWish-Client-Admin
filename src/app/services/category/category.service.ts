@@ -12,7 +12,8 @@ export class CategoryService {
   private categories:Category[]=[];
   private categoryMap: Map<number, string> = new Map();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+  ) {
     this.apiUrl = environment.apiUrl+'/api/Categories';
     this.getAllCategories().subscribe();
    }
