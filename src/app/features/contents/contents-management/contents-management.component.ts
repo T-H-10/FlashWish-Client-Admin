@@ -13,6 +13,7 @@ import { ContentsDialogComponent } from '../contents-dialog/contents-dialog.comp
 import Swal from 'sweetalert2';
 import { SharedFunctionsService } from '../../../shared/shared-functions.service';
 import { CategoryNamePipe } from '../../../pipes/category-name.pipe';
+import { UserNamePipe } from '../../../pipes/user-name.pipe';
 @Component({
   selector: 'app-contents-management',
   standalone: true,
@@ -23,7 +24,8 @@ import { CategoryNamePipe } from '../../../pipes/category-name.pipe';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    CategoryNamePipe
+    CategoryNamePipe,
+    UserNamePipe
   ],
   templateUrl: './contents-management.component.html',
   styleUrl: './contents-management.component.css'

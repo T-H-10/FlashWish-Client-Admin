@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CategoryService } from '../../../services/category/category.service';
 import { environment } from '../../../../environments/environment';
 import { CategoryNamePipe } from '../../../pipes/category-name.pipe';
+import { UserNamePipe } from '../../../pipes/user-name.pipe';
 @Component({
   selector: 'app-templates-management',
   standalone: true,
@@ -24,7 +25,8 @@ import { CategoryNamePipe } from '../../../pipes/category-name.pipe';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    CategoryNamePipe
+    CategoryNamePipe,
+    UserNamePipe
   ],
   templateUrl: './templates-management.component.html',
   styleUrl: './templates-management.component.css'
