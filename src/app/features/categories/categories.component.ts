@@ -15,6 +15,7 @@ import { ContentService } from '../../services/content/content.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ContentsDialogComponent } from '../contents/contents-dialog/contents-dialog.component';
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-categories',
@@ -25,7 +26,8 @@ import { CategoryDialogComponent } from './category-dialog/category-dialog.compo
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    DatePipe
   ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css'
