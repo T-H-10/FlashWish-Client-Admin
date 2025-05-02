@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-// import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
@@ -15,6 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(), 
     // {provide: LOCALE_ID, useValue: 'he-IL'},
     // { provide: MAT_DATE_LOCALE, useValue: 'he-IL' }
-    // provideHttpClient(withInterceptors([AuthInterceptor])), provideAnimationsAsync(), provideAnimationsAsync()
+    provideHttpClient(withInterceptors([AuthInterceptor])), provideAnimationsAsync(), provideAnimationsAsync()
   ]
 };

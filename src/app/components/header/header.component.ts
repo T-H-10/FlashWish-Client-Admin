@@ -35,7 +35,7 @@ export class HeaderComponent {
   //   return this.isMenuOpen;
   // }
   logout() {
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('authToken');
     // sessionStorage.removeItem('user');
     // window.location.reload();
   }
