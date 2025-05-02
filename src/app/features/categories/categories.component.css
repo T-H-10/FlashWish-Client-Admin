@@ -8,10 +8,20 @@
   .card {
     direction: rtl;
   }
-  
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
   
   .search-input {
     width: 300px;
     padding: 0.5rem;
     font-size: 1rem;
+  }
+  .card-content{
+    white-space: pre-line;
+    font-size: 1em;
+    overflow-y: auto;
+    max-height: 200px; 
   }

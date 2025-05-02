@@ -31,17 +31,6 @@
     max-height: 200px; 
   }
 
-  /* .cards-container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-    /* height: 300px;
-} */
 
 .mat-card-actions {
     margin-top: auto; /* זה יגרום לכפתורים להיות תמיד בתחתית הכרטיס */

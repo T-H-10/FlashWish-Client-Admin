@@ -37,7 +37,7 @@ export class ContentsDialogComponent {
     private categoryService: CategoryService,
     @Inject(MAT_DIALOG_DATA) public data: { mode: 'add' | 'edit', content?: Partial<Content> }
   ){
-    this.adminUserID=localStorage.getItem('userID')||'-1';
+    this.adminUserID=localStorage.getItem('userID')||'-1'; // put in the localStorage the userID!!
     this.mode = data.mode;
     this.form = this.fb.group({
       title: [data.content?.title || ''],

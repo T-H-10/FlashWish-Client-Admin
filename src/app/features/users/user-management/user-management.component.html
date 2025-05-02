@@ -13,6 +13,7 @@
             </mat-card-header>
 
             <mat-card-content>
+                <p>תפקיד: {{user.roles.join(', ')}}</p>
                 <p>כמות ברכות: {{countCardsByUserId(user.id)}} </p>
                 <p>תאריך הרשמה: {{user.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}} </p>
                 <p>תאריך עדכון: {{user.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>

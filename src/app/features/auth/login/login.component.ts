@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-// import jwt_decode from 'jwt-decode';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Router } from '@angular/router';
-// import { default as jwt_decode } from 'jwt-decode';
 import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -50,6 +49,7 @@ export class LoginComponent implements OnInit {
             console.log('here!!!');
             
             localStorage.setItem('authToken', response.token);
+            localStorage.setItem('userID', response.user.id.toString());
             this.router.navigate(['/dashboard']);
           }
           else {
@@ -60,17 +60,6 @@ export class LoginComponent implements OnInit {
             });
           }
         }
-        // const decoded=jwt_decode(response.token);
-        // if(decoded.role !== 'admin'){
-        //   this.errorMessage = 'אין הרשאה לגשת למערכת הניהול';
-        //   return;
-        // }
-
-        // localStorage.setItem('user', JSON.stringify(decoded));
-        // this.router.navigate(['/dashboard']);
-        // } else {
-        // this.errorMessage = 'ארעה שגיאה, נסה מאוחר יותר.';
-        // }
       },
       (error) => {
         this.errorMessage = 'שם משתמש או סיסמה שגויים. אנא נסה שוב.';

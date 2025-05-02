@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SidebarComponent } from "../sidebar/sidebar.component";
 import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 
@@ -8,7 +7,6 @@ import { HeaderComponent } from '../header/header.component';
   standalone: true,
   imports: [
     HeaderComponent,
-     SidebarComponent,
      RouterOutlet,
      RouterLink,
      RouterLinkActive

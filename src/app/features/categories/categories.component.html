@@ -22,12 +22,11 @@
 
         <mat-card-actions align="end">
             <button mat-button color="accent" (click)="editCategory(category)">עריכה</button>
-            @if (categoryState[category.categoryID].cards===0 &&
+            <button mat-button color="warn" (click)="deleteCategory(category.categoryID)"
+            [disabled]="!(categoryState[category.categoryID].cards===0 &&
             categoryState[category.categoryID].templates===0 &&
-            categoryState[category.categoryID].contents===0
-            ) {
-            <button mat-button color="warn" (click)="deleteCategory(category.categoryID)">מחיקה</button>
-            }
+            categoryState[category.categoryID].contents===0)"
+            >מחיקה</button>
         </mat-card-actions>
     </mat-card>
     }

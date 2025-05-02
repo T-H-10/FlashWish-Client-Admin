@@ -44,7 +44,7 @@ export class TemplateService {
     return this.http.put<Template>(`${this.apiUrl}/${id}`, {templateName, categoryID, userID, imageFile: null},
       {
         headers: { 'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' +localStorage.getItem('token') || '' 
+          'Authorization': 'Bearer ' +localStorage.getItem('authToken') || '' 
          },
       }
     );

@@ -13,12 +13,18 @@ export class UserService {
   private userMap: Map<number, string>=new Map();
 
   constructor(private http: HttpClient) {
-    this.apiUrl=environment.apiUrl+'/api/users';
+    this.apiUrl=environment.apiUrl+'/api/Users';
     this.getAllUsers().subscribe();
    }
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl).pipe(
+    return this.http.get<User[]>(this.apiUrl+'/Roles',{
+      headers: { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' +localStorage.getItem('authToken') || '' 
+       }
+    }).pipe(
       tap((users: User[])=>{
+        console.log(users);
+        
         this.users=users;
         this.userMap=new Map(users.map((user: User)=>[user.id, user.userName]));
       })

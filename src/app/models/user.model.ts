@@ -5,7 +5,8 @@ export class User {
     public email: string,
     public password: string,
     public createdAt: Date,
-    public updatedAt: Date
+    public updatedAt: Date,
+    public roles: string[]
     ) { }
 }
 

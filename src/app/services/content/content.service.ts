@@ -40,7 +40,7 @@ export class ContentService {
     console.log(content);
     return this.http.put<Content>(`${this.apiUrl}/${id}`, content,{
       headers: { 'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' +localStorage.getItem('token') || '' 
+        'Authorization': 'Bearer ' +localStorage.getItem('authToken') || '' 
        },
     });
   }
