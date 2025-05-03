@@ -37,6 +37,7 @@ export class ContentsManagementComponent implements OnInit {
   filteredContents: Content[] = []; // Replace 'any' with your actual content type
   searchControl = new FormControl('');
   contentInLines:string[] = [];
+  
   constructor(private contentService: ContentService,
      private dialog: MatDialog,
      private cardsService: CardsService) { }

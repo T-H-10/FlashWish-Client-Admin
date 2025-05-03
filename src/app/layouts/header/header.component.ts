@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -18,10 +19,14 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.css'
 })
 export class HeaderComponent {
   isMenuOpen:boolean = true;
+
+  constructor(
+    private authService: AuthService
+  ){}
   
   toggleMenu() {
     this.isMenuOpen=!this.isMenuOpen;
@@ -31,4 +36,7 @@ export class HeaderComponent {
     this.isMenuOpen=false;
   }
 
+  logout() {
+    this.authService.logout()
+  }
 }

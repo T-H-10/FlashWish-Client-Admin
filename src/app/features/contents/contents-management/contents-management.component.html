@@ -1,33 +1,37 @@
 <div class="toolbar">
-    <input [formControl]="searchControl" placeholder="חיפוש לפי כותרת / תוכן / חתימה" class="search-input" />
+    <mat-form-field appearance="outline" class="search-input">
+        <input [formControl]="searchControl"  placeholder="חיפוש לפי כותרת / תוכן / חתימה"
+            class="search-input" />
+    </mat-form-field>
+
 
     <button mat-raised-button color="primary" (click)="addContent()">הוסף תוכן</button>
 </div>
 
 <div class="cards-container">
     @for (content of filteredContents; track content.textID) {
-        <mat-card class="card mat-elevation-z4">
-            <mat-card-header>
-                <mat-card-title>{{ content.title }}</mat-card-title>
-                <mat-card-subtitle class="card-content">{{ content.content }}</mat-card-subtitle>
-                <mat-card-subtitle style="font-style: italic; font-size: 0.9em;">{{ content.signature }}</mat-card-subtitle>
-            </mat-card-header>
+    <mat-card class="card mat-elevation-z4">
+        <mat-card-header>
+            <mat-card-title>{{ content.title }}</mat-card-title>
+            <mat-card-subtitle class="card-content">{{ content.content }}</mat-card-subtitle>
+            <mat-card-subtitle style="font-style: italic; font-size: 0.9em;">{{ content.signature }}</mat-card-subtitle>
+        </mat-card-header>
 
-            <mat-card-content>
-                <p>קטגוריה: {{content.categoryID | categoryName}}</p>
-                <p>משתמש שהעלה: {{content.userID | userName}}</p>
-                <!-- @if (contents.markedForDeletion) {
+        <mat-card-content>
+            <p>קטגוריה: {{content.categoryID | categoryName}}</p>
+            <p>משתמש שהעלה: {{content.userID | userName}}</p>
+            <!-- @if (contents.markedForDeletion) {
                 <p style="color: red;">מיועד למחיקה </p>
                 } -->
-                <p> כמות ברכות: {{countCardsByTextId(content.textID)}}</p>
-                <p>תאריך יצירה: {{content.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>
-                <p>תאריך עדכון: {{content.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>
-            </mat-card-content>
+            <p> כמות ברכות: {{countCardsByTextId(content.textID)}}</p>
+            <p>תאריך יצירה: {{content.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>
+            <p>תאריך עדכון: {{content.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>
+        </mat-card-content>
 
-            <mat-card-actions align="end">
-                <button mat-button color="accent" (click)="editContent(content)">עריכה</button>
-                <button mat-button color="warn" (click)="deleteContent(content.textID)">מחיקה</button>
-            </mat-card-actions>
-        </mat-card>
+        <mat-card-actions align="end">
+            <button mat-button color="accent" (click)="editContent(content)">עריכה</button>
+            <button mat-button color="warn" (click)="deleteContent(content.textID)">מחיקה</button>
+        </mat-card-actions>
+    </mat-card>
     }
 </div>

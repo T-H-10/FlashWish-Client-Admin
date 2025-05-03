@@ -42,11 +42,8 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(email.trim(), password.trim()).subscribe(
       (response) => {
-        console.log(response.token);
         if (response.token) {
-          console.log(this.authService.getUserRole(response.token));
           if (this.authService.getUserRole(response.token)?.includes('Admin')) {
-            console.log('here!!!');
             
             localStorage.setItem('authToken', response.token);
             localStorage.setItem('userID', response.user.id.toString());

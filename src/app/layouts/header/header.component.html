@@ -1,8 +1,10 @@
 <mat-toolbar color="primary" class="toolbar">
     <img src="assets/logo.jpg" alt="לוגו" class="logo" />
-    <button mat-icon-button class="menu-button" (click)="toggleMenu()">
-        <mat-icon>{{isMenuOpen? 'close': 'menu'}}</mat-icon>
-    </button>
+
+    <span class="spacer"></span>
+
+
+
     <!-- <button mat-icon-button (click)="logout()">
         <mat-icon>logout</mat-icon>
     </button> -->
@@ -17,5 +19,17 @@
     @if (isMenuOpen) {
     <div class="backdrop" (click)="closeMenu()"></div>
     }
+
+    <div class="user-actions" >
+        <button mat-icon-button (click)="toggleMenu()">
+            <mat-icon>{{isMenuOpen? '': 'menu'}}</mat-icon>
+        </button>
+        <!-- <button mat-icon-button aria-label="משתמש">
+          <mat-icon>account_circle</mat-icon>
+        </button> -->
+        <button mat-icon-button aria-label="התנתק" (click)="logout()" >
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
 
 </mat-toolbar>

@@ -14,7 +14,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     this.apiUrl=environment.apiUrl+'/api/Users';
-    this.getAllUsers().subscribe();
+    this.getAllUsers();
    }
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl+'/Roles',{

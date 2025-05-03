@@ -20,9 +20,7 @@ export class AuthService {
     this.apiUrl=environment.apiUrl+'/api/auth/login';
   }
 
-  login(email: string, password: string): Observable<{ user:User, token:string}> {
-    console.log('Login called with:', email, password);
-    
+  login(email: string, password: string): Observable<{ user:User, token:string}> {    
     const loginData = { email, password };
     return this.http.post<{ user:User, token:string}>(this.apiUrl, loginData).pipe(
       catchError((error) => {

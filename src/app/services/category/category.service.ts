@@ -16,7 +16,7 @@ export class CategoryService {
   constructor(private http: HttpClient,
   ) {
     this.apiUrl = environment.apiUrl+'/api/Categories';
-    this.getAllCategories().subscribe();
+    this.getAllCategories();
    }
 
   getAllCategories():Observable<Category[]> {

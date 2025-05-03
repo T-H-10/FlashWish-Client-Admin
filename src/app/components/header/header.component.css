@@ -5,7 +5,7 @@
   position: relative;
   direction: rtl;
   height: 70px;
-
+  background-color: #25173b;
   .logo {
     height: 70px;
   }

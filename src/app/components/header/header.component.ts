@@ -14,7 +14,6 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    RouterLink,
     CommonModule,
   ],
   templateUrl: './header.component.html',

@@ -13,18 +13,16 @@ export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
   if (token) {
     // כאן תוכל לקבוע אילו בקשות יוסיפו את הטוקן
     const url = req.url;
-console.log('here');
 
     // לדוגמה: הוסף את הטוקן רק לבקשות ל-API
-    // if (url.startsWith('/api')) {
-        console.log(token);
+    if (!url.includes('/auth')) {
         
       authReq = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`
         }
       });
-    // }
+    }
   }
 
   return next(authReq).pipe(

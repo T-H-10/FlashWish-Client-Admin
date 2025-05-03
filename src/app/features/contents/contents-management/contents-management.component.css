@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 16px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
   }
   
   .card {
@@ -32,6 +32,6 @@
   }
 
 
-.mat-card-actions {
+/* .mat-card-actions {
     margin-top: auto; /* זה יגרום לכפתורים להיות תמיד בתחתית הכרטיס */
-}
+/* } */
