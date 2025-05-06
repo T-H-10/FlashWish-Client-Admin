@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Statistics } from '../../models/statistics.model';
 import { StatisticsService } from '../../services/statistics/statistics.service';
-import { CounterComponent } from "../../components/counter/counter.component";
+import { CounterComponent } from "../../layouts/counter/counter.component";
 
 @Component({
   selector: 'app-dashboard',
