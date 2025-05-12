@@ -183,12 +183,12 @@
 
 .logout-btn {
   margin-right: 8px;
-  color: var(--text-light);
+  color: var(--secondary-color);
   transition: all 0.3s ease;
 }
 
 .logout-btn:hover {
-  color: var(--secondary-color);
+  color: var(--text-light);
 }
 
 .menu-toggle {
