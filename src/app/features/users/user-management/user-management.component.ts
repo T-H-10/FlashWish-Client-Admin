@@ -86,6 +86,9 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
+  isAdmin(user: any): boolean {
+    return user.roles.includes('Admin');
+  }
 
   editUser(user: User): void {
     const dialogRef = this.dialog.open(UserDialogComponent, {
@@ -141,6 +144,67 @@ export class UserManagementComponent implements OnInit {
               icon: 'error',
               title: 'שגיאה',
               text: 'אירעה שגיאה בעת מחיקת המשתמש.'
+            });
+          }
+        });
+      }
+    });
+  }
+
+  addAdminRole(userId: number): void {
+    Swal.fire({
+      title: 'האם אתה בטוח?',
+      text: 'האם אתה בטוח שברצונך להוסיף את תפקיד המנהל למשתמש זה?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'כן, הוסף!',
+      cancelButtonText: 'בטל'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.addAdminRole(userId).subscribe({
+          next: () => {
+            this.getAllUsers();
+            Swal.fire({
+              icon: 'success',
+              title: 'תפקיד נוסף!',
+              text: 'תפקיד המנהל נוסף בהצלחה.'
+            });
+          },
+          error: () => {
+            Swal.fire({
+              icon: 'error',
+              title: 'שגיאה',
+              text: 'אירעה שגיאה בעת הוספת תפקיד המנהל.'
+            });
+          }
+        });
+      }
+    });
+  }
+  removeAdminRole(userId: number): void {
+    Swal.fire({
+      title: 'האם אתה בטוח?',
+      text: 'האם אתה בטוח שברצונך להסיר את תפקיד המנהל למשתמש זה?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'כן, הסר!',
+      cancelButtonText: 'בטל'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.removeAdminRole(userId).subscribe({
+          next: () => {
+            this.getAllUsers();
+            Swal.fire({
+              icon: 'success',
+              title: 'תפקיד הוסר!',
+              text: 'תפקיד המנהל הוסר בהצלחה.'
+            });
+          },
+          error: () => {
+            Swal.fire({
+              icon: 'error',
+              title: 'שגיאה',
+              text: 'אירעה שגיאה בעת הסרת תפקיד המנהל.'
             });
           }
         });

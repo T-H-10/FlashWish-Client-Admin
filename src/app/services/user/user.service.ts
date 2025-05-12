@@ -67,4 +67,23 @@ export class UserService {
     
     return this.http.get<User|null>(`${this.apiUrl}/Users/email-exists?email=${email}`);
   }
+
+  addAdminRole(id: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/Users/${id}/add-admin-role`, {}).pipe(
+      catchError((error) => {
+        console.log(error);
+        return of(error);
+      })
+    );
+  }
+
+  removeAdminRole(id: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/Users/${id}/remove-admin-role`, {}).pipe(
+      catchError((error) => {
+        console.log(error);
+        return of(error);
+      })
+    );
+  }
+
 }

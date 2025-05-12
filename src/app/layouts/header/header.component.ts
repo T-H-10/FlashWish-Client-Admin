@@ -6,6 +6,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -22,21 +23,32 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  isMenuOpen:boolean = true;
+  isMenuOpen: boolean = true;
 
   constructor(
     private authService: AuthService
-  ){}
-  
+  ) { }
+
   toggleMenu() {
-    this.isMenuOpen=!this.isMenuOpen;
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
   closeMenu() {
-    this.isMenuOpen=false;
+    this.isMenuOpen = false;
   }
 
   logout() {
-    this.authService.logout()
+    Swal.fire({
+      title: 'האם אתה בטוח?',
+      text: "לאחר שתצא, תצטרך להתחבר שוב.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'כן, התנתק!',
+      cancelButtonText: 'לא, נשאר',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.authService.logout()
+      }
+    });
   }
 }

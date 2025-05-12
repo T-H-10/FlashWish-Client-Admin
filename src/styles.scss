@@ -11,11 +11,21 @@ body {
     direction: rtl;
 }
 :root {
+    --primary-dark: #1b102e;
     --primary-color: #25173b;
-    --accent-color: #eeb451;
-    --warn-color: #f44336;
-    --primary-text: #ffffff;
-    --accent-text: #000000;
+    --primary-light: #352252;
+    --secondary-dark: #e19425;
+    --secondary-color: #fbbe65;
+    --secondary-light: #ffd08a;
+    --text-light: #ffffff;
+    --text-dark: #25173b;
+    --background-light: #f8f5ff;
+    --shadow-color: rgba(27, 16, 46, 0.2);
+    // --primary-color: #25173b;
+    // --accent-color: #eeb451;
+    // --warn-color: #f44336;
+    // --primary-text: #ffffff;
+    // --accent-text: #000000;
   }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
