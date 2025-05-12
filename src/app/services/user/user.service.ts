@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { User } from '../../models/user.model';
 
 @Injectable({
@@ -13,11 +13,11 @@ export class UserService {
   private userMap: Map<number, string>=new Map();
 
   constructor(private http: HttpClient) {
-    this.apiUrl=environment.apiUrl+'/api/Users';
+    this.apiUrl=environment.apiUrl+'/api';
     this.getAllUsers();
    }
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl+'/Roles',{
+    return this.http.get<User[]>(this.apiUrl+'/Users/Roles',{
       headers: { 'Content-Type': 'application/json',
         'Authorization': 'Bearer ' +localStorage.getItem('authToken') || '' 
        }
@@ -46,20 +46,25 @@ export class UserService {
   }
 
   addUser({userName, email, password}:{userName: string, email: string, password: string}): Observable<User> {// use by userPostModel
-    return this.http.post<User>(this.apiUrl, {userName, email, password});
+    return this.http.post<{ user:User, token:string}>(this.apiUrl+'/Auth/register', {userName, email, password}).pipe(
+      catchError((error) => {
+        console.log(error);
+        return of(error);
+      })
+    );
   }
 
   updateUser(id:number, user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${id}`, {userName: user.userName, email: user.email, password: ''});
+    return this.http.put<User>(`${this.apiUrl}/Users/${id}`, {userName: user.userName, email: user.email, password: ''});
   }
 
   deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/Users/${id}`);
   }
 
   getUserByEmail(email: string): Observable<User|null> {
-    console.log(`${this.apiUrl}/email-exists?username=${email}`);
+    console.log(`${this.apiUrl}/Users/email-exists?username=${email}`);
     
-    return this.http.get<User|null>(`${this.apiUrl}/email-exists?email=${email}`);
+    return this.http.get<User|null>(`${this.apiUrl}/Users/email-exists?email=${email}`);
   }
 }
