@@ -17,7 +17,12 @@ export class DashboardComponent implements OnInit {
     categoriesCount: 0,
     templatesCount: 0,
     greetingMessagesCount: 0,
-    greetingsCount: 0
+    greetingsCount: 0,
+    usersGrowthRate: 0,
+    greetingsGrowthRate: 0,
+    templatesGrowthRate: 0,
+    greetingMessagesGrowthRate: 0,
+    categoriesGrowthRate: 0
   };
 
   constructor(
