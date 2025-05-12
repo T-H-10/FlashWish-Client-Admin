@@ -1,4 +1,160 @@
-<div class="toolbar">
+<div class="cosmic-universe">
+    <!-- Animated Background Elements -->
+    <div class="cosmic-particles">
+        <div class="particle p1"></div>
+        <div class="particle p2"></div>
+        <div class="particle p3"></div>
+    </div>
+
+    <div class="categories-container">
+        <div class="page-header">
+            <div class="header-content">
+                <h1 class="page-title">
+                    @for (char of 'ניהול קטגוריות'.split(''); track $index) {
+                    <span class="title-char" [style.animation-delay]="$index * 0.1 + 's'">
+                        {{char}}
+                    </span>
+                    }
+                </h1>
+                <p class="page-subtitle">ניהול וארגון של קטגוריות המערכת</p>
+            </div>
+
+            <div class="toolbar">
+                <div class="search-wrapper">
+                    <div class="search-orbit">
+                        <div class="orbit-particle"></div>
+                    </div>
+                    <input [formControl]="searchControl" placeholder="חיפוש לפי שם קטגוריה" class="search-input" />
+                    <div class="search-icon">
+                        <i class="material-icons">search</i>
+                    </div>
+                </div>
+
+                <button class="add-button" (click)="addCategory()">
+                    <div class="button-content">
+                        <span class="button-icon">+</span>
+                        <span class="button-text">הוסף קטגוריה</span>
+                    </div>
+                    <div class="button-glow"></div>
+                </button>
+            </div>
+        </div>
+
+        <div class="cards-container">
+            @for (category of categories; track category.categoryID) {
+            <div class="category-card" (mouseenter)="activateCard($event)" (mouseleave)="deactivateCard($event)">
+                <div class="card-glow"></div>
+
+                <div class="card-header">
+                    <div class="category-icon">
+                        <i class="material-icons">category</i>
+                        <div class="icon-ring"></div>
+                    </div>
+                    <h2 class="category-name">{{ category.categoryName }}</h2>
+                </div>
+
+                <div class="card-content">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="material-icons">card_giftcard</i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">ברכות שנוצרו</span>
+                            <span class="stat-value">{{categoryState[category.categoryID].cards}}</span>
+                        </div>
+                        <div class="stat-bar">
+                            <div class="bar-fill"
+                                [style.width]="getPercentage(categoryState[category.categoryID].cards, getMaxCards()) + '%'">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="material-icons">wallpaper</i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">רקעים זמינים</span>
+                            <span class="stat-value">{{categoryState[category.categoryID].templates}}</span>
+                        </div>
+                        <div class="stat-bar">
+                            <div class="bar-fill"
+                                [style.width]="getPercentage(categoryState[category.categoryID].templates, getMaxTemplates()) + '%'">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="material-icons">description</i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">תכנים זמינים</span>
+                            <span class="stat-value">{{categoryState[category.categoryID].contents}}</span>
+                        </div>
+                        <div class="stat-bar">
+                            <div class="bar-fill"
+                                [style.width]="getPercentage(categoryState[category.categoryID].contents, getMaxContents()) + '%'">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dates-container">
+                        <div class="date-item">
+                            <i class="material-icons">event_available</i>
+                            <span>נוצר: {{category.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</span>
+                        </div>
+                        <div class="date-item">
+                            <i class="material-icons">update</i>
+                            <span>עודכן: {{category.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="action-button edit-button" (click)="editCategory(category)">
+                        <i class="material-icons">edit</i>
+                        <span>עריכה</span>
+                    </button>
+
+                    <button class="action-button delete-button" [class.disabled]="!(categoryState[category.categoryID].cards===0 && 
+                                      categoryState[category.categoryID].templates===0 && 
+                                      categoryState[category.categoryID].contents===0)" [disabled]="!(categoryState[category.categoryID].cards===0 && 
+                                categoryState[category.categoryID].templates===0 && 
+                                categoryState[category.categoryID].contents===0)"
+                        (click)="deleteCategory(category.categoryID)">
+                        <i class="material-icons">delete</i>
+                        <span>מחיקה</span>
+                    </button>
+                </div>
+
+                <div class="card-status" [class.empty]="categoryState[category.categoryID].cards===0 && 
+                             categoryState[category.categoryID].templates===0 && 
+                             categoryState[category.categoryID].contents===0" [class.active]="categoryState[category.categoryID].cards > 0 || 
+                              categoryState[category.categoryID].templates > 0 || 
+                              categoryState[category.categoryID].contents > 0">
+                    @if (categoryState[category.categoryID].cards===0 &&
+                    categoryState[category.categoryID].templates===0 &&
+                    categoryState[category.categoryID].contents===0) {
+                    <span>
+                        ריק
+                    </span>
+                    }
+                    @if (categoryState[category.categoryID].cards > 0 ||
+                    categoryState[category.categoryID].templates > 0 ||
+                    categoryState[category.categoryID].contents > 0) {
+                    <span>
+                        פעיל
+                    </span>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- <div class="toolbar">
     <input [formControl]="searchControl" placeholder="חיפוש לפי שם קטגוריה" class="search-input" />
 
     <button mat-raised-button color="primary" (click)="addCategory()">הוסף קטגוריה</button>
@@ -30,4 +186,4 @@
         </mat-card-actions>
     </mat-card>
     }
-</div>
+</div> -->

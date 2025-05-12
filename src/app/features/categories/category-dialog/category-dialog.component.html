@@ -1,4 +1,56 @@
-<h1 mat-dialog-title class="dialog-title">{{ mode === 'add' ? 'הוסף קטגוריה' : 'ערוך קטגוריה' }}</h1>
+<div class="cosmic-dialog">
+    <div class="dialog-particles">
+      <div class="dialog-particle dp1"></div>
+      <div class="dialog-particle dp2"></div>
+      <div class="dialog-particle dp3"></div>
+    </div>
+    
+    <div class="dialog-header">
+      <h1 class="dialog-title">
+        <i class="material-icons">{{ mode === 'add' ? 'add_circle' : 'edit' }}</i>
+        <span>{{ mode === 'add' ? 'הוסף קטגוריה' : 'ערוך קטגוריה' }}</span>
+      </h1>
+      <div class="title-underline"></div>
+    </div>
+  
+    <div class="dialog-content">
+      <form [formGroup]="form">
+        <div class="form-field">
+          <label class="field-label" for="categoryName">שם קטגוריה</label>
+          <div class="input-container">
+            <input id="categoryName" type="text" formControlName="categoryName" class="cosmic-input" />
+            <div class="input-focus-effect"></div>
+            <div class="field-icon">
+              <i class="material-icons">category</i>
+            </div>
+          </div>
+          @if (form.get('categoryName')?.invalid && form.get('categoryName')?.touched) {
+          <div class="field-error">
+            <i class="material-icons">error</i>
+            <span>שם קטגוריה הוא שדה חובה</span>
+          </div>
+        }
+        </div>
+      </form>
+    </div>
+  
+    <div class="dialog-actions">
+      <button class="dialog-button cancel-button" (click)="close()">
+        <span>ביטול</span>
+        <i class="material-icons">close</i>
+      </button>
+      
+      <button class="dialog-button save-button" [disabled]="form.invalid" (click)="save()">
+        <div class="button-content">
+          <span>שמור</span>
+          <i class="material-icons">check</i>
+        </div>
+        <div class="button-glow"></div>
+      </button>
+    </div>
+  </div>
+
+<!-- <h1 mat-dialog-title class="dialog-title">{{ mode === 'add' ? 'הוסף קטגוריה' : 'ערוך קטגוריה' }}</h1>
 
 <div mat-dialog-content class="dialog-content">
     <form [formGroup]="form">
@@ -13,4 +65,4 @@
 <div mat-dialog-actions align="end">
     <button mat-button (click)="close()">ביטול</button>
     <button mat-button color="primary" (click)="save()" [disabled]="form.invalid">שמור</button>
-</div>
+</div> -->
