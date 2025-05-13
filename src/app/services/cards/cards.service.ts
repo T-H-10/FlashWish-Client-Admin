@@ -13,7 +13,7 @@ export class CardsService {
 
   constructor(private http: HttpClient) {
     this.apiUrl = environment.apiUrl + '/api/GreetingCards';
-    this.getAllCards();    
+    this.getAllCards().subscribe();    
   }
   
   getAllCards(): Observable<Card[]> {
