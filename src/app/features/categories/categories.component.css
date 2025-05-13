@@ -121,10 +121,12 @@
   background: linear-gradient(to right, var(--secondary-light), var(--secondary-color));
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 10px rgba(251, 190, 101, 0.3);
+  color: var(--secondary-color);
+  text-shadow: 0 0 10px rgba(251, 190, 101, 0.5);
   margin: 0 0 0.5rem 0;
   display: flex;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .title-char {

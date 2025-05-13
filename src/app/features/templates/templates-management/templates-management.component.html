@@ -1,4 +1,138 @@
-<div class="toolbar">
+<div class="cosmic-universe">
+    <!-- Animated Background Elements -->
+    <div class="cosmic-particles">
+      <div class="particle p1"></div>
+      <div class="particle p2"></div>
+      <div class="particle p3"></div>
+    </div>
+  
+    <div class="templates-container">
+      <div class="page-header">
+        <div class="header-content">
+          <h1 class="page-title">
+            @for (char of 'ניהול-רקעים'.split(''); track $index) {
+            <span class="title-char" [style.animation-delay]="$index * 0.1 + 's'">
+              {{char}}
+            </span>
+        }
+          </h1>
+          <p class="page-subtitle">ניהול וארגון של רקעים לברכות</p>
+        </div>
+        
+        <div class="toolbar">
+          <div class="search-wrapper">
+            <div class="search-orbit">
+              <div class="orbit-particle"></div>
+            </div>
+            <input [formControl]="searchControl" placeholder="חיפוש לפי שם רקע" class="search-input" />
+            <div class="search-icon">
+              <i class="material-icons">search</i>
+            </div>
+          </div>
+  
+          <button class="add-button" (click)="addTemplate()">
+            <div class="button-content">
+              <span class="button-icon">+</span>
+              <span class="button-text">הוסף רקע</span>
+            </div>
+            <div class="button-glow"></div>
+          </button>
+        </div>
+      </div>
+  
+      <div class="templates-grid">
+        @for (template of filteredTemplates; track template.categoryID) {
+          <div class="template-card" (mouseenter)="activateCard($event)" (mouseleave)="deactivateCard($event)">
+            <div class="card-glow"></div>
+            
+            <div class="template-image-container">
+              @if (template.imageURL) {
+                <img [src]="getTemplateFullURL(template.imageURL)" [alt]="template.templateName" class="template-image" />
+              } @else {
+                <div class="no-image">
+                  <i class="material-icons">image_not_supported</i>
+                </div>
+              }
+              
+              <div class="template-overlay">
+                <h2 class="template-name">{{ template.templateName }}</h2>
+                
+                @if (template.markedForDeletion) {
+                  <div class="deletion-badge">
+                    <i class="material-icons">delete_forever</i>
+                    <span>מיועד למחיקה</span>
+                  </div>
+                }
+              </div>
+            </div>
+            
+            <div class="template-content">
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="material-icons">category</i>
+                  </div>
+                  <div class="info-text">
+                    <span class="info-label">קטגוריה</span>
+                    <span class="info-value">{{template.categoryID | categoryName}}</span>
+                  </div>
+                </div>
+                
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="material-icons">person</i>
+                  </div>
+                  <div class="info-text">
+                    <span class="info-label">משתמש שהעלה</span>
+                    <span class="info-value">{{template.userID | userName}}</span>
+                  </div>
+                </div>
+                
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="material-icons">card_giftcard</i>
+                  </div>
+                  <div class="info-text">
+                    <span class="info-label">כמות ברכות</span>
+                    <span class="info-value">{{countCardsByTemplateId(template.templateID)}}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="dates-container">
+                <div class="date-item">
+                  <i class="material-icons">event_available</i>
+                  <span>נוצר: {{template.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</span>
+                </div>
+                <div class="date-item">
+                  <i class="material-icons">update</i>
+                  <span>עודכן: {{template.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <button class="action-button edit-button" (click)="editTemplate(template)">
+                <i class="material-icons">edit</i>
+                <span>עריכה</span>
+              </button>
+              
+              <button class="action-button delete-button" (click)="deleteTemplate(template.templateID)">
+                <i class="material-icons">delete</i>
+                <span>מחיקה</span>
+              </button>
+            </div>
+            
+            <div class="usage-indicator" [style.width]="getUsagePercentage(template.templateID) + '%'">
+              <div class="usage-text">{{getUsagePercentage(template.templateID)}}% בשימוש</div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+<!-- <div class="toolbar">
     <input [formControl]="searchControl" placeholder="חיפוש לפי שם רקע" class="search-input" />
 
     <button mat-raised-button color="primary" (click)="addTemplate()">הוסף רקע</button>
@@ -31,4 +165,4 @@
             </mat-card-actions>
         </mat-card>
     }
-</div>
+</div> -->
