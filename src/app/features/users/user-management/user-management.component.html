@@ -1,4 +1,163 @@
-<div class="toolbar">
+<div class="cosmic-universe">
+    <!-- Animated Background Elements -->
+    <div class="cosmic-particles">
+      <div class="particle p1"></div>
+      <div class="particle p2"></div>
+      <div class="particle p3"></div>
+    </div>
+  
+    <div class="users-container">
+      <div class="page-header">
+        <div class="header-content">
+          <h1 class="page-title">
+            @for (char of 'ניהול-משתמשים'.split(''); track $index) {
+            <span class="title-char"  [style.animation-delay]="$index * 0.1 + 's'">
+              {{char}}
+            </span>
+        }
+          </h1>
+          <p class="page-subtitle">ניהול וארגון של משתמשי המערכת</p>
+        </div>
+        
+        <div class="toolbar">
+          <div class="search-wrapper">
+            <div class="search-orbit">
+              <div class="orbit-particle"></div>
+            </div>
+            <input [formControl]="searchControl" placeholder="חיפוש לפי שם או מייל" class="search-input" />
+            <div class="search-icon">
+              <i class="material-icons">search</i>
+            </div>
+          </div>
+  
+          <button class="add-button" (click)="addUser()">
+            <div class="button-content">
+              <span class="button-text">הוסף משתמש</span>
+              <span class="button-icon">+</span>
+            </div>
+            <div class="button-glow"></div>
+          </button>
+        </div>
+      </div>
+  
+      <div class="users-grid">
+        @for (user of filteredUsers; track user.id) {
+          <div class="user-card" (mouseenter)="activateCard($event)" (mouseleave)="deactivateCard($event)">
+            <div class="card-glow"></div>
+            
+            <div class="card-banner">
+              <div class="banner-constellation">
+                @for (i of [1,2,3,4,5]; track $index) {
+                <div class="constellation-star"></div>
+                <div class="constellation-line"></div>
+                }
+              </div>
+            </div>
+            
+            <div class="user-header">
+              <div class="avatar-container">
+                <div class="avatar-ring"></div>
+                <div class="avatar">
+                  {{user.userName.charAt(0)}}
+                  <div class="avatar-glow"></div>
+                </div>
+              </div>
+              
+              <div class="user-info">
+                <h2 class="user-name">{{ user.userName }}</h2>
+                <div class="user-email">
+                  <i class="material-icons">email</i>
+                  <span>{{ user.email }}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="user-roles">
+              <div class="role-badges">
+                @for (role of user.roles; track role) {
+                  <div class="role-badge">
+                    <i class="material-icons">{{ getRoleIcon(role) }}</i>
+                    <span>{{ role }}</span>
+                  </div>
+                }
+              </div>
+            </div>
+            
+            <div class="user-details">
+              <div class="detail-item">
+                <div class="detail-icon">
+                  <i class="material-icons">card_giftcard</i>
+                </div>
+                <div class="detail-text">
+                  <span class="detail-label">כמות ברכות</span>
+                  <span class="detail-value">{{countCardsByUserId(user.id)}}</span>
+                </div>
+              </div>
+              
+              <div class="detail-item">
+                <div class="detail-icon">
+                  <i class="material-icons">event_available</i>
+                </div>
+                <div class="detail-text">
+                  <span class="detail-label">תאריך הרשמה</span>
+                  <span class="detail-value">{{user.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</span>
+                </div>
+              </div>
+              
+              <div class="detail-item">
+                <div class="detail-icon">
+                  <i class="material-icons">update</i>
+                </div>
+                <div class="detail-text">
+                  <span class="detail-label">תאריך עדכון</span>
+                  <span class="detail-value">{{user.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <div class="admin-toggle">
+                <button class="toggle-admin-button" [class.admin-active]="isAdmin(user)" 
+                >
+                <!-- (click)="toggleAdmin(user)" -->
+                
+                  <div class="toggle-icon">
+                    <i class="material-icons">{{ isAdmin(user) ? 'remove_moderator' : 'add_moderator' }}</i>
+                  </div>
+                  <div class="toggle-text">
+                    @if (isAdmin(user)) {
+                      <span>הסר הרשאת מנהל</span>
+                    } @else {
+                      <span>הוסף כמנהל</span>
+                    }
+                  </div>
+                  <div class="toggle-glow"></div>
+                </button>
+              </div>
+              
+              <div class="action-buttons">
+                <button class="action-button edit-button" (click)="editUser(user)">
+                  <i class="material-icons">edit</i>
+                  <span>עריכה</span>
+                </button>
+                
+                <button class="action-button delete-button" (click)="deleteUser(user.id)">
+                  <i class="material-icons">delete</i>
+                  <span>מחיקה</span>
+                </button>
+              </div>
+            </div>
+            
+            <div class="activity-indicator" [style.width]="getUserActivityPercentage(user.id) + '%'">
+              <div class="activity-text">{{getUserActivityPercentage(user.id)}}% פעילות</div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+<!-- <div class="toolbar">
     <div class="search-container">
         <input [formControl]="searchControl" placeholder="חיפוש לפי שם או מייל" class="search-input" />
         <div class="search-icon">🔍</div>
@@ -14,7 +173,7 @@
     @for (user of filteredUsers; track user.id) {
         <div class="card-wrapper">
         <mat-card class="card mat-elevation-z8">
-            <div class="card-banner" >  <!-- [ngClass]="{'admin-banner': isAdmin(user)}" -->
+            <div class="card-banner" > 
             </div>
             <mat-card-header>
                 <div class="avatar-container">
@@ -47,7 +206,7 @@
 
             <mat-card-actions class="card-actions">
                 <div class="admin-toggle">
-                    <button mat-button class="toggle-admin-button"> <!-- [ngClass]="{'admin-active': isAdmin(user)}" (click)="toggleAdmin(user)"> -->
+                    <button mat-button class="toggle-admin-button">
                         @if (isAdmin(user)) {
                         <span>הסר הרשאת מנהל</span>
                         }
@@ -64,4 +223,4 @@
         </mat-card>
         </div>
     }
-</div>
+</div> -->

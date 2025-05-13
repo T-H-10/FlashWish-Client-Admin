@@ -90,30 +90,6 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  // login() {
-  //   if (this.loginForm.invalid) return;
-    
-  //   this.isSubmitting = true;
-  //   this.errorMessage = '';
-    
-  //   // Simulate API call
-  //   setTimeout(() => {
-  //     this.isSubmitting = false;
-      
-  //     // For demo purposes, randomly show success or error
-  //     if (Math.random() > 0.5) {
-  //       this.isLoginSuccess = true;
-        
-  //       // Redirect after success animation
-  //       setTimeout(() => {
-  //         // Navigate to dashboard or home page
-  //         console.log('Login successful, redirecting...');
-  //       }, 1500);
-  //     } else {
-  //       this.errorMessage = 'שם משתמש או סיסמה שגויים. אנא נסה שנית.';
-  //     }
-  //   }, 2000);
-  // }
   getPlanetStyle(planetIndex: number) {
     if (!this.cosmicUniverse) return {};
     
@@ -236,6 +212,8 @@ export class LoginComponent implements OnInit {
    * Get button text based on current state
    */
   getButtonText(): string {
+    console.log('here---');
+    
     if (this.isSubmitting) {
       return 'מתחבר...';
     } else if (this.isLoginSuccess) {
@@ -249,6 +227,7 @@ export class LoginComponent implements OnInit {
    * Get button icon based on current state
    */
   getButtonIcon(): string {
+    console.log('getButtonIcon---');
     if (this.isSubmitting) {
       return 'sync';
     } else if (this.isLoginSuccess) {

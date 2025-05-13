@@ -122,7 +122,7 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: var(--secondary-color);
-  text-shadow: 0 0 10px rgba(251, 190, 101, 0.5);
+  text-shadow: 0 0 10px rgba(251, 190, 101, 0.9);
   margin: 0 0 0.5rem 0;
   display: flex;
   -webkit-font-smoothing: antialiased;
