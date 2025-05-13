@@ -32,7 +32,7 @@
     overflow: hidden;
     direction: rtl;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--text-light);
+    color: var(--primary-dark);
     min-width: 400px;
     max-width: 90vw;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 
@@ -379,13 +379,3 @@
       margin-right: 0;
     }
   }
-
-/* .dialog-content{
-    direction: rtl;
-}
-.dialog-title{
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    direction: rtl;
-} */

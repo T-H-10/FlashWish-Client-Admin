@@ -40,8 +40,6 @@ export class UserService {
     // }
   
   getUserNameById(id:number):string{
-    console.log(this.userMap);
-    
     return this.userMap.get(id) || '---';
   }
 

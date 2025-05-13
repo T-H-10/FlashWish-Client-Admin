@@ -193,12 +193,12 @@
 
 .menu-toggle {
   display: none;
-  color: var(--text-light);
+  color: var(--secondary-color);
   transition: all 0.3s ease;
 }
 
 .menu-toggle:hover {
-  color: var(--secondary-color);
+  color: var(--text-light);
 }
 
 /* Responsive styles */

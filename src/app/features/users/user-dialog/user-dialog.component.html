@@ -1,4 +1,134 @@
-<h1 mat-dialog-title>{{ mode === 'add' ? 'הוסף משתמש' : 'ערוך משתמש' }}</h1>
+<div class="cosmic-dialog">
+    <div class="dialog-particles">
+        <div class="dialog-particle dp1"></div>
+        <div class="dialog-particle dp2"></div>
+        <div class="dialog-particle dp3"></div>
+    </div>
+
+    <div class="dialog-header">
+        <h1 class="dialog-title">
+            <i class="material-icons">{{ mode === 'add' ? 'person_add' : 'manage_accounts' }}</i>
+            <span>{{ mode === 'add' ? 'הוסף משתמש' : 'ערוך משתמש' }}</span>
+        </h1>
+        <div class="title-underline"></div>
+    </div>
+
+    <div class="dialog-content">
+        <form [formGroup]="form">
+            <div class="form-field">
+                <label class="field-label" for="userName">שם משתמש</label>
+                <div class="input-container">
+                    <input id="userName" type="text" formControlName="userName" class="cosmic-input" />
+                    <div class="input-focus-effect"></div>
+                    <div class="field-icon">
+                        <i class="material-icons">person</i>
+                    </div>
+                </div>
+                @if (form.get('userName')?.hasError('required') && form.get('userName')?.touched) {
+                <div class="field-error">
+                    <i class="material-icons">error</i>
+                    <span>חובה להזין שם משתמש</span>
+                </div>
+                }
+                @if (form.get('userName')?.hasError('minlength') && form.get('userName')?.touched) {
+                <div class="field-error">
+                    <i class="material-icons">error</i>
+                    <span>שם משתמש חייב להיות באורך מינימלי של 3 תווים</span>
+                </div>
+                }
+            </div>
+
+            <div class="form-field">
+                <label class="field-label" for="email">מייל</label>
+                <div class="input-container">
+                    <input id="email" type="email" formControlName="email" class="cosmic-input" />
+                    <div class="input-focus-effect"></div>
+                    <div class="field-icon">
+                        <i class="material-icons">email</i>
+                    </div>
+                </div>
+                @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
+                <div class="field-error">
+                    <i class="material-icons">error</i>
+                    <span>חובה להזין כתובת מייל</span>
+                </div>
+                }
+                @if (form.get('email')?.hasError('email') && form.get('email')?.touched) {
+                <div class="field-error">
+                    <i class="material-icons">error</i>
+                    <span>כתובת המייל אינה תקינה</span>
+                </div>
+                }
+                @if (form.get('email')?.hasError('emailExists') && form.get('email')?.touched) {
+                <div class="field-error">
+                    <i class="material-icons">error</i>
+                    <span>מייל כבר קיים</span>
+                </div>
+                }
+            </div>
+
+            @if(mode === 'add') {
+            <div class="form-field">
+                <label class="field-label" for="password">סיסמה</label>
+                <div class="input-container">
+                    <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                        class="cosmic-input" />
+                    <div class="input-focus-effect"></div>
+                    <div class="field-icon">
+                        <i class="material-icons">lock</i>
+                    </div>
+                    <div class="password-toggle" (click)="togglePasswordVisibility()">
+                        <i class="material-icons">{{ showPassword ? 'visibility' : 'visibility_off' }}</i>
+                    </div>
+                </div>
+                @if (form.get('password')?.hasError('required') && form.get('password')?.touched) {
+                <div class="field-error">
+                    <i class="material-icons">error</i>
+                    <span>חובה להזין סיסמה</span>
+                </div>
+                }
+                @if (form.get('password')?.hasError('minlength') && form.get('password')?.touched) {
+                <div class="field-error">
+                    <i class="material-icons">error</i>
+                    <span>סיסמה חייבת להיות באורך מינימלי של 6 תווים</span>
+                </div>
+                }
+                @if (form.get('password')?.value) {
+                <div class="password-strength">
+                    <div class="strength-label">חוזק סיסמה:</div>
+                    <div class="strength-meter">
+                        <div class="strength-segment" [class.active]="getPasswordStrength() >= 1"></div>
+                        <div class="strength-segment" [class.active]="getPasswordStrength() >= 2"></div>
+                        <div class="strength-segment" [class.active]="getPasswordStrength() >= 3"></div>
+                        <div class="strength-segment" [class.active]="getPasswordStrength() >= 4"></div>
+                    </div>
+                    <div class="strength-text" [ngClass]="getPasswordStrengthClass()">
+                        {{ getPasswordStrengthText() }}
+                    </div>
+                </div>
+                }
+            </div>
+            }
+        </form>
+    </div>
+
+    <div class="dialog-actions">
+        <button class="dialog-button cancel-button" (click)="close()">
+            <span>ביטול</span>
+            <i class="material-icons">close</i>
+        </button>
+
+        <button class="dialog-button save-button" [disabled]="form.invalid" (click)="save()">
+            <div class="button-content">
+                <span>שמור</span>
+                <i class="material-icons">check</i>
+            </div>
+            <div class="button-glow"></div>
+        </button>
+    </div>
+</div>
+
+<!-- <h1 mat-dialog-title>{{ mode === 'add' ? 'הוסף משתמש' : 'ערוך משתמש' }}</h1>
 
 <div mat-dialog-content>
     <form [formGroup]="form">
@@ -40,4 +170,4 @@
 <div mat-dialog-actions align="end">
     <button mat-button (click)="close()">ביטול</button>
     <button mat-button color="primary" (click)="save()">שמור</button>
-</div>
+</div> -->

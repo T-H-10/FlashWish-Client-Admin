@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Observable, map, of } from 'rxjs';
 import { UserService } from '../../../services/user/user.service';
 import { User } from '../../../models/user.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-dialog',
@@ -22,7 +23,8 @@ import { User } from '../../../models/user.model';
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    CommonModule
   ],
   templateUrl: './user-dialog.component.html',
   styleUrl: './user-dialog.component.css'
@@ -30,6 +32,7 @@ import { User } from '../../../models/user.model';
 export class UserDialogComponent {
   form: FormGroup;
   mode: 'add' | 'edit';
+  showPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -77,5 +80,78 @@ export class UserDialogComponent {
 
   close(): void {
     this.dialogRef.close();
+  }
+
+  /**
+   * Toggle password visibility
+   */
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+  
+  /**
+   * Calculate password strength (1-4)
+   */
+  getPasswordStrength(): number {
+    const password = this.form.get('password')?.value;
+    if (!password) return 0;
+    
+    let strength = 0;
+    
+    // Length check
+    if (password.length >= 8) strength++;
+    
+    // Contains uppercase
+    if (/[A-Z]/.test(password)) strength++;
+    
+    // Contains number
+    if (/[0-9]/.test(password)) strength++;
+    
+    // Contains special character
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+    
+    return strength;
+  }
+  
+  /**
+   * Get password strength text
+   */
+  getPasswordStrengthText(): string {
+    const strength = this.getPasswordStrength();
+    
+    switch (strength) {
+      case 0:
+      case 1:
+        return 'חלשה';
+      case 2:
+        return 'בינונית';
+      case 3:
+        return 'חזקה';
+      case 4:
+        return 'חזקה מאוד';
+      default:
+        return '';
+    }
+  }
+  
+  /**
+   * Get CSS class for password strength
+   */
+  getPasswordStrengthClass(): string {
+    const strength = this.getPasswordStrength();
+    
+    switch (strength) {
+      case 0:
+      case 1:
+        return 'strength-weak';
+      case 2:
+        return 'strength-medium';
+      case 3:
+        return 'strength-strong';
+      case 4:
+        return 'strength-very-strong';
+      default:
+        return '';
+    }
   }
 }

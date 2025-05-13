@@ -1,5 +1,5 @@
 /* Variables for our color scheme */
-:root {
+/* :root {
     --primary-dark: #1b102e;
     --primary-color: #25173b;
     --primary-light: #352252;
@@ -18,7 +18,7 @@
     --text-dark: #25173b;
     --shadow-color: rgba(27, 16, 46, 0.3);
     --glow-color: rgba(251, 190, 101, 0.6);
-  }
+  } */
   
   .cosmic-alert-container {
     position: fixed;
@@ -275,7 +275,7 @@
     
     &.cancel-button {
       background: rgba(255, 255, 255, 0.1);
-      color: var(--text-light);
+      color: var(--primary-dark);
       
       &:hover {
         background: rgba(255, 255, 255, 0.2);
@@ -286,7 +286,7 @@
   .close-button {
     background: transparent;
     border: none;
-    color: var(--text-light);
+    color: var(--primary-dark);
     opacity: 0.5;
     cursor: pointer;
     padding: 0;

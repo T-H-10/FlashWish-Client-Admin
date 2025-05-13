@@ -113,7 +113,7 @@
     font-size: 1.8rem;
     font-weight: 600;
     margin: 0;
-    color: var(--text-light);
+    color: var(--secondary-color);
   }
   
   .dialog-title i {
@@ -144,7 +144,7 @@
     display: block;
     font-size: 1rem;
     margin-bottom: 0.8rem;
-    color: var(--text-light);
+    color: var(--secondary-color);
     opacity: 0.8;
   }
   
@@ -239,7 +239,7 @@
   
   .cancel-button {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--text-light);
+    color: var(--primary-dark);
   }
   
   .cancel-button:hover {
