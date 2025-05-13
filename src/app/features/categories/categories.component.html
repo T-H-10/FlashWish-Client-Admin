@@ -41,7 +41,7 @@
         </div>
 
         <div class="cards-container">
-            @for (category of categories; track category.categoryID) {
+            @for (category of filteredCategories; track category.categoryID) {
             <div class="category-card" (mouseenter)="activateCard($event)" (mouseleave)="deactivateCard($event)">
                 <div class="card-glow"></div>
 

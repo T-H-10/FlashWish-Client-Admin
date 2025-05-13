@@ -50,9 +50,9 @@
             </p>
           </div>
           <div class="stat-chart">
-            @for (i of [1,2,3,4,5,6,7]; track $index) {
+            @for (i of chartHeights; track $index) {
             <div class="chart-bar"
-                 [style.height]="(20 + Math.random() * 60) + '%'"
+                 [style.height]="i"
                  [style.animation-delay]="$index * 0.1 + 's'"></div>
             }
           </div>

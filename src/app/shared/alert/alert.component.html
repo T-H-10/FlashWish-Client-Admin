@@ -1,0 +1,41 @@
+<div class="cosmic-alert-container">
+    <div class="cosmic-alert" [@alertAnimation]="animationState">
+      <div class="alert-particles">
+        <div class="alert-particle ap1"></div>
+        <div class="alert-particle ap2"></div>
+        <div class="alert-particle ap3"></div>
+      </div>
+      
+      <div class="alert-icon">
+        <i class="material-icons">
+          {{ getIconForType(type) }}
+        </i>
+        <div class="icon-ring"></div>
+      </div>
+      
+      <div class="alert-content">
+        <h3 class="alert-title">{{ title }}</h3>
+        <p class="alert-message">{{ message }}</p>
+        @if (showActions) {
+        <div class="alert-actions">
+          <button class="alert-button confirm-button" (click)="onConfirm()">
+            <span>{{ confirmText }}</span>
+          </button>
+          <button class="alert-button cancel-button" (click)="onCancel()">
+            <span>{{ cancelText }}</span>
+          </button>
+        </div>
+      }
+      </div>
+      @if (dismissible) {
+      <button class="close-button" (click)="close()">
+        <i class="material-icons">close</i>
+      </button>
+    }
+      @if (autoClose) {
+      <div class="alert-progress">
+        <div class="progress-bar" [style.animation-duration]="duration + 'ms'"></div>
+      </div>
+    }
+    </div>
+  </div>

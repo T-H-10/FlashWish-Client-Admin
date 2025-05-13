@@ -34,15 +34,23 @@ export class DashboardComponent implements OnInit {
   // }
   currentDate = new Date();
   Math = Math; // Make Math available in the template
-  
+  chartHeights: string[]=[];
   // constructor() { }
   
   ngOnInit(): void {
     this.loadStatistics();
+    this.generateChartHeights();
     // Update the time every second
     setInterval(() => {
       this.currentDate = new Date();
     }, 1000);
+  }
+
+  generateChartHeights(){
+    this.chartHeights = Array.from({length:7},()=>{
+      const height = 20+this.Math.random()*60;
+      return `${height}%`;
+    })
   }
   
   activateCard(event: MouseEvent): void {
