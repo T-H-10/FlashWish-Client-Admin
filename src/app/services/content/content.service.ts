@@ -14,7 +14,7 @@ export class ContentService {
 
   constructor(private http: HttpClient) {
     this.apiUrl = environment.apiUrl+'/api/GreetingMessages';
-    this.getAllContents();
+    this.getAllContents().subscribe();
   }
 
   getAllContents():Observable<Content[]> {

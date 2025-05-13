@@ -153,4 +153,74 @@ export class ContentsManagementComponent implements OnInit {
         || content.signature.toLowerCase().includes(lower)
     });
   }
+
+  activateCard(event: MouseEvent): void {
+    const card = event.currentTarget as HTMLElement;
+    const rect = card.getBoundingClientRect();
+    
+    // Calculate mouse position relative to the card
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    
+    // Calculate the position for the glow effect (in percentage)
+    const posX = (x / rect.width) * 100;
+    const posY = (y / rect.height) * 100;
+    
+    // Apply the glow effect position
+    const glow = card.querySelector('.card-glow') as HTMLElement;
+    if (glow) {
+      glow.style.background = `radial-gradient(circle at ${posX}% ${posY}%, var(--glow-color) 0%, transparent 70%)`;
+      glow.style.opacity = '0.15';
+    }
+    
+    // Apply 3D rotation effect
+    const rotateY = ((x / rect.width) - 0.5) * 10; // -5 to 5 degrees
+    const rotateX = ((y / rect.height) - 0.5) * -10; // -5 to 5 degrees
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+  }
+  
+  /**
+   * Deactivates the 3D card effect on mouse leave
+   */
+  deactivateCard(event: MouseEvent): void {
+    const card = event.currentTarget as HTMLElement;
+    
+    // Reset the transform
+    card.style.transform = '';
+    
+    // Reset the glow
+    const glow = card.querySelector('.card-glow') as HTMLElement;
+    if (glow) {
+      glow.style.opacity = '0';
+    }
+  }
+  
+  /**
+   * Calculate usage percentage for the content
+   */
+  getUsagePercentage(textId: number): number {
+    // Get the count of cards using this content
+    const count = this.countCardsByTextId(textId);
+    
+    // Get the maximum count across all contents for comparison
+    const maxCount = this.getMaxCardCount();
+    
+    // Calculate percentage (with a minimum of 5% for visibility)
+    return maxCount === 0 ? 5 : Math.max(5, Math.min(100, Math.round((count / maxCount) * 100)));
+  }
+  
+  /**
+   * Get the maximum card count across all contents
+   */
+  private getMaxCardCount(): number {
+    if (!this.filteredContents || this.filteredContents.length === 0) return 1;
+    
+    let maxCount = 0;
+    this.filteredContents.forEach(content => {
+      const count = this.countCardsByTextId(content.textID);
+      if (count > maxCount) maxCount = count;
+    });
+    
+    return maxCount === 0 ? 1 : maxCount; // Avoid division by zero
+  }
 }

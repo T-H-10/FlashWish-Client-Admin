@@ -23,9 +23,7 @@ export class UserService {
        }
     }).pipe(
       tap((users: User[])=>{   
-        this.users=users;
-        console.log(users);
-        
+        this.users=users;       
         this.userMap=new Map(users.map((user: User)=>[user.id, user.userName]));
       })
     );

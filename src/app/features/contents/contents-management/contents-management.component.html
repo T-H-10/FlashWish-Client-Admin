@@ -1,8 +1,137 @@
-<div class="toolbar">
-    <!-- <in appearance="outline" class="search-input"> -->
+<div class="cosmic-universe">
+    <!-- Animated Background Elements -->
+    <div class="cosmic-particles">
+      <div class="particle p1"></div>
+      <div class="particle p2"></div>
+      <div class="particle p3"></div>
+    </div>
+  
+    <div class="contents-container">
+      <div class="page-header">
+        <div class="header-content">
+          <h1 class="page-title">
+            @for (char of  'ניהול-תכנים'.split(''); track $index) {
+            <span class="title-char" [style.animation-delay]="$index * 0.1 + 's'">
+              {{char}}
+            </span>
+            }
+          </h1>
+          <p class="page-subtitle">ניהול וארגון של תכני ברכות</p>
+        </div>
+        
+        <div class="toolbar">
+          <div class="search-wrapper">
+            <div class="search-orbit">
+              <div class="orbit-particle"></div>
+            </div>
+            <input [formControl]="searchControl" placeholder="חיפוש לפי כותרת / תוכן / חתימה" class="search-input" />
+            <div class="search-icon">
+              <i class="material-icons">search</i>
+            </div>
+          </div>
+  
+          <button class="add-button" (click)="addContent()">
+            <div class="button-content">
+              <span class="button-icon">+</span>
+              <span class="button-text">הוסף תוכן</span>
+            </div>
+            <div class="button-glow"></div>
+          </button>
+        </div>
+      </div>
+  
+      <div class="contents-grid">
+        @for (content of filteredContents; track content.textID) {
+          <div class="content-card" (mouseenter)="activateCard($event)" (mouseleave)="deactivateCard($event)">
+            <div class="card-glow"></div>
+            
+            <div class="content-header">
+              <div class="content-icon">
+                <i class="material-icons">format_quote</i>
+                <div class="icon-ring"></div>
+              </div>
+              <div class="content-title-container">
+                <h2 class="content-title">{{ content.title }}</h2>
+                <div class="content-category">
+                  <i class="material-icons">category</i>
+                  <span>{{content.categoryID | categoryName}}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="content-body">
+              <div class="content-text">{{ content.content }}</div>
+              <div class="content-signature">{{ content.signature }}</div>
+            </div>
+            
+            <div class="content-details">
+              <div class="details-grid">
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="material-icons">person</i>
+                  </div>
+                  <div class="detail-text">
+                    <span class="detail-label">משתמש שהעלה</span>
+                    <span class="detail-value">{{content.userID | userName}}</span>
+                  </div>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="material-icons">card_giftcard</i>
+                  </div>
+                  <div class="detail-text">
+                    <span class="detail-label">כמות ברכות</span>
+                    <span class="detail-value">{{countCardsByTextId(content.textID)}}</span>
+                  </div>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="material-icons">event_available</i>
+                  </div>
+                  <div class="detail-text">
+                    <span class="detail-label">תאריך יצירה</span>
+                    <span class="detail-value">{{content.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</span>
+                  </div>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="material-icons">update</i>
+                  </div>
+                  <div class="detail-text">
+                    <span class="detail-label">תאריך עדכון</span>
+                    <span class="detail-value">{{content.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <button class="action-button edit-button" (click)="editContent(content)">
+                <i class="material-icons">edit</i>
+                <span>עריכה</span>
+              </button>
+              
+              <button class="action-button delete-button" (click)="deleteContent(content.textID)">
+                <i class="material-icons">delete</i>
+                <span>מחיקה</span>
+              </button>
+            </div>
+            
+            <div class="usage-indicator" [style.width]="getUsagePercentage(content.textID) + '%'">
+              <div class="usage-text">{{getUsagePercentage(content.textID)}}% בשימוש</div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+<!-- <div class="toolbar">
         <input [formControl]="searchControl"  placeholder="חיפוש לפי כותרת / תוכן / חתימה"
             class="search-input" />
-    <!-- </mat-form-field> -->
 
 
     <button mat-raised-button color="primary" (click)="addContent()">הוסף תוכן</button>
@@ -20,9 +149,6 @@
         <mat-card-content>
             <p>קטגוריה: {{content.categoryID | categoryName}}</p>
             <p>משתמש שהעלה: {{content.userID | userName}}</p>
-            <!-- @if (contents.markedForDeletion) {
-                <p style="color: red;">מיועד למחיקה </p>
-                } -->
             <p> כמות ברכות: {{countCardsByTextId(content.textID)}}</p>
             <p>תאריך יצירה: {{content.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>
             <p>תאריך עדכון: {{content.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>
@@ -34,4 +160,4 @@
         </mat-card-actions>
     </mat-card>
     }
-</div>
+</div> -->

@@ -23,6 +23,8 @@ export class CategoryService {
     return this.http.get<Category[]>(this.apiUrl).pipe(
       tap((categories: Category[])=>{
         this.categories=categories;
+        console.log(categories);
+        
         this.categoryMap=new Map(categories.map((category: Category) => [category.categoryID, category.categoryName]));
       })
     );
