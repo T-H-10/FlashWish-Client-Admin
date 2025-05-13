@@ -58,6 +58,15 @@ export class UserManagementComponent implements OnInit {
     return this.cardsServise.getCardsByUserId(userID).length;
   }
 
+  toggleAdmin(user: User):void{
+    if(this.isAdmin(user)) {
+      this.removeAdminRole(user.id);
+    }
+    else {
+      this.addAdminRole(user.id);
+    }
+  }
+  
   addUser(): void {
     const dialogRef = this.dialog.open(UserDialogComponent, {
       width: '400px',

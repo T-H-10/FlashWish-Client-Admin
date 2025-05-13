@@ -212,8 +212,6 @@ export class LoginComponent implements OnInit {
    * Get button text based on current state
    */
   getButtonText(): string {
-    console.log('here---');
-    
     if (this.isSubmitting) {
       return 'מתחבר...';
     } else if (this.isLoginSuccess) {
@@ -227,7 +225,6 @@ export class LoginComponent implements OnInit {
    * Get button icon based on current state
    */
   getButtonIcon(): string {
-    console.log('getButtonIcon---');
     if (this.isSubmitting) {
       return 'sync';
     } else if (this.isLoginSuccess) {

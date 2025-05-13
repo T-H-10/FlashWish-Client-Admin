@@ -6,7 +6,7 @@
 
     <span class="spacer"></span>
     
-    <!-- Desktop Navigation -->
+
     <nav class="nav-links desktop-nav">
       <a mat-button routerLink="/dashboard" routerLinkActive="active-link" class="nav-item">
         <span class="nav-text">דף הבית</span>
@@ -30,7 +30,7 @@
       </a>
     </nav>
 
-    <!-- Mobile Navigation -->
+
     <nav class="nav-links mobile-nav" [ngClass]="{'open': isMenuOpen}">
       <div class="mobile-nav-header">
         <img src="assets/logo.jpg" alt="לוגו" class="mobile-logo" />
@@ -76,32 +76,3 @@
     </div>
   </mat-toolbar>
 </div>
-
-<!-- <mat-toolbar color="primary" class="toolbar">
-    <img src="assets/logo.jpg" alt="לוגו" class="logo" />
-
-    <span class="spacer"></span>
-
-
-    <nav class="nav-links" [ngClass]="{'open': isMenuOpen}">
-        <a mat-button routerLink="/dashboard" (click)="closeMenu()">דף הבית</a>
-        <a mat-button routerLink="/users" (click)="closeMenu()">ניהול משתמשים</a>
-        <a mat-button routerLink="/templates" (click)="closeMenu()">ניהול תבניות</a>
-        <a mat-button routerLink="/contents" (click)="closeMenu()">ניהול תכנים</a>
-        <a mat-button routerLink="/categories" (click)="closeMenu()">ניהול קטגוריות</a>
-    </nav>
-    @if (isMenuOpen) {
-    <div class="backdrop" (click)="closeMenu()"></div>
-    }
-
-    <div class="user-actions" >
-        <button mat-icon-button (click)="toggleMenu()">
-            <mat-icon>{{isMenuOpen? '': 'menu'}}</mat-icon>
-        </button>
-
-        <button mat-icon-button aria-label="התנתק" (click)="logout()" >
-          <mat-icon>logout</mat-icon>
-        </button>
-      </div>
-
-</mat-toolbar> -->

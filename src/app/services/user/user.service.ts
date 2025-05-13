@@ -76,6 +76,8 @@ export class UserService {
   }
 
   removeAdminRole(id: number): Observable<void> {
+    console.log(`${this.apiUrl}/Users/${id}/remove-admin-role`);
+    
     return this.http.post<void>(`${this.apiUrl}/Users/${id}/remove-admin-role`, {}).pipe(
       catchError((error) => {
         console.log(error);

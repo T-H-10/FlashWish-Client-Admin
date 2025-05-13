@@ -118,8 +118,7 @@
             <div class="card-actions">
               <div class="admin-toggle">
                 <button class="toggle-admin-button" [class.admin-active]="isAdmin(user)" 
-                >
-                <!-- (click)="toggleAdmin(user)" -->
+                (click)="toggleAdmin(user)">
                 
                   <div class="toggle-icon">
                     <i class="material-icons">{{ isAdmin(user) ? 'remove_moderator' : 'add_moderator' }}</i>
