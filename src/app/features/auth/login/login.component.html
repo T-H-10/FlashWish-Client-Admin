@@ -1,4 +1,164 @@
-<div class="login-container">
+<div class="cosmic-universe" #cosmicUniverse>
+    <!-- Animated Background Elements -->
+    <div class="stellar-background">
+      <div class="stars"></div>
+      <div class="twinkling"></div>
+      <div class="cosmic-clouds"></div>
+    </div>
+    
+    <!-- Floating Planets -->
+    <div class="floating-planets">
+      <div class="planet planet-1" [ngStyle]="getPlanetStyle(1)"></div>
+      <div class="planet planet-2" [ngStyle]="getPlanetStyle(2)"></div>
+      <div class="planet planet-3" [ngStyle]="getPlanetStyle(3)"></div>
+    </div>
+    
+    <!-- Portal Gateway -->
+    <div class="portal-container">
+      <div class="portal-ring outer-ring" [ngStyle]="getRingStyle(1)"></div>
+      <div class="portal-ring middle-ring" [ngStyle]="getRingStyle(2)"></div>
+      <div class="portal-ring inner-ring" [ngStyle]="getRingStyle(3)"></div>
+      
+      <div class="login-portal" [ngStyle]="getPortalStyle()">
+        <div class="portal-header">
+          <div class="portal-emblem">
+            <div class="emblem-core"></div>
+            <div class="emblem-ring"></div>
+          </div>
+          <h2 class="portal-title">
+            <span class="title-char" *ngFor="let char of titleChars; let i = index" [style.animation-delay]="i * 0.1 + 's'">
+              {{char}}
+            </span>
+          </h2>
+          <div class="portal-subtitle">הזדהה למערכת כדי להמשיך</div>
+        </div>
+  
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="portal-form">
+          <div class="form-group" [class.focused]="emailFocused" [class.valid]="isFieldValid('email')" [class.invalid]="isFieldInvalid('email')">
+            <div class="field-container">
+              <div class="field-icon">
+                <div class="icon-orbit">
+                  <div class="orbit-particle"></div>
+                </div>
+                <i class="material-icons">email</i>
+              </div>
+              
+              <div class="input-wrapper">
+                <label for="email" class="field-label">אימייל</label>
+                <input 
+                  id="email" 
+                  type="email" 
+                  formControlName="email" 
+                  class="cosmic-input" 
+                  placeholder="הזן את האימייל שלך"
+                  (focus)="onFieldFocus('email')"
+                  (blur)="onFieldBlur('email')"
+                />
+                <div class="field-underline">
+                  <div class="underline-fill"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="error-container" *ngIf="isFieldInvalid('email')">
+              <div class="error-icon">
+                <i class="material-icons">error_outline</i>
+              </div>
+              <div class="error-message">אנא הכנס אימייל תקני</div>
+            </div>
+          </div>
+  
+          <div class="form-group" [class.focused]="passwordFocused" [class.valid]="isFieldValid('password')" [class.invalid]="isFieldInvalid('password')">
+            <div class="field-container">
+              <div class="field-icon">
+                <div class="icon-orbit">
+                  <div class="orbit-particle"></div>
+                </div>
+                <i class="material-icons">lock</i>
+              </div>
+              
+              <div class="input-wrapper">
+                <label for="password" class="field-label">סיסמה</label>
+                <input 
+                  id="password" 
+                  [type]="showPassword ? 'text' : 'password'" 
+                  formControlName="password" 
+                  class="cosmic-input" 
+                  placeholder="הזן את הסיסמה שלך"
+                  (focus)="onFieldFocus('password')"
+                  (blur)="onFieldBlur('password')"
+                />
+                <div class="password-toggle" (click)="togglePasswordVisibility()">
+                  <i class="material-icons">{{ showPassword ? 'visibility' : 'visibility_off' }}</i>
+                </div>
+                <div class="field-underline">
+                  <div class="underline-fill"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="error-container" *ngIf="isFieldInvalid('password')">
+              <div class="error-icon">
+                <i class="material-icons">error_outline</i>
+              </div>
+              <div class="error-message">סיסמה היא שדה חובה</div>
+            </div>
+          </div>
+          
+          <!-- הצגת הודעת שגיאה -->
+          <div class="cosmic-error" *ngIf="errorMessage" [@fadeInOut]>
+            <div class="error-pulse"></div>
+            <div class="error-content">
+              <i class="material-icons error-alert">warning</i>
+              <div class="error-text">{{ errorMessage }}</div>
+            </div>
+            <div class="error-close" (click)="clearError()">
+              <i class="material-icons">close</i>
+            </div>
+          </div>
+  
+          <button 
+            type="submit" 
+            [disabled]="loginForm.invalid" 
+            class="portal-button"
+            [class.button-active]="loginForm.valid"
+            [class.button-submitting]="isSubmitting"
+            [class.button-success]="isLoginSuccess"
+          >
+            <div class="button-bg"></div>
+            <div class="button-content">
+              <div class="button-text">{{ getButtonText() }}</div>
+              <div class="button-icon">
+                <i class="material-icons">{{ getButtonIcon() }}</i>
+              </div>
+            </div>
+            <div class="button-particles">
+              <div class="button-particle bp1"></div>
+              <div class="button-particle bp2"></div>
+              <div class="button-particle bp3"></div>
+              <div class="button-particle bp4"></div>
+            </div>
+          </button>
+        </form>
+        
+        <div class="portal-footer">
+          <div class="cosmic-divider">
+            <div class="divider-line"></div>
+            <div class="divider-icon">
+              <i class="material-icons">auto_awesome</i>
+            </div>
+            <div class="divider-line"></div>
+          </div>
+          <div class="portal-options">
+            <a href="#" class="cosmic-link">שכחתי סיסמה</a>
+            <span class="option-separator">•</span>
+            <a href="#" class="cosmic-link">צור חשבון חדש</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- <div class="login-container">
     <h2> התחברות</h2>
 
     <form [formGroup]="loginForm" (ngSubmit)="login()">
@@ -22,7 +182,6 @@
             }
           </div>
       
-          <!-- הצגת הודעת שגיאה -->
            @if (errorMessage) {
             <div class="error-message">
                 {{ errorMessage }}
@@ -31,4 +190,4 @@
       
           <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">התחבר</button>
     </form>      
-</div>
+</div> -->
