@@ -14,7 +14,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     this.apiUrl=environment.apiUrl+'/api';
-    this.getAllUsers();
+    this.getAllUsers().subscribe();
    }
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl+'/Users/Roles',{
@@ -22,10 +22,10 @@ export class UserService {
         'Authorization': 'Bearer ' +localStorage.getItem('authToken') || '' 
        }
     }).pipe(
-      tap((users: User[])=>{
+      tap((users: User[])=>{   
+        this.users=users;
         console.log(users);
         
-        this.users=users;
         this.userMap=new Map(users.map((user: User)=>[user.id, user.userName]));
       })
     );
@@ -42,6 +42,8 @@ export class UserService {
     // }
   
   getUserNameById(id:number):string{
+    console.log(this.userMap);
+    
     return this.userMap.get(id) || '---';
   }
 

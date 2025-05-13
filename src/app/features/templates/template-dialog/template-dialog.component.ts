@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,10 +26,14 @@ import { CategoryService } from '../../../services/category/category.service';
   templateUrl: './template-dialog.component.html',
   styleUrl: './template-dialog.component.css'
 })
-export class TemplateDialogComponent {
+export class TemplateDialogComponent implements OnInit {
   form: FormGroup;
   mode: 'add' | 'edit';
   categories: Category[]=[];
+  selectedFileName: string = '';
+  imagePreview: string | ArrayBuffer | null = null;
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<TemplateDialogComponent>,
@@ -41,7 +45,7 @@ export class TemplateDialogComponent {
     this.form = this.fb.group({
       templateName: [data.template?.templateName || '', Validators.required],
       categoryID: [data.template?.categoryID || '', Validators.required],
-      userID: [data.template?.userID || '1'],//default userID to 1- userAdminId to get from the token!
+      userID: [data.template?.userID || localStorage.getItem('userID')||'-1'],//default userID to 1- userAdminId to get from the token!
       imageFile: [data.template?.imageURL || ''],
     });
 
@@ -62,8 +66,17 @@ export class TemplateDialogComponent {
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.selectedFileName = file.name;
+      
+      // Create image preview
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+
       this.form.patchValue({ imageFile:  input.files[0] });
-      console.log(input.files[0]);
     }
   }
 

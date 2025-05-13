@@ -75,6 +75,8 @@ export class TemplatesManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        console.log(result);
+        
         this.templateService.addTemplate(result).subscribe({
           next: () => {
             this.getAllTemplates();

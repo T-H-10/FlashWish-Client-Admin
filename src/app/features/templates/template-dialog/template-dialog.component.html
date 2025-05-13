@@ -1,4 +1,116 @@
-<h1 mat-dialog-title>{{ mode === 'add' ? 'הוסף תבנית רקע' : 'ערוך תבנית רקע' }}</h1>
+<div class="cosmic-dialog">
+    <div class="dialog-particles">
+        <div class="dialog-particle dp1"></div>
+        <div class="dialog-particle dp2"></div>
+        <div class="dialog-particle dp3"></div>
+    </div>
+
+    <div class="dialog-header">
+        <h1 class="dialog-title">
+            <i class="material-icons">{{ mode === 'add' ? 'add_photo_alternate' : 'edit' }}</i>
+            <span>{{ mode === 'add' ? 'הוסף תבנית רקע' : 'ערוך תבנית רקע' }}</span>
+        </h1>
+        <div class="title-underline"></div>
+    </div>
+
+    <div class="dialog-content">
+        <form [formGroup]="form">
+            <div class="form-field">
+                <label class="field-label" for="templateName">שם התבנית</label>
+                <div class="input-container">
+                    <input id="templateName" type="text" formControlName="templateName" class="cosmic-input" />
+                    <div class="input-focus-effect"></div>
+                    <div class="field-icon">
+                        <i class="material-icons">title</i>
+                    </div>
+                </div>
+                @if(form.get('templateName')?.invalid && form.get('templateName')?.touched){
+                <div class="field-error">
+                    <i class="material-icons">error</i>
+                    <span>שם התבנית הוא שדה חובה</span>
+                </div>
+                }
+            </div>
+
+            <div class="form-field">
+                <label class="field-label" for="categoryID">קטגוריה</label>
+                <div class="select-container">
+                    <select id="categoryID" formControlName="categoryID" class="cosmic-select">
+                        <option value="" disabled selected>בחר קטגוריה</option>
+                        @for (cat of categories; track cat.categoryID) {
+                        <option [value]="cat.categoryID">{{ cat.categoryName }}</option>
+                        }
+                    </select>
+                    <div class="select-arrow">
+                        <i class="material-icons">arrow_drop_down</i>
+                    </div>
+                    <div class="input-focus-effect"></div>
+                    <div class="field-icon">
+                        <i class="material-icons">category</i>
+                    </div>
+                </div>
+                @if (form.get('categoryID')?.invalid && form.get('categoryID')?.touched) {
+                <div class="field-error">
+                    <i class="material-icons">error</i>
+                    <span>קטגוריה היא שדה חובה</span>
+                </div>
+                }
+            </div>
+
+            <!-- @if (mode === 'edit') {
+            <div class="form-field">
+                <label class="field-label" for="userID">משתמש יוצר</label>
+                <div class="input-container">
+                    <input id="userID" type="number" formControlName="userID" class="cosmic-input" />
+                    <div class="input-focus-effect"></div>
+                    <div class="field-icon">
+                        <i class="material-icons">person</i>
+                    </div>
+                </div>
+            </div>
+            } -->
+
+            @if (mode === 'add') {
+            <div class="form-field">
+                <label class="field-label">קובץ תמונה</label>
+                <div class="file-input-container">
+                    <div class="file-input-wrapper">
+                        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileInput />
+                        <div class="file-input-text">{{ selectedFileName || 'בחר קובץ...' }}</div>
+                        <button type="button" class="file-input-button" (click)="fileInput.click()">
+                            <i class="material-icons">cloud_upload</i>
+                            <span>העלאה</span>
+                        </button>
+                    </div>
+                    <div class="input-focus-effect"></div>
+                </div>
+                @if (imagePreview) {
+                <div class="file-preview">
+                    <img [src]="imagePreview" alt="תצוגה מקדימה" class="preview-image" />
+                </div>
+                }
+            </div>
+            }
+        </form>
+    </div>
+
+    <div class="dialog-actions">
+        <button class="dialog-button cancel-button" (click)="close()">
+            <span>ביטול</span>
+            <i class="material-icons">close</i>
+        </button>
+
+        <button class="dialog-button save-button" [disabled]="form.invalid" (click)="save()">
+            <div class="button-content">
+                <span>שמור</span>
+                <i class="material-icons">check</i>
+            </div>
+            <div class="button-glow"></div>
+        </button>
+    </div>
+</div>
+
+<!-- <h1 mat-dialog-title>{{ mode === 'add' ? 'הוסף תבנית רקע' : 'ערוך תבנית רקע' }}</h1>
 
 <div mat-dialog-content>
     <form [formGroup]="form">
@@ -38,4 +150,4 @@
 <div mat-dialog-actions align="end">
     <button mat-button (click)="close()">ביטול</button>
     <button mat-button color="primary" (click)="save()" [disabled]="form.invalid">שמור</button>
-</div>
+</div> -->
