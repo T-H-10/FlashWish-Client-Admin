@@ -1,4 +1,122 @@
-<h1 mat-dialog-title class="dialog-title">{{ mode === 'add' ? 'הוסף תוכן' : 'ערוך תוכן' }}</h1>
+<div class="cosmic-dialog">
+    <div class="dialog-particles">
+      <div class="dialog-particle dp1"></div>
+      <div class="dialog-particle dp2"></div>
+      <div class="dialog-particle dp3"></div>
+    </div>
+    
+    <div class="dialog-header">
+      <h1 class="dialog-title">
+        <i class="material-icons">{{ mode === 'add' ? 'post_add' : 'edit_note' }}</i>
+        <span>{{ mode === 'add' ? 'הוסף תוכן' : 'ערוך תוכן' }}</span>
+      </h1>
+      <div class="title-underline"></div>
+    </div>
+  
+    <div class="dialog-content">
+      <form [formGroup]="form">
+        <div class="form-field">
+          <label class="field-label" for="title">כותרת</label>
+          <div class="input-container">
+            <input id="title" type="text" formControlName="title" class="cosmic-input" />
+            <div class="input-focus-effect"></div>
+            <div class="field-icon">
+              <i class="material-icons">title</i>
+            </div>
+          </div>
+          @if (form.get('title')?.invalid && form.get('title')?.touched) {
+          <div class="field-error">
+            <i class="material-icons">error</i>
+            <span>כותרת היא שדה חובה</span>
+          </div>
+        }
+        </div>
+        
+        <div class="form-field">
+          <label class="field-label" for="content">תוכן</label>
+          <div class="textarea-container">
+            <textarea id="content" formControlName="content" class="cosmic-textarea" rows="4"></textarea>
+            <div class="input-focus-effect"></div>
+            <div class="field-icon">
+              <i class="material-icons">format_quote</i>
+            </div>
+          </div>
+          @if (form.get('content')?.invalid && form.get('content')?.touched) {
+          <div class="field-error">
+            <i class="material-icons">error</i>
+            <span>תוכן הוא שדה חובה</span>
+          </div>
+        }
+        </div>
+        
+        <div class="form-field">
+          <label class="field-label" for="signature">חתימה</label>
+          <div class="input-container">
+            <input id="signature" type="text" formControlName="signature" class="cosmic-input" />
+            <div class="input-focus-effect"></div>
+            <div class="field-icon">
+              <i class="material-icons">draw</i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-field">
+          <label class="field-label" for="categoryID">קטגוריה</label>
+          <div class="select-container">
+            <select id="categoryID" formControlName="categoryID" class="cosmic-select">
+              <option value="" disabled selected>בחר קטגוריה</option>
+              @for (cat of categories; track cat.categoryID) {
+                <option [value]="cat.categoryID">{{ cat.categoryName }}</option>
+              }
+            </select>
+            <div class="select-arrow">
+              <i class="material-icons">arrow_drop_down</i>
+            </div>
+            <div class="input-focus-effect"></div>
+            <div class="field-icon">
+              <i class="material-icons">category</i>
+            </div>
+          </div>
+          @if (form.get('categoryID')?.invalid && form.get('categoryID')?.touched) {
+          <div class="field-error">
+            <i class="material-icons">error</i>
+            <span>קטגוריה היא שדה חובה</span>
+          </div>
+        }
+        </div>
+        
+        @if (mode === 'edit') {
+          <div class="form-field">
+            <label class="field-label" for="userID">משתמש יוצר</label>
+            <div class="input-container">
+              <input id="userID" type="number" formControlName="userID" class="cosmic-input" />
+              <div class="input-focus-effect"></div>
+              <div class="field-icon">
+                <i class="material-icons">person</i>
+              </div>
+            </div>
+          </div>
+        }
+      </form>
+    </div>
+  
+    <div class="dialog-actions">
+      <button class="dialog-button cancel-button" (click)="close()">
+        <span>ביטול</span>
+        <i class="material-icons">close</i>
+      </button>
+      
+      <button class="dialog-button save-button" [disabled]="form.invalid" (click)="save()">
+        <div class="button-content">
+          <span>שמור</span>
+          <i class="material-icons">check</i>
+        </div>
+        <div class="button-glow"></div>
+      </button>
+    </div>
+  </div>
+
+<!-- <h1 mat-dialog-title class="dialog-title">{{ mode === 'add' ? 'הוסף תוכן' : 'ערוך תוכן' }}</h1>
 
 <div mat-dialog-content class="dialog-content">
     <form [formGroup]="form">
@@ -41,4 +159,4 @@
 <div mat-dialog-actions align="end">
     <button mat-button (click)="close()">ביטול</button>
     <button mat-button color="primary" (click)="save()" [disabled]="form.invalid">שמור</button>
-</div>
+</div> -->

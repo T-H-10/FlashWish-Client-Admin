@@ -1,4 +1,386 @@
-.dialog-content{
+/* Variables for our color scheme */
+/* :root {
+    --primary-dark: #1b102e;
+    --primary-color: #25173b;
+    --primary-light: #352252;
+    --secondary-dark: #e19425;
+    --secondary-color: #fbbe65;
+    --secondary-light: #ffd08a;
+    --accent-color: #ff6b6b;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --text-light: #ffffff;
+    --text-dark: #25173b;
+    --background-light: #f8f5ff;
+    --card-bg: rgba(37, 23, 59, 0.95);
+    --shadow-color: rgba(27, 16, 46, 0.3);
+    --glow-color: rgba(251, 190, 101, 0.6);
+  } */
+  
+  /* Global styles */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Cosmic Dialog */
+  .cosmic-dialog {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    direction: rtl;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-light);
+    min-width: 400px;
+    max-width: 90vw;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 
+                0 0 20px var(--glow-color);
+  }
+  
+  /* Dialog Particles */
+  .dialog-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .dialog-particle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--secondary-light);
+    opacity: 0.1;
+    filter: blur(4px);
+    animation: float-particle 15s infinite ease-in-out;
+  }
+  
+  .dp1 {
+    width: 80px;
+    height: 80px;
+    top: -20px;
+    right: -20px;
+    animation-delay: 0s;
+  }
+  
+  .dp2 {
+    width: 60px;
+    height: 60px;
+    bottom: -20px;
+    left: -20px;
+    animation-delay: -5s;
+    background: var(--secondary-dark);
+  }
+  
+  .dp3 {
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    left: 70%;
+    animation-delay: -2s;
+  }
+  
+  @keyframes float-particle {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+    }
+    25% {
+      transform: translateY(-15px) translateX(10px);
+    }
+    50% {
+      transform: translateY(0) translateX(20px);
+    }
+    75% {
+      transform: translateY(15px) translateX(10px);
+    }
+  }
+  
+  /* Dialog Header */
+  .dialog-header {
+    position: relative;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .dialog-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--secondary-dark);
+  }
+  
+  .dialog-title i {
+    font-size: 2rem;
+    margin-left: 0.8rem;
+    color: var(--secondary-color);
+  }
+  
+  .title-underline {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--secondary-color), transparent);
+    margin: 1rem auto 0;
+    border-radius: 3px;
+  }
+  
+  /* Dialog Content */
+  .dialog-content {
+    position: relative;
+    padding: 1.5rem;
+  }
+  
+  .form-field {
+    margin-bottom: 1.5rem;
+  }
+  
+  .field-label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    color: var(--secondary-color);
+    opacity: 0.8;
+  }
+  
+  .input-container {
+    position: relative;
+  }
+  
+  .cosmic-input {
+    width: 100%;
+    padding: 12px 45px 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--primary-dark);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .cosmic-input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(251, 190, 101, 0.2);
+  }
+  
+  /* Textarea Styling */
+  .textarea-container {
+    position: relative;
+  }
+  
+  .cosmic-textarea {
+    width: 100%;
+    padding: 12px 15px 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--primary-dark);
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 100px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+  
+  .cosmic-textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(251, 190, 101, 0.2);
+  }
+  
+  .textarea-container .field-icon {
+    top: 12px;
+    transform: none;
+  }
+  
+  .input-focus-effect {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--secondary-dark), var(--secondary-color));
+    transition: width 0.3s ease;
+    border-radius: 0 0 4px 4px;
+  }
+  
+  .cosmic-input:focus ~ .input-focus-effect,
+  .cosmic-textarea:focus ~ .input-focus-effect {
+    width: 100%;
+  }
+  
+  .field-icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+    pointer-events: none;
+  }
+  
+  .field-icon i {
+    font-size: 1.5rem;
+  }
+  
+  .field-error {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+  }
+  
+  .field-error i {
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+  }
+  
+  /* Select Styling */
+  .select-container {
+    position: relative;
+  }
+  
+  .cosmic-select {
+    width: 100%;
+    padding: 12px 45px 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--primary-dark);
+    font-size: 1rem;
+    appearance: none;
+    transition: all 0.3s ease;
+  }
+  
+  .cosmic-select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(251, 190, 101, 0.2);
+  }
+  
+  .select-arrow {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+    pointer-events: none;
+  }
+  
+  /* Dialog Actions */
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  .dialog-button {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+  }
+  
+  .dialog-button i {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+  }
+  
+  .cancel-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary-dark);
+  }
+  
+  .cancel-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .save-button {
+    position: relative;
+    background: linear-gradient(135deg, var(--secondary-dark), var(--secondary-color));
+    color: var(--text-dark);
+    font-weight: 600;
+    overflow: hidden;
+  }
+  
+  .save-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .save-button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(251, 190, 101, 0.3);
+  }
+  
+  .button-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.8) 0%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .save-button:not(:disabled):hover .button-glow {
+    opacity: 0.3;
+    animation: rotate-glow 3s infinite linear;
+  }
+  
+  @keyframes rotate-glow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Responsive Styles */
+  @media screen and (max-width: 480px) {
+    .cosmic-dialog {
+      min-width: 300px;
+    }
+    
+    .dialog-title {
+      font-size: 1.5rem;
+    }
+    
+    .dialog-actions {
+      flex-direction: column-reverse;
+      gap: 1rem;
+    }
+    
+    .dialog-button {
+      width: 100%;
+      justify-content: center;
+      margin-right: 0;
+    }
+  }
+
+/* .dialog-content{
     direction: rtl;
 }
 .dialog-title{
@@ -6,4 +388,4 @@
     font-weight: bold;
     margin-bottom: 1rem;
     direction: rtl;
-}
+} */
