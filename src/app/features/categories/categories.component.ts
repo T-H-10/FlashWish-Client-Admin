@@ -69,15 +69,15 @@ export class CategoriesComponent implements OnInit {
   }
 
   countCardsByCategoryId(categoryID: number): number {
-    return this.cardsService.getCardsByCategoryId(categoryID).length;
+    return this.cardsService.getCardsByCategoryId(categoryID)?.length || 0;
   }
 
   countContentsByCategoryId(categoryID: number): number {
-    return this.contentService.getContentByCategoryId(categoryID).length;
+    return this.contentService.getContentByCategoryId(categoryID)?.length || 0;
   }
 
   countTemplatesByCategoryId(categoryID: number): number {
-    return this.templateService.getTemplatesByCategoryId(categoryID).length;
+    return this.templateService.getTemplatesByCategoryId(categoryID)?.length || 0;
   }
 
   addCategory(): void {

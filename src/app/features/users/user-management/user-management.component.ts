@@ -55,7 +55,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   countCardsByUserId(userID: number): number {
-    return this.cardsServise.getCardsByUserId(userID).length;
+    return this.cardsServise.getCardsByUserId(userID)?.length;
   }
 
   toggleAdmin(user: User):void{

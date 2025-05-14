@@ -32,7 +32,7 @@ export class ContentService {
   }
   
   getContentByCategoryId(categoryID: number): Content[] {
-    return this.contents.filter(content => content.categoryID === categoryID);
+    return this.contents?.filter(content => content.categoryID === categoryID);
   }
 
 

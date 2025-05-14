@@ -37,7 +37,7 @@ export class TemplateService {
   }
   
   getTemplatesByCategoryId(categoryID: number): Template[] {
-    return this.templates.filter(template => template.categoryID === categoryID);
+    return this.templates?.filter(template => template.categoryID === categoryID);
   }
 
   updateTemplate(id:number, {templateName, categoryID, userID}:{templateName: string, categoryID: number, userID: number}): Observable<Template> {

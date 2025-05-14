@@ -23,19 +23,19 @@ export class CardsService {
   }
 
   getCardsByUserId(userID: number): Card[] {
-    return this.cards.filter(card => card.userID === userID);
+    return this.cards?.filter(card => card.userID === userID);
   }
 
   getCardsByCategoryId(categoryID: number): Card[] {
-    return this.cards.filter(card => card.categoryID === categoryID);
+    return this.cards?.filter(card => card.categoryID === categoryID);
   }
 
   getCardsByTemplateId(templateID: number): Card[] {
-    return this.cards.filter(card => card.templateID === templateID);
+    return this.cards?.filter(card => card.templateID === templateID);
   }
 
   getCardsByTextId(textID: number): Card[] {
-    return this.cards.filter(card => card.textID === textID);
+    return this.cards?.filter(card => card.textID === textID);
   }
 
 }

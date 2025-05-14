@@ -60,11 +60,11 @@
                         </div>
                         <div class="stat-info">
                             <span class="stat-label">ברכות שנוצרו</span>
-                            <span class="stat-value">{{categoryState[category.categoryID].cards}}</span>
+                            <span class="stat-value">{{categoryState[category.categoryID]?.cards || 0}}</span>
                         </div>
                         <div class="stat-bar">
                             <div class="bar-fill"
-                                [style.width]="getPercentage(categoryState[category.categoryID].cards, getMaxCards()) + '%'">
+                                [style.width]="getPercentage(categoryState[category.categoryID]?.cards || 0, getMaxCards()) + '%'">
                             </div>
                         </div>
                     </div>
@@ -75,11 +75,11 @@
                         </div>
                         <div class="stat-info">
                             <span class="stat-label">רקעים זמינים</span>
-                            <span class="stat-value">{{categoryState[category.categoryID].templates}}</span>
+                            <span class="stat-value">{{categoryState[category.categoryID]?.templates || 0}}</span>
                         </div>
                         <div class="stat-bar">
                             <div class="bar-fill"
-                                [style.width]="getPercentage(categoryState[category.categoryID].templates, getMaxTemplates()) + '%'">
+                                [style.width]="getPercentage(categoryState[category.categoryID]?.templates || 0, getMaxTemplates()) + '%'">
                             </div>
                         </div>
                     </div>
@@ -90,11 +90,11 @@
                         </div>
                         <div class="stat-info">
                             <span class="stat-label">תכנים זמינים</span>
-                            <span class="stat-value">{{categoryState[category.categoryID].contents}}</span>
+                            <span class="stat-value">{{categoryState[category.categoryID]?.contents || 0}}</span>
                         </div>
                         <div class="stat-bar">
                             <div class="bar-fill"
-                                [style.width]="getPercentage(categoryState[category.categoryID].contents, getMaxContents()) + '%'">
+                                [style.width]="getPercentage(categoryState[category.categoryID]?.contents || 0, getMaxContents()) + '%'">
                             </div>
                         </div>
                     </div>
@@ -117,9 +117,9 @@
                         <span>עריכה</span>
                     </button>
 
-                    <button class="action-button delete-button" [class.disabled]="!(categoryState[category.categoryID].cards===0 && 
+                    <button class="action-button delete-button" [class.disabled]="!(categoryState[category.categoryID]?.cards===0 && 
                                       categoryState[category.categoryID].templates===0 && 
-                                      categoryState[category.categoryID].contents===0)" [disabled]="!(categoryState[category.categoryID].cards===0 && 
+                                      categoryState[category.categoryID].contents===0)" [disabled]="!(categoryState[category.categoryID]?.cards===0 && 
                                 categoryState[category.categoryID].templates===0 && 
                                 categoryState[category.categoryID].contents===0)"
                         (click)="deleteCategory(category.categoryID)">
@@ -128,7 +128,7 @@
                     </button>
                 </div>
 
-                <div class="card-status" [class.empty]="categoryState[category.categoryID].cards===0 && 
+                <div class="card-status" [class.empty]="categoryState[category.categoryID]?.cards===0 && 
                              categoryState[category.categoryID].templates===0 && 
                              categoryState[category.categoryID].contents===0" [class.active]="categoryState[category.categoryID].cards > 0 || 
                               categoryState[category.categoryID].templates > 0 || 
@@ -153,37 +153,3 @@
         </div>
     </div>
 </div>
-
-<!-- <div class="toolbar">
-    <input [formControl]="searchControl" placeholder="חיפוש לפי שם קטגוריה" class="search-input" />
-
-    <button mat-raised-button color="primary" (click)="addCategory()">הוסף קטגוריה</button>
-</div>
-
-<div class="cards-container">
-    @for (category of categories; track category.categoryID) {
-    <mat-card class="card mat-elevation-z4">
-        <mat-card-header>
-            <mat-card-title>{{ category.categoryName }}</mat-card-title>
-        </mat-card-header>
-
-        <mat-card-content>
-            <p>כמות ברכות שנוצרו: {{categoryState[category.categoryID].cards}}</p>
-            <p>כמות רקעים זמינים: {{categoryState[category.categoryID].templates}}</p>
-            <p>כמות תכנים זמינים: {{categoryState[category.categoryID].contents}} </p>
-            <p>תאריך יצירה: {{category.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>
-            <p>תאריך עדכון: {{category.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>
-
-        </mat-card-content>
-
-        <mat-card-actions align="end">
-            <button mat-button color="accent" (click)="editCategory(category)">עריכה</button>
-            <button mat-button color="warn" (click)="deleteCategory(category.categoryID)"
-            [disabled]="!(categoryState[category.categoryID].cards===0 &&
-            categoryState[category.categoryID].templates===0 &&
-            categoryState[category.categoryID].contents===0)"
-            >מחיקה</button>
-        </mat-card-actions>
-    </mat-card>
-    }
-</div> -->
