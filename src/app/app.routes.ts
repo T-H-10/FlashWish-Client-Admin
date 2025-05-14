@@ -9,7 +9,7 @@ import { ContentsManagementComponent } from './features/contents/contents-manage
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-    // { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     {
         path: '',
@@ -25,5 +25,5 @@ export const routes: Routes = [
             {path: 'categories', component: CategoriesComponent}
         ]
     },
-    // { path: '**', redirectTo: 'dashboard' } // Redirect to dashboard for any unknown routes
+    { path: '**', redirectTo: 'dashboard' } // Redirect to dashboard for any unknown routes
 ];

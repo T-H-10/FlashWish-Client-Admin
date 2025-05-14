@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,19 +22,53 @@ import Swal from 'sweetalert2';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isMenuOpen: boolean = true;
+  isScrolled: boolean = false;
+  activeNavItem: number = -1;
+  
+  cosmicParticles = Array(15).fill(0).map((_, i) => ({
+    top: Math.random() * 100,
+    left: Math.random() * 100,
+    size: Math.random() * 3 + 1,
+    delay: Math.random() * 5,
+    duration: Math.random() * 10 + 10
+  }));
 
   constructor(
     private authService: AuthService
   ) { }
 
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+  ngOnInit(): void {
+    // Check initial scroll position
+    this.checkScroll();
   }
 
-  closeMenu() {
+  @HostListener('window:scroll')
+  checkScroll(): void {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    this.isScrolled = scrollPosition > 10;
+  }
+  
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+  
+  closeMenu(): void {
     this.isMenuOpen = false;
+  }
+  
+  
+  setActiveNavItem(index: number): void {
+    this.activeNavItem = index;
+  }
+  
+  resetActiveNavItem(): void {
+    this.activeNavItem = -1;
+  }
+  
+  getNavItemState(index: number): string {
+    return this.activeNavItem === index ? 'active' : 'inactive';
   }
 
   logout() {

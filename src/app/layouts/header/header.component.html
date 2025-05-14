@@ -1,4 +1,175 @@
-<div class="header-container">
+<div class="header-container" [class.scrolled]="isScrolled">
+  <div class="cosmic-background">
+    <div class="nebula-layer"></div>
+    <div class="stars-layer">
+      @for (particle of cosmicParticles; track $index) {
+      <div class="cosmic-particle"
+           [ngStyle]="{
+             'top': particle.top + '%',
+             'left': particle.left + '%',
+             'width': particle.size + 'px',
+             'height': particle.size + 'px',
+             'animation-delay': particle.delay + 's',
+             'animation-duration': particle.duration + 's'
+           }">
+      </div>
+    }
+    </div>
+    <div class="cosmic-waves">
+      <div class="cosmic-wave wave1"></div>
+      <div class="cosmic-wave wave2"></div>
+      <div class="cosmic-wave wave3"></div>
+    </div>
+  </div>
+
+  <mat-toolbar class="toolbar">
+    <div class="logo-container">
+      <div class="logo-orbit">
+        <div class="orbit-particle op1"></div>
+        <div class="orbit-particle op2"></div>
+        <div class="orbit-particle op3"></div>
+      </div>
+      <div class="logo-wrapper">
+        <img src="assets/logo.jpg" alt="לוגו" class="logo" />
+        <div class="logo-glow"></div>
+      </div>
+    </div>
+
+    <span class="spacer"></span>
+    
+    <!-- Desktop Navigation -->
+    <nav class="nav-links desktop-nav">
+      <a mat-button routerLink="/dashboard" routerLinkActive="active-link" class="nav-item"
+         [@navItemAnimation]="getNavItemState(0)"
+         (mouseenter)="setActiveNavItem(0)"
+         (mouseleave)="resetActiveNavItem()">
+        <div class="nav-icon">
+          <mat-icon>dashboard</mat-icon>
+        </div>
+        <span class="nav-text">דף הבית</span>
+        <div class="nav-indicator">
+          <div class="indicator-glow"></div>
+        </div>
+      </a>
+      <a mat-button routerLink="/users" routerLinkActive="active-link" class="nav-item"
+         [@navItemAnimation]="getNavItemState(1)"
+         (mouseenter)="setActiveNavItem(1)"
+         (mouseleave)="resetActiveNavItem()">
+        <div class="nav-icon">
+          <mat-icon>people</mat-icon>
+        </div>
+        <span class="nav-text">ניהול משתמשים</span>
+        <div class="nav-indicator">
+          <div class="indicator-glow"></div>
+        </div>
+      </a>
+      <a mat-button routerLink="/templates" routerLinkActive="active-link" class="nav-item"
+         [@navItemAnimation]="getNavItemState(2)"
+         (mouseenter)="setActiveNavItem(2)"
+         (mouseleave)="resetActiveNavItem()">
+        <div class="nav-icon">
+          <mat-icon>description</mat-icon>
+        </div>
+        <span class="nav-text">ניהול תבניות</span>
+        <div class="nav-indicator">
+          <div class="indicator-glow"></div>
+        </div>
+      </a>
+      <a mat-button routerLink="/contents" routerLinkActive="active-link" class="nav-item"
+         [@navItemAnimation]="getNavItemState(3)"
+         (mouseenter)="setActiveNavItem(3)"
+         (mouseleave)="resetActiveNavItem()">
+        <div class="nav-icon">
+          <mat-icon>content_paste</mat-icon>
+        </div>
+        <span class="nav-text">ניהול תכנים</span>
+        <div class="nav-indicator">
+          <div class="indicator-glow"></div>
+        </div>
+      </a>
+      <a mat-button routerLink="/categories" routerLinkActive="active-link" class="nav-item"
+         [@navItemAnimation]="getNavItemState(4)"
+         (mouseenter)="setActiveNavItem(4)"
+         (mouseleave)="resetActiveNavItem()">
+        <div class="nav-icon">
+          <mat-icon>category</mat-icon>
+        </div>
+        <span class="nav-text">ניהול קטגוריות</span>
+        <div class="nav-indicator">
+          <div class="indicator-glow"></div>
+        </div>
+      </a>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <nav class="nav-links mobile-nav" [ngClass]="{'open': isMenuOpen}">
+      <div class="mobile-nav-header">
+        <div class="mobile-logo-container">
+          <img src="assets/logo.jpg" alt="לוגו" class="mobile-logo" />
+          <div class="mobile-logo-glow"></div>
+        </div>
+        <button mat-icon-button class="close-menu-btn" (click)="closeMenu()">
+          <mat-icon>close</mat-icon>
+          <div class="btn-ripple"></div>
+        </button>
+      </div>
+      <div class="mobile-nav-items">
+        <a mat-button routerLink="/dashboard" routerLinkActive="active-link" class="nav-item" (click)="closeMenu()">
+          <div class="mobile-nav-icon">
+            <mat-icon>dashboard</mat-icon>
+            <div class="icon-glow"></div>
+          </div>
+          <span class="nav-text">דף הבית</span>
+        </a>
+        <a mat-button routerLink="/users" routerLinkActive="active-link" class="nav-item" (click)="closeMenu()">
+          <div class="mobile-nav-icon">
+            <mat-icon>people</mat-icon>
+            <div class="icon-glow"></div>
+          </div>
+          <span class="nav-text">ניהול משתמשים</span>
+        </a>
+        <a mat-button routerLink="/templates" routerLinkActive="active-link" class="nav-item" (click)="closeMenu()">
+          <div class="mobile-nav-icon">
+            <mat-icon>description</mat-icon>
+            <div class="icon-glow"></div>
+          </div>
+          <span class="nav-text">ניהול תבניות</span>
+        </a>
+        <a mat-button routerLink="/contents" routerLinkActive="active-link" class="nav-item" (click)="closeMenu()">
+          <div class="mobile-nav-icon">
+            <mat-icon>content_paste</mat-icon>
+            <div class="icon-glow"></div>
+          </div>
+          <span class="nav-text">ניהול תכנים</span>
+        </a>
+        <a mat-button routerLink="/categories" routerLinkActive="active-link" class="nav-item" (click)="closeMenu()">
+          <div class="mobile-nav-icon">
+            <mat-icon>category</mat-icon>
+            <div class="icon-glow"></div>
+          </div>
+          <span class="nav-text">ניהול קטגוריות</span>
+        </a>
+      </div>
+    </nav>
+
+    @if (isMenuOpen) {
+    <div class="backdrop" (click)="closeMenu()" @backdropAnimation></div>
+    }
+
+    <div class="user-actions">
+      <button mat-icon-button class="cosmic-button menu-toggle" (click)="toggleMenu()">
+        <mat-icon>{{isMenuOpen? '': 'menu'}}</mat-icon>
+        <div class="button-glow"></div>
+      </button>
+      <button mat-icon-button aria-label="התנתק" class="cosmic-button logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <div class="button-glow"></div>
+      </button>
+    </div>
+  </mat-toolbar>
+</div>
+
+<!-- <div class="header-container">
   <mat-toolbar class="toolbar">
     <div class="logo-container">
       <img src="assets/logo.jpg" alt="לוגו" class="logo" />
@@ -75,4 +246,4 @@
       </button>
     </div>
   </mat-toolbar>
-</div>
+</div> -->
