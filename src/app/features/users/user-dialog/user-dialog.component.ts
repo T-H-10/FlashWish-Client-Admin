@@ -27,7 +27,7 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   templateUrl: './user-dialog.component.html',
-  styleUrl: './user-dialog.component.css'
+  styleUrls: ['./user-dialog.component.css', './user-dialog2.component.css'],
 })
 export class UserDialogComponent {
   form: FormGroup;
