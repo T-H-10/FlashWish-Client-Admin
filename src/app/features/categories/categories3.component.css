@@ -1,0 +1,131 @@
+
+/* Card Actions */
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background: transparent;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 0.5rem;
+}
+
+.action-button i {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.edit-button:hover {
+  background: rgba(251, 190, 101, 0.2);
+  color: var(--secondary-light);
+}
+
+.delete-button:hover {
+  background: rgba(255, 107, 107, 0.2);
+  color: var(--accent-color);
+}
+
+.delete-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Card Status */
+.card-status {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.card-status.empty {
+  background: rgba(255, 107, 107, 0.2);
+  color: var(--accent-color);
+}
+
+.card-status.active {
+  background: rgba(76, 175, 80, 0.2);
+  color: var(--success-color);
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 1200px) {
+  .cards-container {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cosmic-universe {
+    padding: 1rem;
+  }
+  
+  .page-title {
+    font-size: 2.5rem;
+  }
+  
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .search-wrapper {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .category-icon {
+    margin-bottom: 1rem;
+    margin-left: 0;
+  }
+  
+  .stat-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .stat-icon {
+    margin-bottom: 0.8rem;
+    margin-left: 0;
+  }
+  
+  .stat-info {
+    margin-left: 0;
+    margin-bottom: 0.8rem;
+    width: 100%;
+  }
+}

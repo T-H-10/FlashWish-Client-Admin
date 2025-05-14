@@ -30,11 +30,11 @@ import { DatePipe } from '@angular/common';
     DatePipe
   ],
   templateUrl: './contents-management.component.html',
-  styleUrl: './contents-management.component.css'
+  styleUrls: ['./contents-management.component.css', './contents-management2.component.css', './contents-management3.component.css']
 })
 export class ContentsManagementComponent implements OnInit {
-  contents: Content[] = []; // Replace 'any' with your actual content type
-  filteredContents: Content[] = []; // Replace 'any' with your actual content type
+  contents: Content[] = []; 
+  filteredContents: Content[] = []; 
   searchControl = new FormControl('');
   contentInLines:string[] = [];
   

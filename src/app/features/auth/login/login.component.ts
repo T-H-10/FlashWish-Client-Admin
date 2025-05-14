@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css', './login2.component.css', './login3.component.css', './login4.component.css']
 })
 
 export class LoginComponent implements OnInit {
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private renderer: Renderer2
+    // private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {

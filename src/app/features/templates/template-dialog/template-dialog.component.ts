@@ -24,7 +24,7 @@ import { CategoryService } from '../../../services/category/category.service';
     MatButtonModule
   ],
   templateUrl: './template-dialog.component.html',
-  styleUrl: './template-dialog.component.css'
+  styleUrls: ['./template-dialog.component.css', './template-dialog2.component.css']
 })
 export class TemplateDialogComponent implements OnInit {
   form: FormGroup;

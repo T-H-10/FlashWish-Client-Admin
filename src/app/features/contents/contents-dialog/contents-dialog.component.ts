@@ -24,7 +24,7 @@ import { CategoryService } from '../../../services/category/category.service';
         MatButtonModule
   ],
   templateUrl: './contents-dialog.component.html',
-  styleUrl: './contents-dialog.component.css'
+  styleUrls: ['./contents-dialog.component.css', './contents-dialog2.component.css']
 })
 export class ContentsDialogComponent {
   form: FormGroup;

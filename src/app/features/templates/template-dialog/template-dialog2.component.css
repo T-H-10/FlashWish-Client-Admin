@@ -1,0 +1,185 @@
+
+/* File Input Styling */
+.file-input-container {
+  position: relative;
+}
+
+.file-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: -1;
+}
+
+.file-input-text {
+  flex: 1;
+  padding: 12px 15px;
+  color: var(--primary-dark);
+  opacity: 0.8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-input-button {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--secondary-dark), var(--secondary-color));
+  color: var(--text-dark);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.file-input-button i {
+  margin-left: 8px;
+}
+
+.file-input-button:hover {
+  background: linear-gradient(135deg, var(--secondary-color), var(--secondary-light));
+}
+
+.file-preview {
+  margin-top: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.preview-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Dialog Actions */
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.dialog-button {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 1rem;
+}
+
+.dialog-button i {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.cancel-button {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--primary-dark);
+}
+
+.cancel-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.save-button {
+  position: relative;
+  background: linear-gradient(135deg, var(--secondary-dark), var(--secondary-color));
+  color: var(--text-dark);
+  font-weight: 600;
+  overflow: hidden;
+}
+
+.save-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.save-button:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(251, 190, 101, 0.3);
+}
+
+.button-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.8) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.save-button:not(:disabled):hover .button-glow {
+  opacity: 0.3;
+  animation: rotate-glow 3s infinite linear;
+}
+
+@keyframes rotate-glow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 480px) {
+  .cosmic-dialog {
+    min-width: 300px;
+  }
+  
+  .dialog-title {
+    font-size: 1.5rem;
+  }
+  
+  .dialog-actions {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+  
+  .dialog-button {
+    width: 100%;
+    justify-content: center;
+    margin-right: 0;
+  }
+  
+  .file-input-wrapper {
+    flex-direction: column;
+  }
+  
+  .file-input-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

@@ -30,7 +30,7 @@ import { DatePipe } from '@angular/common';
     DatePipe
   ],
   templateUrl: './categories.component.html',
-  styleUrl: './categories.component.css'
+  styleUrls: ['./categories.component.css', './categories2.component.css', './categories3.component.css']
 })
 export class CategoriesComponent implements OnInit {
   categories: Category[] = [];

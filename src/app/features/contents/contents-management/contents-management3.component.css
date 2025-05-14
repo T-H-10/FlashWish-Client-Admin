@@ -1,0 +1,55 @@
+
+/* Responsive Styles */
+@media screen and (max-width: 1200px) {
+  .contents-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cosmic-universe {
+    padding: 1rem;
+  }
+  
+  .page-title {
+    font-size: 2.5rem;
+  }
+  
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .search-wrapper {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .contents-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .content-header {
+    flex-direction: column;
+  }
+  
+  .content-icon {
+    margin-bottom: 1rem;
+    margin-left: 0;
+  }
+  
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .content-text {
+    font-size: 1rem;
+  }
+}

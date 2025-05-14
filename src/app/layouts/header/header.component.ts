@@ -20,7 +20,7 @@ import Swal from 'sweetalert2';
     CommonModule
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css','./header2.component.css']
 })
 export class HeaderComponent implements OnInit {
   isMenuOpen: boolean = true;

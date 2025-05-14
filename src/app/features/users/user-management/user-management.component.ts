@@ -27,7 +27,7 @@ import { DatePipe } from '@angular/common';
     DatePipe
   ],
   templateUrl: './user-management.component.html',
-  styleUrl: './user-management.component.css'
+  styleUrls: ['./user-management.component.css','./user-management2.component.css','./user-management3.component.css']
 })
 export class UserManagementComponent implements OnInit {
   users: User[] = [];

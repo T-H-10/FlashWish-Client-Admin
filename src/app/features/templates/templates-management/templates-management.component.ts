@@ -33,7 +33,7 @@ import { DatePipe } from '@angular/common';
     DatePipe,
   ],
   templateUrl: './templates-management.component.html',
-  styleUrl: './templates-management.component.css'
+  styleUrls: ['./templates-management.component.css', './templates-management2.component.css']
 })
 export class TemplatesManagementComponent implements OnInit {
   templates: Template[] = [];
@@ -64,7 +64,7 @@ export class TemplatesManagementComponent implements OnInit {
   }
 
   countCardsByTemplateId(templateID: number): number {
-    return this.cardsService.getCardsByTemplateId(templateID).length;
+    return this.cardsService.getCardsByTemplateId(templateID)?.length || 0;
   }
 
   addTemplate(): void {

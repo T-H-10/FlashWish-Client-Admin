@@ -21,11 +21,15 @@ body {
     --text-dark: #25173b;
     --background-light: #f8f5ff;
     --shadow-color: rgba(27, 16, 46, 0.2);
-    // --primary-color: #25173b;
-    // --accent-color: #eeb451;
-    // --warn-color: #f44336;
-    // --primary-text: #ffffff;
-    // --accent-text: #000000;
+    --glow-color: rgba(251, 190, 101, 0.6);
+    --card-bg: rgba(37, 23, 59, 0.85);
+    --card-bg-hover: rgba(37, 23, 59, 0.95);
+    --primary-dark: #1b102e;
+    --accent-color: #ff6b6b;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --card-bg: rgba(37, 23, 59, 0.85);
+    --card-bg-hover: rgba(37, 23, 59, 0.95);
   }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

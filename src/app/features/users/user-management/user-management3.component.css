@@ -1,0 +1,257 @@
+.add-button {
+  position: relative;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--secondary-dark), var(--secondary-color));
+  color: var(--text-dark);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.button-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+}
+
+.button-text {
+  margin-left: 8px;
+}
+
+.button-icon {
+  font-size: 1.2rem;
+}
+
+.button-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.8) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.add-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(251, 190, 101, 0.4);
+}
+
+.add-button:hover .button-glow {
+  opacity: 0.3;
+  animation: rotate-glow 3s infinite linear;
+}
+
+@keyframes rotate-glow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Users Grid */
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+/* User Card */
+.user-card {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-card:hover {
+  transform: translateY(-10px) rotateX(5deg);
+  background: var(--card-bg-hover);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 
+              0 0 20px var(--glow-color);
+}
+
+.card-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    var(--glow-color) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.user-card:hover .card-glow {
+  opacity: 0.15;
+}
+
+/* Card Banner */
+.card-banner {
+  position: relative;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+  overflow: hidden;
+}
+
+.banner-constellation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.constellation-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--secondary-light);
+  border-radius: 50%;
+  box-shadow: 0 0 5px var(--secondary-light);
+  animation: twinkle 3s infinite alternate;
+}
+
+.constellation-star:nth-child(1) {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.constellation-star:nth-child(2) {
+  top: 30%;
+  left: 30%;
+  animation-delay: 0.5s;
+}
+
+.constellation-star:nth-child(3) {
+  top: 50%;
+  left: 50%;
+  animation-delay: 1s;
+}
+
+.constellation-star:nth-child(4) {
+  top: 40%;
+  left: 70%;
+  animation-delay: 1.5s;
+}
+
+.constellation-star:nth-child(5) {
+  top: 60%;
+  left: 90%;
+  animation-delay: 2s;
+}
+
+.constellation-line {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--secondary-color), transparent);
+  opacity: 0.3;
+}
+
+/* xxxxxxxxxxxxxxxxxxxxle {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+} */
+
+/* User Header */
+.user-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  margin-top: -40px;
+}
+
+.avatar-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-left: 1.5rem;
+  flex-shrink: 0;
+}
+
+.avatar-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px dashed rgba(251, 190, 101, 0.3);
+  border-radius: 50%;
+  animation: rotate 20s linear infinite;
+}
+
+.avatar {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  background: linear-gradient(135deg, var(--secondary-dark), var(--secondary-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.avatar-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.8) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  animation: rotate-glow 5s infinite linear;
+}

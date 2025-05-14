@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CounterComponent, CommonModule],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrls: ['./dashboard.component.css',  './dashboard2.component.css',  './dashboard3.component.css']
 })
 export class DashboardComponent implements OnInit {
   statistics: Statistics = {

@@ -1,0 +1,278 @@
+
+/* Content Card */
+.content-card {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-card:hover {
+  transform: translateY(-10px) rotateX(5deg);
+  background: var(--card-bg-hover);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 
+              0 0 20px var(--glow-color);
+}
+
+.card-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    var(--glow-color) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.content-card:hover .card-glow {
+  opacity: 0.15;
+}
+
+/* Content Header */
+.content-header {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.content-icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
+
+.content-icon i {
+  font-size: 2rem;
+  color: var(--secondary-color);
+  z-index: 1;
+}
+
+.icon-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px dashed rgba(251, 190, 101, 0.3);
+  border-radius: 50%;
+  animation: rotate 10s linear infinite;
+}
+
+.content-title-container {
+  flex: 1;
+}
+
+.content-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: var(--text-light);
+}
+
+.content-category {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--secondary-light);
+}
+
+.content-category i {
+  font-size: 1.1rem;
+  margin-left: 0.5rem;
+}
+
+/* Content Body */
+.content-body {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.1);
+  max-height: 550px;
+  overflow-y: auto;
+}
+
+.content-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content-body::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.content-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  position: relative;
+  padding: 0 1.5rem;
+}
+
+.content-text::before,
+.content-text::after {
+  content: '"';
+  position: absolute;
+  font-size: 2.5rem;
+  color: var(--secondary-color);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.content-text::before {
+  top: -0.5rem;
+  right: 0;
+}
+
+.content-text::after {
+  bottom: -1.5rem;
+  left: 0;
+}
+
+.content-signature {
+  align-self: flex-end;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--secondary-light);
+  margin-top: auto;
+}
+
+/* Content Details */
+.content-details {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.detail-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  margin-left: 0.8rem;
+  flex-shrink: 0;
+}
+
+.detail-icon i {
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+}
+
+.detail-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-bottom: 0.2rem;
+}
+
+.detail-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Card Actions */
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background: transparent;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 0.5rem;
+}
+
+.action-button i {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.edit-button:hover {
+  background: rgba(251, 190, 101, 0.2);
+  color: var(--secondary-light);
+}
+
+.delete-button:hover {
+  background: rgba(255, 107, 107, 0.2);
+  color: var(--accent-color);
+}
+
+/* Usage Indicator */
+.usage-indicator {
+  position: relative;
+  height: 4px;
+  background: var(--secondary-color);
+  transition: width 1s ease;
+  max-width: 100%;
+}
+
+.usage-text {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  font-size: 0.8rem;
+  color: var(--secondary-light);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.content-card:hover .usage-text {
+  opacity: 1;
+}
