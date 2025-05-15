@@ -60,11 +60,11 @@
                         </div>
                         <div class="stat-info">
                             <span class="stat-label">ברכות שנוצרו</span>
-                            <span class="stat-value">{{categoryState[category.categoryID]?.cards || 0}}</span>
+                            <span class="stat-value">{{categoryState[category.categoryID].cards || 0}}</span>
                         </div>
                         <div class="stat-bar">
                             <div class="bar-fill"
-                                [style.width]="getPercentage(categoryState[category.categoryID]?.cards || 0, getMaxCards()) + '%'">
+                                [style.width]="getPercentage(categoryState[category.categoryID].cards || 0, getMaxCards()) + '%'">
                             </div>
                         </div>
                     </div>
@@ -75,11 +75,11 @@
                         </div>
                         <div class="stat-info">
                             <span class="stat-label">רקעים זמינים</span>
-                            <span class="stat-value">{{categoryState[category.categoryID]?.templates || 0}}</span>
+                            <span class="stat-value">{{categoryState[category.categoryID].templates || 0}}</span>
                         </div>
                         <div class="stat-bar">
                             <div class="bar-fill"
-                                [style.width]="getPercentage(categoryState[category.categoryID]?.templates || 0, getMaxTemplates()) + '%'">
+                                [style.width]="getPercentage(categoryState[category.categoryID].templates || 0, getMaxTemplates()) + '%'">
                             </div>
                         </div>
                     </div>
@@ -90,11 +90,11 @@
                         </div>
                         <div class="stat-info">
                             <span class="stat-label">תכנים זמינים</span>
-                            <span class="stat-value">{{categoryState[category.categoryID]?.contents || 0}}</span>
+                            <span class="stat-value">{{categoryState[category.categoryID].contents || 0}}</span>
                         </div>
                         <div class="stat-bar">
                             <div class="bar-fill"
-                                [style.width]="getPercentage(categoryState[category.categoryID]?.contents || 0, getMaxContents()) + '%'">
+                                [style.width]="getPercentage(categoryState[category.categoryID].contents || 0, getMaxContents()) + '%'">
                             </div>
                         </div>
                     </div>
@@ -117,9 +117,9 @@
                         <span>עריכה</span>
                     </button>
 
-                    <button class="action-button delete-button" [class.disabled]="!(categoryState[category.categoryID]?.cards===0 && 
+                    <button class="action-button delete-button" [class.disabled]="!(categoryState[category.categoryID].cards===0 && 
                                       categoryState[category.categoryID].templates===0 && 
-                                      categoryState[category.categoryID].contents===0)" [disabled]="!(categoryState[category.categoryID]?.cards===0 && 
+                                      categoryState[category.categoryID].contents===0)" [disabled]="!(categoryState[category.categoryID].cards===0 && 
                                 categoryState[category.categoryID].templates===0 && 
                                 categoryState[category.categoryID].contents===0)"
                         (click)="deleteCategory(category.categoryID)">
@@ -128,7 +128,7 @@
                     </button>
                 </div>
 
-                <div class="card-status" [class.empty]="categoryState[category.categoryID]?.cards===0 && 
+                <div class="card-status" [class.empty]="categoryState[category.categoryID].cards===0 && 
                              categoryState[category.categoryID].templates===0 && 
                              categoryState[category.categoryID].contents===0" [class.active]="categoryState[category.categoryID].cards > 0 || 
                               categoryState[category.categoryID].templates > 0 || 
