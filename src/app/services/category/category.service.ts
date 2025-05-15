@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Category } from '../../models/category.model';
+import { AppConfigService } from '../app-config.service';
 
 
 @Injectable({
@@ -14,8 +15,9 @@ export class CategoryService {
   private categoryMap: Map<number, string> = new Map();
 
   constructor(private http: HttpClient,
+    private config: AppConfigService
   ) {
-    this.apiUrl = environment.apiUrl+'/api/Categories';
+    this.apiUrl = this.config.apiUrl+'/api/Categories';
     this.getAllCategories().subscribe();
    }
 

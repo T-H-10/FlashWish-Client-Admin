@@ -131,38 +131,3 @@
       </div>
     </div>
   </div>
-
-<!-- <div class="toolbar">
-    <input [formControl]="searchControl" placeholder="חיפוש לפי שם רקע" class="search-input" />
-
-    <button mat-raised-button color="primary" (click)="addTemplate()">הוסף רקע</button>
-</div>
-
-<div class="cards-container">
-    @for (template of filteredTemplates; track template.categoryID) {
-        <mat-card class="card mat-elevation-z4">
-            <mat-card-header class="mat-card-header">
-                <mat-card-title>{{ template.templateName }}</mat-card-title>
-                @if (template.imageURL) {
-                <img [src]="getTemplateFullURL(template.imageURL)" [alt]="template.templateName" class="template-image" />
-                }
-            </mat-card-header>
-
-            <mat-card-content>
-                <p>קטגוריה: {{template.categoryID | categoryName}}</p>
-                <p>משתמש שהעלה: {{template.userID | userName }} </p>
-                @if (template.markedForDeletion) {
-                <p style="color: red;">מיועד למחיקה </p>
-                }
-                <p>כמות ברכות: {{countCardsByTemplateId(template.templateID)}}</p>
-                <p>תאריך יצירה: {{template.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}} </p>
-                <p>תאריך עדכון: {{template.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>
-            </mat-card-content>
-
-            <mat-card-actions align="end">
-                <button mat-button color="accent" (click)="editTemplate(template)">עריכה</button>
-                <button mat-button color="warn" (click)="deleteTemplate(template.templateID)">מחיקה</button>
-            </mat-card-actions>
-        </mat-card>
-    }
-</div> -->

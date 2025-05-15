@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "prebuild": "scripts/generate-config.sh",
-    "build": "ng build",
+    "build": "scripts\\generate-config.cmd && ng build",
+    "build:prod": "scripts\\generate-config.cmd && ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:FlashWish-Admin": "node dist/flash-wish-admin/server/server.mjs"
