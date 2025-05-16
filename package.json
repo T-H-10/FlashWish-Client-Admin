@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "scripts\\generate-config.cmd && ng build",
-    "build:prod": "scripts\\generate-config.cmd && ng build --configuration=production",
+    "start": "npm run generate-config && ng serve",
+    "build": "npm run generate-config && ng build",
+    "build:prod": "npm run generate-config && ng build --configuration=production",
+    "generate-config": "node generate-config.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:FlashWish-Admin": "node dist/flash-wish-admin/server/server.mjs"

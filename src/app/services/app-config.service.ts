@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AppConfigService {
@@ -8,6 +9,9 @@ export class AppConfigService {
   constructor(private http: HttpClient) {}
 
   loadConfig(): Promise<void> {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const configFile = isLocal ? '/assets/config.local.json' : '/assets/config.json';
+
     return this.http
       .get('/assets/config.json')
       .toPromise()
