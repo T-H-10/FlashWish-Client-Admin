@@ -1,5 +1,3 @@
-
-/* Template Card */
 .template-card {
   position: relative;
   background: var(--card-bg);
@@ -43,7 +41,6 @@
   opacity: 0.15;
 }
 
-/* Template Image Container */
 .template-image-container {
   position: relative;
   width: 100%;
@@ -112,7 +109,6 @@
   margin-left: 5px;
 }
 
-/* Template Content */
 .template-content {
   flex: 1;
   padding: 1.5rem;
@@ -184,7 +180,6 @@
   color: var(--secondary-color);
 }
 
-/* Card Actions */
 .card-actions {
   display: flex;
   justify-content: flex-end;
@@ -224,7 +219,6 @@
   color: var(--accent-color);
 }
 
-/* Usage Indicator */
 .usage-indicator {
   position: relative;
   height: 4px;
@@ -247,7 +241,6 @@
   opacity: 1;
 }
 
-/* Responsive Styles */
 @media screen and (max-width: 1200px) {
   .templates-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -295,4 +288,4 @@
   .template-image-container {
     height: 160px;
   }
-}
+} 

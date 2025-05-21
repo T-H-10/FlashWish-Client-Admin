@@ -11,10 +11,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { debounceTime } from 'rxjs';
 import { ContentsDialogComponent } from '../contents-dialog/contents-dialog.component';
 import Swal from 'sweetalert2';
-import { CategoryNamePipe } from '../../../pipes/category-name.pipe';
 import { UserNamePipe } from '../../../pipes/user-name.pipe';
 import { CardsService } from '../../../services/cards/cards.service';
 import { DatePipe } from '@angular/common';
+import { Category } from '../../../models/category.model';
+import { CategoryService } from '../../../services/category/category.service';
+import { SortDirection, SortField } from '../../templates/templates-management/templates-management.component';
 @Component({
   selector: 'app-contents-management',
   standalone: true,
@@ -25,21 +27,29 @@ import { DatePipe } from '@angular/common';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    CategoryNamePipe,
     UserNamePipe,
     DatePipe
   ],
   templateUrl: './contents-management.component.html',
-  styleUrls: ['./contents-management.component.css', './contents-management2.component.css', './contents-management3.component.css']
+  styleUrls: ['./contents-management.component.css', './contents-management2.component.css', './contents-management3.component.css',
+    '../../../shared/filter-and-sort-styles.css']
 })
 export class ContentsManagementComponent implements OnInit {
   contents: Content[] = []; 
   filteredContents: Content[] = []; 
   searchControl = new FormControl('');
+  categories:Category[]=[];
   contentInLines:string[] = [];
+    // Sort and filter state
+    sortField: SortField = '';
+    sortDirection: SortDirection = 'asc';
+    selectedCategoryId: number = 0;
+    showFilterMenu: boolean = false;
+    showSortMenu: boolean = false;
   
   constructor(private contentService: ContentService,
      private dialog: MatDialog,
+     private categoryService: CategoryService,
      private cardsService: CardsService) { }
 
   ngOnInit(): void {
@@ -47,6 +57,9 @@ export class ContentsManagementComponent implements OnInit {
     this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe(value => {
       this.filterContents(value || '');
     });
+    this.categoryService.getAllCategories().subscribe(categories=>{
+      this.categories = categories;
+     })  
   }
 
   getAllContents(): void {
@@ -58,6 +71,10 @@ export class ContentsManagementComponent implements OnInit {
 
   countCardsByTextId(textID: number): number {
     return this.cardsService.getCardsByTextId(textID).length;
+  }
+
+  getCategoryName(categoryID: number): string {
+    return this.categoryService.getCategoryNameById(categoryID) || "nothing";
   }
 
   addContent(): void {
@@ -145,14 +162,112 @@ export class ContentsManagementComponent implements OnInit {
     });
   }
 
-  private filterContents(searchTerm: string): void {
-    const lower = searchTerm.toLowerCase();
-    this.filteredContents = this.contents.filter(content => {
-      return content.title.toLowerCase().includes(lower)
-        || content.content.toLowerCase().includes(lower)
-        || content.signature.toLowerCase().includes(lower)
-    });
+   // Filter and sort methods
+   toggleFilterMenu(): void {
+    this.showFilterMenu = !this.showFilterMenu;
+    if (this.showFilterMenu) {
+      this.showSortMenu = false;
+    }
   }
+
+  toggleSortMenu(): void {
+    this.showSortMenu = !this.showSortMenu;
+    if (this.showSortMenu) {
+      this.showFilterMenu = false;
+    }
+  }
+
+  filterByCategory(categoryId: number): void {
+    this.selectedCategoryId = categoryId;
+    this.showFilterMenu = false;
+    this.applyFiltersAndSort();
+  }
+
+  sortMessages(field: SortField): void {
+    if (this.sortField === field) {
+      // Toggle direction if same field
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortField = field;
+      this.sortDirection = 'asc';
+    }
+    this.showSortMenu = false;
+    this.applyFiltersAndSort();
+  }
+
+  resetSort(): void {
+    this.sortField = '';
+    this.sortDirection = 'asc';
+    this.applyFiltersAndSort();
+  }
+
+  getSortFieldName(): string {
+    switch (this.sortField) {
+      case 'name': return 'שם';
+      case 'category': return 'קטגוריה';
+      case 'date': return 'תאריך';
+      case 'usage': return 'שימוש';
+      default: return '';
+    }
+  }
+
+  private filterContents(searchTerm: string): void {
+    // const lower = searchTerm.toLowerCase();
+    // this.filteredContents = this.contents.filter(content => {
+    //   return content.title.toLowerCase().includes(lower)
+    //     || content.content.toLowerCase().includes(lower)
+    //     || content.signature.toLowerCase().includes(lower)
+    // });
+    this.applyFiltersAndSort(searchTerm);
+  }
+
+  
+    private applyFiltersAndSort(searchTerm: string = this.searchControl.value || ''): void {
+      // First apply search filter
+      const lower = searchTerm.toLowerCase();
+      let result = this.contents.filter(content =>
+        content.title.toLowerCase().includes(lower)
+      );
+      
+      // Then apply category filter
+      if (this.selectedCategoryId !== 0) {
+        result = result.filter(template => template.categoryID === this.selectedCategoryId);
+      }
+      
+      // Then apply sorting
+      if (this.sortField) {
+        result = this.sortTemplatesByField(result, this.sortField, this.sortDirection);
+      }
+      
+      this.filteredContents = result;
+    }
+  
+    private sortTemplatesByField(contents: Content[], field: SortField, direction: SortDirection): Content[] {
+      return [...contents].sort((a, b) => {
+        let comparison = 0;
+        
+        switch (field) {
+          // case 'name':
+          //   comparison = a..localeCompare(b.templateName);
+          //   break;
+          case 'category':
+            const catA = this.getCategoryName(a.categoryID);
+            const catB = this.getCategoryName(b.categoryID);
+            comparison = catA.localeCompare(catB);
+            break;
+          case 'date':
+            comparison = new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime();
+            break;
+          case 'usage':
+            const usageA = this.countCardsByTextId(a.textID);
+            const usageB = this.countCardsByTextId(b.textID);
+            comparison = usageA - usageB;
+            break;
+        }
+        
+        return direction === 'asc' ? comparison : -comparison;
+      });
+    }
 
   activateCard(event: MouseEvent): void {
     const card = event.currentTarget as HTMLElement;

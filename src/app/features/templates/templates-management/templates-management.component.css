@@ -1,11 +1,9 @@
-/* Global styles */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Cosmic Universe - The immersive container */
 .cosmic-universe {
   position: relative;
   min-height: 100vh;
@@ -18,7 +16,6 @@
   padding: 2rem;
 }
 
-/* Cosmic Particles Animation */
 .cosmic-particles {
   position: absolute;
   top: 0;
@@ -78,7 +75,6 @@
   }
 }
 
-/* Templates Container */
 .templates-container {
   position: relative;
   z-index: 1;
@@ -86,7 +82,6 @@
   margin: 0 auto;
 }
 
-/* Page Header */
 .page-header {
   margin-bottom: 3rem;
 }
@@ -129,7 +124,6 @@
   margin: 0;
 }
 
-/* Toolbar */
 .toolbar {
   display: flex;
   justify-content: space-between;
@@ -282,7 +276,6 @@
   }
 }
 
-/* Templates Grid */
 .templates-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

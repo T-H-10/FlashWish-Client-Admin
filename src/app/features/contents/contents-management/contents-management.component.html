@@ -20,6 +20,80 @@
         </div>
         
         <div class="toolbar">
+      <!-- Sort and Filter Options -->
+          <div class="filter-sort-container">
+            <div class="filter-dropdown">
+              <button class="filter-button" (click)="toggleFilterMenu()">
+                <i class="material-icons">filter_list</i>
+                <span>סינון</span>
+                <div class="button-glow"></div>
+              </button>
+              <div class="dropdown-menu" [class.show]="showFilterMenu">
+                <div class="dropdown-header">סנן לפי קטגוריה</div>
+                <div class="dropdown-items">
+                  <div class="dropdown-item" (click)="filterByCategory(0)">
+                    <span>הכל</span>
+                    <div class="item-indicator" [class.active]="selectedCategoryId === 0"></div>
+                  </div>
+                  @for (category of categories; track category.categoryID) {
+                    <div class="dropdown-item" (click)="filterByCategory(category.categoryID)">
+                      <span>{{category.categoryName}}</span>
+                      <div class="item-indicator" [class.active]="selectedCategoryId === category.categoryID"></div>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+  
+            <div class="sort-dropdown">
+              <button class="sort-button" (click)="toggleSortMenu()">
+                <i class="material-icons">sort</i>
+                <span>מיון</span>
+                <div class="button-glow"></div>
+              </button>
+              <div class="dropdown-menu" [class.show]="showSortMenu">
+                <div class="dropdown-header">מיין לפי</div>
+                <div class="dropdown-items">
+                  <!-- <div class="dropdown-item" (click)="sortMessages('name')">
+                    <span>שם</span>
+                    @if (sortField === 'name') {
+                    <i class="material-icons">
+                      {{sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'}}
+                    </i>}
+                    <div class="item-indicator" [class.active]="sortField === 'name'"></div>
+                  </div> -->
+                  <div class="dropdown-item" (click)="sortMessages('category')">
+                    <span>קטגוריה</span>
+                    @if (sortField === 'category') {
+                    <i class="material-icons">
+                      {{sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'}}
+                    </i>
+                  }
+                    <div class="item-indicator" [class.active]="sortField === 'category'"></div>
+                  </div>
+                  <div class="dropdown-item" (click)="sortMessages('date')">
+                    <span>תאריך</span>
+                    @if (sortField === 'date') {
+                    <i class="material-icons">
+                      {{sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'}}
+                    </i>
+                  }
+                    <div class="item-indicator" [class.active]="sortField === 'date'"></div>
+                  </div>
+                  <div class="dropdown-item" (click)="sortMessages('usage')">
+                    <span>שימוש</span>
+                    @if (sortField === 'usage') {
+                    <i class="material-icons">
+                      {{sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'}}
+                    </i>
+                  }
+                    <div class="item-indicator" [class.active]="sortField === 'usage'"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="search-wrapper">
             <div class="search-orbit">
               <div class="orbit-particle"></div>
@@ -40,6 +114,26 @@
         </div>
       </div>
   
+  <!-- Active Filters Display -->
+  @if (selectedCategoryId !== 0 || sortField !== '') {
+    <div class="active-filters">
+      <div class="filter-chips">
+        @if (selectedCategoryId !== 0) {
+        <div class="filter-chip">
+          <span>קטגוריה: {{getCategoryName(selectedCategoryId)}}</span>
+          <i class="material-icons" (click)="filterByCategory(0)">close</i>
+        </div>
+      }
+      @if (sortField !== '') {
+        <div class="filter-chip">
+          <span>מיון לפי: {{getSortFieldName()}} ({{sortDirection === 'asc' ? 'עולה' : 'יורד'}})</span>
+          <i class="material-icons" (click)="resetSort()">close</i>
+        </div>
+      }
+      </div>
+    </div>
+  }
+
       <div class="contents-grid">
         @for (content of filteredContents; track content.textID) {
           <div class="content-card" (mouseenter)="activateCard($event)" (mouseleave)="deactivateCard($event)">
@@ -54,7 +148,7 @@
                 <h2 class="content-title">{{ content.title }}</h2>
                 <div class="content-category">
                   <i class="material-icons">category</i>
-                  <span>{{content.categoryID | categoryName}}</span>
+                  <span>{{getCategoryName(content.categoryID)}}</span>
                 </div>
               </div>
             </div>
@@ -128,36 +222,3 @@
       </div>
     </div>
   </div>
-
-<!-- <div class="toolbar">
-        <input [formControl]="searchControl"  placeholder="חיפוש לפי כותרת / תוכן / חתימה"
-            class="search-input" />
-
-
-    <button mat-raised-button color="primary" (click)="addContent()">הוסף תוכן</button>
-</div>
-
-<div class="cards-container">
-    @for (content of filteredContents; track content.textID) {
-    <mat-card class="card mat-elevation-z4">
-        <mat-card-header>
-            <mat-card-title>{{ content.title }}</mat-card-title>
-            <mat-card-subtitle class="card-content">{{ content.content }}</mat-card-subtitle>
-            <mat-card-subtitle style="font-style: italic; font-size: 0.9em;">{{ content.signature }}</mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content>
-            <p>קטגוריה: {{content.categoryID | categoryName}}</p>
-            <p>משתמש שהעלה: {{content.userID | userName}}</p>
-            <p> כמות ברכות: {{countCardsByTextId(content.textID)}}</p>
-            <p>תאריך יצירה: {{content.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>
-            <p>תאריך עדכון: {{content.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</p>
-        </mat-card-content>
-
-        <mat-card-actions align="end">
-            <button mat-button color="accent" (click)="editContent(content)">עריכה</button>
-            <button mat-button color="warn" (click)="deleteContent(content.textID)">מחיקה</button>
-        </mat-card-actions>
-    </mat-card>
-    }
-</div> -->
