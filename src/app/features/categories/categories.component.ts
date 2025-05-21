@@ -96,12 +96,21 @@ export class CategoriesComponent implements OnInit {
             });
           },
           error: (error) => {
+            if(error.status===409){
+            Swal.fire({
+              icon: 'error',
+              title: 'שגיאה',
+              text: 'קיימת קטגוריה בעלת שם זהה.'
+            });
+          }
+          else {
             Swal.fire({
               icon: 'error',
               title: 'שגיאה',
               text: 'אירעה שגיאה בעת הוספת הקטגוריה.'
             });
           }
+        }
         });
       }
     });
