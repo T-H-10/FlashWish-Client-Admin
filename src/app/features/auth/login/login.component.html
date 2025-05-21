@@ -150,36 +150,3 @@
         </div>
     </div>
 </div>
-<!-- <div class="login-container">
-    <h2> התחברות</h2>
-
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <div class="form-group">
-            <label for="email">אימייל</label>
-            <input id="email" type="email" formControlName="email"  class="form-control" placeholder="הכנס אימייל"/>
-            @if (loginForm.controls['email'].invalid && loginForm.controls['email'].touched) {
-                <small class="error">
-                    אנא הכנס אימייל תקני
-                </small>
-            }
-        </div>
-
-        <div class="form-group">
-            <label for="password">סיסמה</label>
-            <input id="password" type="password" formControlName="password" class="form-control" placeholder="הכנס סיסמה">
-            @if (loginForm.controls['password'].invalid && loginForm.controls['password'].touched) {
-                <small class="error">
-                    סיסמה היא שדה חובה
-                </small>
-            }
-          </div>
-      
-           @if (errorMessage) {
-            <div class="error-message">
-                {{ errorMessage }}
-            </div>
-           }
-      
-          <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">התחבר</button>
-    </form>      
-</div> -->

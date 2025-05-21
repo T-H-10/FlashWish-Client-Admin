@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    this.isSubmitting=true;
     const { email, password } = this.loginForm.value;
     console.log('in login');
 
@@ -69,6 +70,8 @@ export class LoginComponent implements OnInit {
         
         if (response.token) {
           if (this.authService.getUserRole(response.token)?.includes('Admin')) {
+            this.isSubmitting=false;
+            this.isLoginSuccess=true;
             
             localStorage.setItem('authToken', response.token);
             localStorage.setItem('userID', response.user.id.toString());
@@ -76,6 +79,7 @@ export class LoginComponent implements OnInit {
           }
         }
           else {
+            this.isSubmitting=false;
             Swal.fire({
               icon: 'error',
               title: 'שגיאה',
@@ -85,6 +89,7 @@ export class LoginComponent implements OnInit {
         }
       ,
       (error) => {
+        this.isSubmitting=false;
         this.errorMessage = 'שם משתמש או סיסמה שגויים. אנא נסה שוב.';
       }
     );
