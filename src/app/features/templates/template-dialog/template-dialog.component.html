@@ -8,7 +8,7 @@
     <div class="dialog-header">
         <h1 class="dialog-title">
             <i class="material-icons">{{ mode === 'add' ? 'add_photo_alternate' : 'edit' }}</i>
-            <span>{{ mode === 'add' ? 'הוסף תבנית רקע' : 'ערוך תבנית רקע' }}</span>
+            <span>{{ mode === 'add' ? 'הוסף רקע' : 'ערוך רקע' }}</span>
         </h1>
         <div class="title-underline"></div>
     </div>
@@ -16,7 +16,7 @@
     <div class="dialog-content">
         <form [formGroup]="form">
             <div class="form-field">
-                <label class="field-label" for="templateName">שם התבנית</label>
+                <label class="field-label" for="templateName">שם רקע</label>
                 <div class="input-container">
                     <input id="templateName" type="text" formControlName="templateName" class="cosmic-input" />
                     <div class="input-focus-effect"></div>
@@ -27,7 +27,7 @@
                 @if(form.get('templateName')?.invalid && form.get('templateName')?.touched){
                 <div class="field-error">
                     <i class="material-icons">error</i>
-                    <span>שם התבנית הוא שדה חובה</span>
+                    <span>שם רקע הוא שדה חובה</span>
                 </div>
                 }
             </div>
