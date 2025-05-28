@@ -151,5 +151,12 @@
             </div>
             }
         </div>
+        @if (filteredCategories.length === 0) {
+            <app-empty-state [icon]="getEmptyStateData().icon" [title]="getEmptyStateData().title"
+              [description]="getEmptyStateData().description" [suggestions]="getEmptyStateData().suggestions"
+              [actionText]="getEmptyStateData().actionText" [actionIcon]="getEmptyStateData().actionIcon"
+              [actionCallback]="getEmptyStateData().actionCallback">
+            </app-empty-state>
+            }
     </div>
 </div>

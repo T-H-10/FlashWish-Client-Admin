@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ContentsDialogComponent } from '../contents/contents-dialog/contents-dialog.component';
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
 import { DatePipe } from '@angular/common';
+import { EmptyStateComponent } from "../../shared/empty-state/empty-state/empty-state.component";
 
 @Component({
   selector: 'app-categories',
@@ -27,8 +28,9 @@ import { DatePipe } from '@angular/common';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    DatePipe
-  ],
+    DatePipe,
+    EmptyStateComponent
+],
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css', './categories2.component.css', './categories3.component.css']
 })
@@ -273,4 +275,40 @@ export class CategoriesComponent implements OnInit {
     
     return max;
   }
+
+  handleEmptyStateAction(): void {
+    this.addCategory();
+  }
+
+    // Add this method to get appropriate empty state data
+    getEmptyStateData() {
+      const hasActiveFilters =(this.searchControl.value && this.searchControl.value.trim() !== '');
+      
+      if (hasActiveFilters) {
+        return {
+          icon: 'search_off',
+          title: 'לא נמצאו תוצאות',
+          description: 'לא נמצאו תכנים התואמים לקריטריונים שבחרת',
+          suggestions: [
+            { icon: 'clear', text: 'נקה את הסינונים הפעילים' },
+            { icon: 'search', text: 'נסה מילות חיפוש אחרות' },
+            { icon: 'category', text: 'בחר קטגוריה אחרת' }
+          ]
+        };
+      } else {
+        return {
+          icon: 'note_add',
+          title: 'אין קטגוריות במערכת',
+          description: 'עדיין לא הוספת קטגוריות למערכת. התחל על ידי הוספת הקטגוריה הראשונה שלך',
+          suggestions: [
+            { icon: 'add_circle', text: 'הוסף קטגוריה חדשה' },
+            { icon: 'help', text: 'עיין במדריך השימוש' }
+          ],
+          actionText: 'הוסף קטגוריה ראשונה',
+          actionIcon: 'add',
+          actionCallback: () => this.addCategory()
+        };
+      }
+    }
+  
 }

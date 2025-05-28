@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import Swal from 'sweetalert2';
 import { CardsService } from '../../../services/cards/cards.service';
 import { DatePipe } from '@angular/common';
+import { EmptyStateComponent } from "../../../shared/empty-state/empty-state/empty-state.component";
 
 @Component({
   selector: 'app-user-management',
@@ -24,8 +25,9 @@ import { DatePipe } from '@angular/common';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    DatePipe
-  ],
+    DatePipe,
+    EmptyStateComponent
+],
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.css','./user-management2.component.css','./user-management3.component.css']
 })
@@ -313,4 +315,39 @@ export class UserManagementComponent implements OnInit {
     
     return maxCount === 0 ? 1 : maxCount; // Avoid division by zero
   }
+
+  handleEmptyStateAction(): void {
+    this.addUser();
+  }
+
+    // Add this method to get appropriate empty state data
+    getEmptyStateData() {
+      const hasActiveFilters = (this.searchControl.value && this.searchControl.value.trim() !== '');
+      if (hasActiveFilters) {
+        return {
+          icon: 'search_off',
+          title: 'לא נמצאו תוצאות',
+          description: 'לא נמצאו משתמשים התואמים לקריטריונים שבחרת',
+          suggestions: [
+            { icon: 'clear', text: 'נקה את הסינונים הפעילים' },
+            { icon: 'search', text: 'נסה מילות חיפוש אחרות' },
+            { icon: 'category', text: 'בחר קטגוריה אחרת' }
+          ],
+        };
+      } else {
+        return {
+          icon: 'note_add',
+          title: 'אין משתמשים במערכת',
+          description: 'עדיין לא הוספת משתמשים למערכת. התחל על ידי הוספת המשתמש הראשון שלך',
+          suggestions: [
+            { icon: 'add_circle', text: 'הוסף משתמש חדש' },
+            { icon: 'help', text: 'עיין במדריך השימוש' }
+          ],
+          actionText: 'הוסף משתמש ראשון',
+          actionIcon: 'add',
+          actionCallback: () => this.addUser()
+        };
+      }
+    }
+  
 }
