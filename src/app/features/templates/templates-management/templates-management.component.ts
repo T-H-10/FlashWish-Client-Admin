@@ -18,6 +18,7 @@ import { UserNamePipe } from '../../../pipes/user-name.pipe';
 import { CardsService } from '../../../services/cards/cards.service';
 import { DatePipe } from '@angular/common';
 import { Category } from '../../../models/category.model';
+import { EmptyStateComponent } from "../../../shared/empty-state/empty-state/empty-state.component";
 
 export type SortField = 'name' | 'category' | 'date' | 'usage' | '';
 export type SortDirection = 'asc' | 'desc';
@@ -35,7 +36,8 @@ export type SortDirection = 'asc' | 'desc';
     CategoryNamePipe,
     UserNamePipe,
     DatePipe,
-  ],
+    EmptyStateComponent
+],
   templateUrl: './templates-management.component.html',
   styleUrls: ['./templates-management.component.css', './templates-management2.component.css',
     '../../../shared/filter-and-sort-styles.css']
@@ -351,4 +353,53 @@ export class TemplatesManagementComponent implements OnInit {
 
     return maxCount === 0 ? 1 : maxCount; // Avoid division by zero
   }
+  handleEmptyStateAction(): void {
+    this.addTemplate();
+  }
+
+    // Add this method to get appropriate empty state data
+    getEmptyStateData() {
+      const hasActiveFilters = this.selectedCategoryId !== 0 || this.sortField !== '' || (this.searchControl.value && this.searchControl.value.trim() !== '');
+      
+      if (hasActiveFilters) {
+        return {
+          icon: 'search_off',
+          title: 'לא נמצאו תוצאות',
+          description: 'לא נמצאו תכנים התואמים לקריטריונים שבחרת',
+          suggestions: [
+            { icon: 'clear', text: 'נקה את הסינונים הפעילים' },
+            { icon: 'search', text: 'נסה מילות חיפוש אחרות' },
+            { icon: 'category', text: 'בחר קטגוריה אחרת' }
+          ],
+          actionText: 'נקה סינונים',
+          actionIcon: 'clear_all',
+          actionCallback: () => this.clearAllFilters()
+        };
+      } else {
+        return {
+          icon: 'note_add',
+          title: 'אין רקעים במערכת',
+          description: 'עדיין לא הוספת רקעים למערכת. התחל על ידי הוספת הרקע הראשון שלך',
+          suggestions: [
+            { icon: 'add_circle', text: 'הוסף רקע חדש' },
+            { icon: 'upload', text: 'העלה תכנים קיימים' },
+            { icon: 'help', text: 'עיין במדריך השימוש' }
+          ],
+          actionText: 'הוסף תוכן ראשון',
+          actionIcon: 'add',
+          actionCallback: () => this.addTemplate()
+        };
+      }
+    }
+  
+    // Add this method to clear all filters
+    clearAllFilters(): void {
+      this.selectedCategoryId = 0;
+      this.sortField = '';
+      this.sortDirection = 'asc';
+      this.searchControl.setValue('');
+      this.showFilterMenu = false;
+      this.showSortMenu = false;
+      this.applyFiltersAndSort();
+    }
 }

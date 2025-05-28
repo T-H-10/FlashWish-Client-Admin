@@ -17,6 +17,7 @@ import { DatePipe } from '@angular/common';
 import { Category } from '../../../models/category.model';
 import { CategoryService } from '../../../services/category/category.service';
 import { SortDirection, SortField } from '../../templates/templates-management/templates-management.component';
+import { EmptyStateComponent } from "../../../shared/empty-state/empty-state/empty-state.component";
 @Component({
   selector: 'app-contents-management',
   standalone: true,
@@ -28,8 +29,9 @@ import { SortDirection, SortField } from '../../templates/templates-management/t
     MatFormFieldModule,
     MatInputModule,
     UserNamePipe,
-    DatePipe
-  ],
+    DatePipe,
+    EmptyStateComponent
+],
   templateUrl: './contents-management.component.html',
   styleUrls: ['./contents-management.component.css', './contents-management2.component.css', './contents-management3.component.css',
     '../../../shared/filter-and-sort-styles.css']
@@ -338,4 +340,53 @@ export class ContentsManagementComponent implements OnInit {
     
     return maxCount === 0 ? 1 : maxCount; // Avoid division by zero
   }
+  handleEmptyStateAction(): void {
+    this.addContent();
+  }
+
+    // Add this method to get appropriate empty state data
+    getEmptyStateData() {
+      const hasActiveFilters = this.selectedCategoryId !== 0 || this.sortField !== '' || (this.searchControl.value && this.searchControl.value.trim() !== '');
+      
+      if (hasActiveFilters) {
+        return {
+          icon: 'search_off',
+          title: 'לא נמצאו תוצאות',
+          description: 'לא נמצאו תכנים התואמים לקריטריונים שבחרת',
+          suggestions: [
+            { icon: 'clear', text: 'נקה את הסינונים הפעילים' },
+            { icon: 'search', text: 'נסה מילות חיפוש אחרות' },
+            { icon: 'category', text: 'בחר קטגוריה אחרת' }
+          ],
+          actionText: 'נקה סינונים',
+          actionIcon: 'clear_all',
+          actionCallback: () => this.clearAllFilters()
+        };
+      } else {
+        return {
+          icon: 'note_add',
+          title: 'אין תכנים במערכת',
+          description: 'עדיין לא הוספת תכנים למערכת. התחל על ידי הוספת התוכן הראשון שלך',
+          suggestions: [
+            { icon: 'add_circle', text: 'הוסף תוכן חדש' },
+            { icon: 'upload', text: 'ייבא תכנים קיימים' },
+            { icon: 'help', text: 'עיין במדריך השימוש' }
+          ],
+          actionText: 'הוסף תוכן ראשון',
+          actionIcon: 'add',
+          actionCallback: () => this.addContent()
+        };
+      }
+    }
+  
+    // Add this method to clear all filters
+    clearAllFilters(): void {
+      this.selectedCategoryId = 0;
+      this.sortField = '';
+      this.sortDirection = 'asc';
+      this.searchControl.setValue('');
+      this.showFilterMenu = false;
+      this.showSortMenu = false;
+      this.applyFiltersAndSort();
+    }
 }

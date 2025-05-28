@@ -1,60 +1,60 @@
 <div class="cosmic-universe">
-    <!-- Animated Background Elements -->
-    <div class="cosmic-particles">
-      <div class="particle p1"></div>
-      <div class="particle p2"></div>
-      <div class="particle p3"></div>
-    </div>
-  
-    <div class="contents-container">
-      <div class="page-header">
-        <div class="header-content">
-          <h1 class="page-title">
-            @for (char of  'ניהול-תכנים'.split(''); track $index) {
-            <span class="title-char" [style.animation-delay]="$index * 0.1 + 's'">
-              {{char}}
-            </span>
-            }
-          </h1>
-          <p class="page-subtitle">ניהול וארגון של תכני ברכות</p>
-        </div>
-        
-        <div class="toolbar">
-      <!-- Sort and Filter Options -->
-          <div class="filter-sort-container">
-            <div class="filter-dropdown">
-              <button class="filter-button" (click)="toggleFilterMenu()">
-                <i class="material-icons">filter_list</i>
-                <span>סינון</span>
-                <div class="button-glow"></div>
-              </button>
-              <div class="dropdown-menu" [class.show]="showFilterMenu">
-                <div class="dropdown-header">סנן לפי קטגוריה</div>
-                <div class="dropdown-items">
-                  <div class="dropdown-item" (click)="filterByCategory(0)">
-                    <span>הכל</span>
-                    <div class="item-indicator" [class.active]="selectedCategoryId === 0"></div>
-                  </div>
-                  @for (category of categories; track category.categoryID) {
-                    <div class="dropdown-item" (click)="filterByCategory(category.categoryID)">
-                      <span>{{category.categoryName}}</span>
-                      <div class="item-indicator" [class.active]="selectedCategoryId === category.categoryID"></div>
-                    </div>
-                  }
+  <!-- Animated Background Elements -->
+  <div class="cosmic-particles">
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+  </div>
+
+  <div class="contents-container">
+    <div class="page-header">
+      <div class="header-content">
+        <h1 class="page-title">
+          @for (char of 'ניהול-תכנים'.split(''); track $index) {
+          <span class="title-char" [style.animation-delay]="$index * 0.1 + 's'">
+            {{char}}
+          </span>
+          }
+        </h1>
+        <p class="page-subtitle">ניהול וארגון של תכני ברכות</p>
+      </div>
+
+      <div class="toolbar">
+        <!-- Sort and Filter Options -->
+        <div class="filter-sort-container">
+          <div class="filter-dropdown">
+            <button class="filter-button" (click)="toggleFilterMenu()">
+              <i class="material-icons">filter_list</i>
+              <span>סינון</span>
+              <div class="button-glow"></div>
+            </button>
+            <div class="dropdown-menu" [class.show]="showFilterMenu">
+              <div class="dropdown-header">סנן לפי קטגוריה</div>
+              <div class="dropdown-items">
+                <div class="dropdown-item" (click)="filterByCategory(0)">
+                  <span>הכל</span>
+                  <div class="item-indicator" [class.active]="selectedCategoryId === 0"></div>
                 </div>
+                @for (category of categories; track category.categoryID) {
+                <div class="dropdown-item" (click)="filterByCategory(category.categoryID)">
+                  <span>{{category.categoryName}}</span>
+                  <div class="item-indicator" [class.active]="selectedCategoryId === category.categoryID"></div>
+                </div>
+                }
               </div>
             </div>
-  
-            <div class="sort-dropdown">
-              <button class="sort-button" (click)="toggleSortMenu()">
-                <i class="material-icons">sort</i>
-                <span>מיון</span>
-                <div class="button-glow"></div>
-              </button>
-              <div class="dropdown-menu" [class.show]="showSortMenu">
-                <div class="dropdown-header">מיין לפי</div>
-                <div class="dropdown-items">
-                  <!-- <div class="dropdown-item" (click)="sortMessages('name')">
+          </div>
+
+          <div class="sort-dropdown">
+            <button class="sort-button" (click)="toggleSortMenu()">
+              <i class="material-icons">sort</i>
+              <span>מיון</span>
+              <div class="button-glow"></div>
+            </button>
+            <div class="dropdown-menu" [class.show]="showSortMenu">
+              <div class="dropdown-header">מיין לפי</div>
+              <div class="dropdown-items">
+                <!-- <div class="dropdown-item" (click)="sortMessages('name')">
                     <span>שם</span>
                     @if (sortField === 'name') {
                     <i class="material-icons">
@@ -62,60 +62,60 @@
                     </i>}
                     <div class="item-indicator" [class.active]="sortField === 'name'"></div>
                   </div> -->
-                  <div class="dropdown-item" (click)="sortMessages('category')">
-                    <span>קטגוריה</span>
-                    @if (sortField === 'category') {
-                    <i class="material-icons">
-                      {{sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'}}
-                    </i>
+                <div class="dropdown-item" (click)="sortMessages('category')">
+                  <span>קטגוריה</span>
+                  @if (sortField === 'category') {
+                  <i class="material-icons">
+                    {{sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'}}
+                  </i>
                   }
-                    <div class="item-indicator" [class.active]="sortField === 'category'"></div>
-                  </div>
-                  <div class="dropdown-item" (click)="sortMessages('date')">
-                    <span>תאריך</span>
-                    @if (sortField === 'date') {
-                    <i class="material-icons">
-                      {{sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'}}
-                    </i>
+                  <div class="item-indicator" [class.active]="sortField === 'category'"></div>
+                </div>
+                <div class="dropdown-item" (click)="sortMessages('date')">
+                  <span>תאריך</span>
+                  @if (sortField === 'date') {
+                  <i class="material-icons">
+                    {{sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'}}
+                  </i>
                   }
-                    <div class="item-indicator" [class.active]="sortField === 'date'"></div>
-                  </div>
-                  <div class="dropdown-item" (click)="sortMessages('usage')">
-                    <span>שימוש</span>
-                    @if (sortField === 'usage') {
-                    <i class="material-icons">
-                      {{sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'}}
-                    </i>
+                  <div class="item-indicator" [class.active]="sortField === 'date'"></div>
+                </div>
+                <div class="dropdown-item" (click)="sortMessages('usage')">
+                  <span>שימוש</span>
+                  @if (sortField === 'usage') {
+                  <i class="material-icons">
+                    {{sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'}}
+                  </i>
                   }
-                    <div class="item-indicator" [class.active]="sortField === 'usage'"></div>
-                  </div>
+                  <div class="item-indicator" [class.active]="sortField === 'usage'"></div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="search-wrapper">
-            <div class="search-orbit">
-              <div class="orbit-particle"></div>
-            </div>
-            <input [formControl]="searchControl" placeholder="חיפוש לפי כותרת / תוכן / חתימה" class="search-input" />
-            <div class="search-icon">
-              <i class="material-icons">search</i>
-            </div>
-          </div>
-  
-          <button class="add-button" (click)="addContent()">
-            <div class="button-content">
-              <span class="button-icon">+</span>
-              <span class="button-text">הוסף תוכן</span>
-            </div>
-            <div class="button-glow"></div>
-          </button>
         </div>
+
+        <div class="search-wrapper">
+          <div class="search-orbit">
+            <div class="orbit-particle"></div>
+          </div>
+          <input [formControl]="searchControl" placeholder="חיפוש לפי כותרת / תוכן / חתימה" class="search-input" />
+          <div class="search-icon">
+            <i class="material-icons">search</i>
+          </div>
+        </div>
+
+        <button class="add-button" (click)="addContent()">
+          <div class="button-content">
+            <span class="button-icon">+</span>
+            <span class="button-text">הוסף תוכן</span>
+          </div>
+          <div class="button-glow"></div>
+        </button>
       </div>
-  
-  <!-- Active Filters Display -->
-  @if (selectedCategoryId !== 0 || sortField !== '') {
+    </div>
+
+    <!-- Active Filters Display -->
+    @if (selectedCategoryId !== 0 || sortField !== '') {
     <div class="active-filters">
       <div class="filter-chips">
         @if (selectedCategoryId !== 0) {
@@ -123,102 +123,110 @@
           <span>קטגוריה: {{getCategoryName(selectedCategoryId)}}</span>
           <i class="material-icons" (click)="filterByCategory(0)">close</i>
         </div>
-      }
-      @if (sortField !== '') {
+        }
+        @if (sortField !== '') {
         <div class="filter-chip">
           <span>מיון לפי: {{getSortFieldName()}} ({{sortDirection === 'asc' ? 'עולה' : 'יורד'}})</span>
           <i class="material-icons" (click)="resetSort()">close</i>
         </div>
-      }
-      </div>
-    </div>
-  }
-
-      <div class="contents-grid">
-        @for (content of filteredContents; track content.textID) {
-          <div class="content-card" (mouseenter)="activateCard($event)" (mouseleave)="deactivateCard($event)">
-            <div class="card-glow"></div>
-            
-            <div class="content-header">
-              <div class="content-icon">
-                <i class="material-icons">format_quote</i>
-                <div class="icon-ring"></div>
-              </div>
-              <div class="content-title-container">
-                <h2 class="content-title">{{ content.title }}</h2>
-                <div class="content-category">
-                  <i class="material-icons">category</i>
-                  <span>{{getCategoryName(content.categoryID)}}</span>
-                </div>
-              </div>
-            </div>
-            
-            <div class="content-body">
-              <div class="content-text">{{ content.content }}</div>
-              <div class="content-signature">{{ content.signature }}</div>
-            </div>
-            
-            <div class="content-details">
-              <div class="details-grid">
-                <div class="detail-item">
-                  <div class="detail-icon">
-                    <i class="material-icons">person</i>
-                  </div>
-                  <div class="detail-text">
-                    <span class="detail-label">משתמש שהעלה</span>
-                    <span class="detail-value">{{content.userID | userName}}</span>
-                  </div>
-                </div>
-                
-                <div class="detail-item">
-                  <div class="detail-icon">
-                    <i class="material-icons">card_giftcard</i>
-                  </div>
-                  <div class="detail-text">
-                    <span class="detail-label">כמות ברכות</span>
-                    <span class="detail-value">{{countCardsByTextId(content.textID)}}</span>
-                  </div>
-                </div>
-                
-                <div class="detail-item">
-                  <div class="detail-icon">
-                    <i class="material-icons">event_available</i>
-                  </div>
-                  <div class="detail-text">
-                    <span class="detail-label">תאריך יצירה</span>
-                    <span class="detail-value">{{content.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</span>
-                  </div>
-                </div>
-                
-                <div class="detail-item">
-                  <div class="detail-icon">
-                    <i class="material-icons">update</i>
-                  </div>
-                  <div class="detail-text">
-                    <span class="detail-label">תאריך עדכון</span>
-                    <span class="detail-value">{{content.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="card-actions">
-              <button class="action-button edit-button" (click)="editContent(content)">
-                <i class="material-icons">edit</i>
-                <span>עריכה</span>
-              </button>
-              
-              <button class="action-button delete-button" (click)="deleteContent(content.textID)">
-                <i class="material-icons">delete</i>
-                <span>מחיקה</span>
-              </button>
-            </div>
-            
-            <div class="usage-indicator" [style.width]="getUsagePercentage(content.textID) + '%'">
-              <div class="usage-text">{{getUsagePercentage(content.textID)}}% בשימוש</div>
-            </div>
-          </div>
         }
       </div>
     </div>
+    }
+
+    <div class="contents-grid">
+      @for (content of filteredContents; track content.textID) {
+      <div class="content-card" (mouseenter)="activateCard($event)" (mouseleave)="deactivateCard($event)">
+        <div class="card-glow"></div>
+
+        <div class="content-header">
+          <div class="content-icon">
+            <i class="material-icons">format_quote</i>
+            <div class="icon-ring"></div>
+          </div>
+          <div class="content-title-container">
+            <h2 class="content-title">{{ content.title }}</h2>
+            <div class="content-category">
+              <i class="material-icons">category</i>
+              <span>{{getCategoryName(content.categoryID)}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-body">
+          <div class="content-text">{{ content.content }}</div>
+          <div class="content-signature">{{ content.signature }}</div>
+        </div>
+
+        <div class="content-details">
+          <div class="details-grid">
+            <div class="detail-item">
+              <div class="detail-icon">
+                <i class="material-icons">person</i>
+              </div>
+              <div class="detail-text">
+                <span class="detail-label">משתמש שהעלה</span>
+                <span class="detail-value">{{content.userID | userName}}</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-icon">
+                <i class="material-icons">card_giftcard</i>
+              </div>
+              <div class="detail-text">
+                <span class="detail-label">כמות ברכות</span>
+                <span class="detail-value">{{countCardsByTextId(content.textID)}}</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-icon">
+                <i class="material-icons">event_available</i>
+              </div>
+              <div class="detail-text">
+                <span class="detail-label">תאריך יצירה</span>
+                <span class="detail-value">{{content.createdAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-icon">
+                <i class="material-icons">update</i>
+              </div>
+              <div class="detail-text">
+                <span class="detail-label">תאריך עדכון</span>
+                <span class="detail-value">{{content.updatedAt+'z' | date:'dd/MM/yyyy HH:mm':'Asia/Jerusalem'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button class="action-button edit-button" (click)="editContent(content)">
+            <i class="material-icons">edit</i>
+            <span>עריכה</span>
+          </button>
+
+          <button class="action-button delete-button" (click)="deleteContent(content.textID)">
+            <i class="material-icons">delete</i>
+            <span>מחיקה</span>
+          </button>
+        </div>
+
+        <div class="usage-indicator" [style.width]="getUsagePercentage(content.textID) + '%'">
+          <div class="usage-text">{{getUsagePercentage(content.textID)}}% בשימוש</div>
+        </div>
+      </div>
+      }
+    </div>
+    @if (filteredContents.length === 0) {
+    <app-empty-state [icon]="getEmptyStateData().icon" [title]="getEmptyStateData().title"
+      [description]="getEmptyStateData().description" [suggestions]="getEmptyStateData().suggestions"
+      [actionText]="getEmptyStateData().actionText" [actionIcon]="getEmptyStateData().actionIcon"
+      [actionCallback]="getEmptyStateData().actionCallback">
+    </app-empty-state>
+    }
+
   </div>
+</div>
